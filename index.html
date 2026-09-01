@@ -1,1072 +1,104 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>LEVANTE | Born in Istanbul. Inspired by the Levant breeze.</title>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>LEVANTE | Born in Istanbul</title>
 
   <meta
     name="description"
-    content="LEVANTE - Modern bags inspired by Istanbul."
+    content="LEVANTE - Born in Istanbul. Inspired by the Levant breeze."
   >
 
-  <style>
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
-    :root {
-      --bg: #f6f3ee;
-      --black: #171717;
-      --white: #ffffff;
-      --accent: #b86d59;
-      --soft: #e9e3da;
-      --gray: #6f6f6f;
-      --border: #ded7ce;
-      --green: #25D366;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--black);
-      overflow-x: hidden;
-    }
-
-    body.menu-open,
-    body.cart-open {
-      overflow: hidden;
-    }
-
-    img {
-      width: 100%;
-      display: block;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-
-    /* =====================================================
-       HEADER
-    ===================================================== */
-
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 5%;
-      z-index: 1000;
-
-      background: rgba(246, 243, 238, .94);
-      backdrop-filter: blur(15px);
-
-      border-bottom: 1px solid rgba(0,0,0,.06);
-    }
-
-    .header-left,
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .menu-btn {
-      width: 46px;
-      height: 46px;
-      border: none;
-      background: transparent;
-      font-size: 28px;
-      color: var(--black);
-    }
-
-    .logo {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-
-      color: var(--black);
-      text-decoration: none;
-
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: 7px;
-    }
-
-    .language-select {
-      padding: 9px 13px;
-      border-radius: 25px;
-
-      border: 1px solid var(--border);
-      background: var(--white);
-
-      font-size: 13px;
-      font-weight: 700;
-
-      outline: none;
-    }
-
-    .cart-button {
-      position: relative;
-
-      width: 46px;
-      height: 46px;
-
-      border: none;
-      border-radius: 50%;
-
-      background: var(--black);
-      color: white;
-
-      font-size: 18px;
-    }
-
-    .cart-count {
-      position: absolute;
-
-      top: -5px;
-      right: -5px;
-
-      min-width: 21px;
-      height: 21px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 0 5px;
-
-      border-radius: 20px;
-
-      background: var(--accent);
-      color: white;
-
-      font-size: 11px;
-      font-weight: bold;
-    }
-
-
-    /* =====================================================
-       SIDE MENU
-    ===================================================== */
-
-    .menu-overlay {
-      position: fixed;
-      inset: 0;
-
-      background: rgba(0,0,0,.45);
-
-      z-index: 2500;
-
-      opacity: 0;
-      visibility: hidden;
-
-      transition: .3s;
-    }
-
-    .menu-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .side-menu {
-      position: fixed;
-
-      top: 0;
-      left: -340px;
-
-      width: 320px;
-      max-width: 85%;
-
-      height: 100vh;
-
-      background: white;
-
-      z-index: 3000;
-
-      padding: 35px;
-
-      transition: .4s ease;
-
-      box-shadow: 15px 0 50px rgba(0,0,0,.12);
-    }
-
-    .side-menu.active {
-      left: 0;
-    }
-
-    .close-menu {
-      float: right;
-
-      border: none;
-      background: transparent;
-
-      font-size: 30px;
-    }
-
-    .side-menu h2 {
-      margin-bottom: 60px;
-
-      font-size: 28px;
-      letter-spacing: 6px;
-    }
-
-    .side-menu nav {
-      display: flex;
-      flex-direction: column;
-
-      gap: 26px;
-    }
-
-    .side-menu nav a {
-      text-decoration: none;
-
-      color: var(--black);
-
-      font-size: 19px;
-      font-weight: 600;
-
-      transition: .25s;
-    }
-
-    .side-menu nav a:hover {
-      color: var(--accent);
-      padding-left: 8px;
-    }
-
-
-    /* =====================================================
-       HERO SLIDER
-    ===================================================== */
-
-    .hero {
-      position: relative;
-
-      margin-top: 78px;
-
-      height: 720px;
-
-      overflow: hidden;
-
-      background: #ddd;
-    }
-
-    .slide {
-      position: absolute;
-      inset: 0;
-
-      opacity: 0;
-
-      transition: opacity 1s ease;
-    }
-
-    .slide.active {
-      opacity: 1;
-    }
-
-    .slide img {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-      object-position: center;
-    }
-
-    .slide::after {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      background:
-        linear-gradient(
-          90deg,
-          rgba(0,0,0,.72),
-          rgba(0,0,0,.28),
-          rgba(0,0,0,.05)
-        );
-    }
-
-    .hero-content {
-      position: absolute;
-
-      z-index: 10;
-
-      left: 9%;
-      top: 50%;
-
-      transform: translateY(-50%);
-
-      max-width: 650px;
-
-      color: white;
-    }
-
-    .hero-tag {
-      display: inline-block;
-
-      margin-bottom: 22px;
-
-      padding: 10px 18px;
-
-      border-radius: 30px;
-
-      background: var(--accent);
-
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-    }
-
-    .hero h1 {
-      margin-bottom: 25px;
-
-      font-size: clamp(48px, 7vw, 92px);
-      line-height: .95;
-
-      letter-spacing: -3px;
-    }
-
-    .hero p {
-      max-width: 540px;
-
-      margin-bottom: 32px;
-
-      font-size: 19px;
-      line-height: 1.6;
-    }
-
-    .primary-btn {
-      display: inline-flex;
-
-      align-items: center;
-
-      padding: 17px 29px;
-
-      border-radius: 40px;
-
-      background: white;
-      color: black;
-
-      text-decoration: none;
-
-      font-weight: 800;
-
-      transition: .3s;
-    }
-
-    .primary-btn:hover {
-      transform: translateY(-4px);
-    }
-
-    .slider-dots {
-      position: absolute;
-
-      bottom: 32px;
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      z-index: 20;
-
-      display: flex;
-
-      gap: 10px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-
-      border-radius: 20px;
-
-      background: rgba(255,255,255,.5);
-
-      cursor: pointer;
-
-      transition: .3s;
-    }
-
-    .dot.active {
-      width: 34px;
-
-      background: white;
-    }
-
-
-    /* =====================================================
-       INTRO
-    ===================================================== */
-
-    .intro {
-      max-width: 1100px;
-
-      margin: auto;
-
-      padding: 110px 8%;
-
-      text-align: center;
-    }
-
-    .small-title {
-      margin-bottom: 20px;
-
-      color: var(--accent);
-
-      font-size: 12px;
-      font-weight: 800;
-
-      letter-spacing: 3px;
-
-      text-transform: uppercase;
-    }
-
-    .intro h2 {
-      margin-bottom: 25px;
-
-      font-size: clamp(35px, 5vw, 65px);
-
-      line-height: 1.05;
-    }
-
-    .intro p {
-      color: var(--gray);
-
-      font-size: 18px;
-      line-height: 1.8;
-    }
-
-
-    /* =====================================================
-       PRODUCTS
-    ===================================================== */
-
-    .products-section {
-      padding: 20px 6% 110px;
-    }
-
-    .section-header {
-      display: flex;
-
-      justify-content: space-between;
-      align-items: end;
-
-      gap: 40px;
-
-      margin-bottom: 42px;
-    }
-
-    .section-header h2 {
-      font-size: clamp(34px, 4vw, 58px);
-    }
-
-    .section-header p {
-      max-width: 420px;
-
-      color: var(--gray);
-
-      line-height: 1.6;
-    }
-
-    .products-grid {
-      display: grid;
-
-      grid-template-columns: repeat(4, 1fr);
-
-      gap: 24px;
-    }
-
-    .product-card {
-      overflow: hidden;
-
-      background: white;
-
-      border-radius: 20px;
-
-      transition: .35s;
-    }
-
-    .product-card:hover {
-      transform: translateY(-9px);
-
-      box-shadow:
-        0 20px 50px rgba(0,0,0,.10);
-    }
-
-    .product-image {
-      height: 470px;
-
-      overflow: hidden;
-
-      background: var(--soft);
-    }
-
-    .product-image img {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      transition: .5s;
-    }
-
-    .product-card:hover img {
-      transform: scale(1.05);
-    }
-
-    .product-info {
-      padding: 22px;
-    }
-
-    .product-code {
-      margin-bottom: 10px;
-
-      color: var(--gray);
-
-      font-size: 10px;
-      font-weight: 800;
-
-      letter-spacing: 2px;
-    }
-
-    .product-info h3 {
-      margin-bottom: 10px;
-
-      font-size: 22px;
-    }
-
-    .story {
-      min-height: 110px;
-
-      color: var(--gray);
-
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .product-bottom {
-      display: flex;
-
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 10px;
-
-      margin-top: 20px;
-    }
-
-    .price {
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .add-btn {
-      padding: 12px 16px;
-
-      border: none;
-      border-radius: 30px;
-
-      background: var(--black);
-      color: white;
-
-      font-size: 13px;
-      font-weight: 800;
-
-      transition: .3s;
-
-      white-space: nowrap;
-    }
-
-    .add-btn:hover {
-      background: var(--accent);
-    }
-
-
-    /* =====================================================
-       STORY BANNER
-    ===================================================== */
-
-    .story-banner {
-      position: relative;
-
-      min-height: 540px;
-
-      margin: 0 6% 100px;
-
-      overflow: hidden;
-
-      border-radius: 30px;
-    }
-
-    .story-banner img {
-      position: absolute;
-      inset: 0;
-
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-    }
-
-    .story-overlay {
-      position: absolute;
-      inset: 0;
-
-      background:
-        linear-gradient(
-          90deg,
-          rgba(0,0,0,.80),
-          rgba(0,0,0,.15)
-        );
-    }
-
-    .story-content {
-      position: relative;
-
-      z-index: 2;
-
-      max-width: 720px;
-
-      padding: 85px;
-
-      color: white;
-    }
-
-    .story-content h2 {
-      margin-bottom: 25px;
-
-      font-size: clamp(40px, 6vw, 75px);
-
-      line-height: 1.05;
-    }
-
-    .story-content p {
-      font-size: 18px;
-      line-height: 1.7;
-    }
-
-
-    /* =====================================================
-       FEATURES
-    ===================================================== */
-
-    .features {
-      padding: 100px 8%;
-
-      background: var(--black);
-
-      color: white;
-    }
-
-    .features-title {
-      max-width: 720px;
-
-      font-size: clamp(35px, 5vw, 65px);
-    }
-
-    .features-grid {
-      display: grid;
-
-      grid-template-columns: repeat(3, 1fr);
-
-      gap: 50px;
-
-      margin-top: 60px;
-    }
-
-    .feature-number {
-      margin-bottom: 15px;
-
-      color: var(--accent);
-
-      font-size: 13px;
-      font-weight: bold;
-
-      letter-spacing: 2px;
-    }
-
-    .feature h3 {
-      margin-bottom: 15px;
-
-      font-size: 25px;
-    }
-
-    .feature p {
-      color: #aaa;
-
-      line-height: 1.7;
-    }
-
-
-    /* =====================================================
-       CART
-    ===================================================== */
-
-    .cart-drawer {
-      position: fixed;
-
-      top: 0;
-      right: -500px;
-
-      width: 430px;
-      max-width: 100%;
-
-      height: 100vh;
-
-      display: flex;
-      flex-direction: column;
-
-      background: white;
-
-      z-index: 4000;
-
-      transition: .4s;
-
-      box-shadow:
-        -10px 0 40px rgba(0,0,0,.12);
-    }
-
-    .cart-drawer.active {
-      right: 0;
-    }
-
-    .cart-header {
-      display: flex;
-
-      justify-content: space-between;
-      align-items: center;
-
-      padding: 25px;
-
-      border-bottom:
-        1px solid var(--border);
-    }
-
-    .cart-header h2 {
-      font-size: 25px;
-    }
-
-    .close-cart {
-      border: none;
-
-      background: transparent;
-
-      font-size: 28px;
-    }
-
-    .cart-items {
-      flex: 1;
-
-      overflow-y: auto;
-
-      padding: 20px;
-    }
-
-    .cart-item {
-      display: flex;
-
-      gap: 15px;
-
-      padding: 15px 0;
-
-      border-bottom:
-        1px solid var(--border);
-    }
-
-    .cart-item img {
-      width: 75px;
-      height: 95px;
-
-      object-fit: cover;
-
-      border-radius: 10px;
-    }
-
-    .cart-item-info {
-      flex: 1;
-    }
-
-    .cart-item-info h4 {
-      margin-bottom: 5px;
-    }
-
-    .cart-item-info small {
-      color: var(--gray);
-    }
-
-    .quantity-controls {
-      display: flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-      margin-top: 10px;
-    }
-
-    .quantity-controls button {
-      width: 28px;
-      height: 28px;
-
-      border: none;
-      border-radius: 50%;
-
-      background: var(--soft);
-    }
-
-    .remove-btn {
-      margin-top: 8px;
-
-      border: none;
-
-      background: transparent;
-
-      color: #c0392b;
-
-      font-size: 12px;
-    }
-
-    .empty-cart {
-      padding: 70px 20px;
-
-      color: var(--gray);
-
-      text-align: center;
-    }
-
-    .checkout {
-      padding: 25px;
-
-      background: white;
-
-      border-top:
-        1px solid var(--border);
-    }
-
-    .checkout h3 {
-      margin-bottom: 18px;
-    }
-
-    .checkout input {
-      width: 100%;
-
-      margin-bottom: 12px;
-
-      padding: 15px;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 10px;
-
-      outline: none;
-    }
-
-    .checkout input:focus {
-      border-color: var(--accent);
-    }
-
-    .whatsapp-order {
-      width: 100%;
-
-      padding: 17px;
-
-      border: none;
-      border-radius: 10px;
-
-      background: var(--green);
-
-      color: white;
-
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-
-    /* =====================================================
-       FOOTER
-    ===================================================== */
-
-    footer {
-      padding: 70px 8% 35px;
-
-      background: #111;
-
-      color: white;
-    }
-
-    .footer-top {
-      display: flex;
-
-      justify-content: space-between;
-
-      gap: 40px;
-
-      flex-wrap: wrap;
-    }
-
-    .footer-logo {
-      margin-bottom: 15px;
-
-      font-size: 35px;
-      font-weight: 800;
-
-      letter-spacing: 7px;
-    }
-
-    .footer-text {
-      max-width: 400px;
-
-      color: #999;
-
-      line-height: 1.7;
-    }
-
-    .footer-bottom {
-      margin-top: 60px;
-      padding-top: 25px;
-
-      border-top:
-        1px solid #333;
-
-      color: #777;
-
-      font-size: 13px;
-    }
-
-
-    /* =====================================================
-       MOBILE
-    ===================================================== */
-
-    @media (max-width: 1100px) {
-
-      .products-grid {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-
-    }
-
-    @media (max-width: 700px) {
-
-      header {
-        height: 68px;
-
-        padding: 0 14px;
-      }
-
-      .hero {
-        margin-top: 68px;
-
-        height: 680px;
-      }
-
-      .logo {
-        font-size: 18px;
-
-        letter-spacing: 4px;
-      }
-
-      .header-right {
-        gap: 7px;
-      }
-
-      .language-select {
-        width: 58px;
-
-        padding: 8px 5px;
-
-        font-size: 11px;
-      }
-
-      .cart-button {
-        width: 40px;
-        height: 40px;
-      }
-
-      .hero-content {
-        left: 7%;
-        right: 7%;
-      }
-
-      .hero h1 {
-        font-size: 52px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-
-      .intro {
-        padding: 85px 7%;
-      }
-
-      .section-header {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 15px;
-      }
-
-      .products-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .product-image {
-        height: 560px;
-      }
-
-      .story-banner {
-        margin-left: 4%;
-        margin-right: 4%;
-      }
-
-      .story-content {
-        padding: 50px 25px;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cart-drawer {
-        width: 100%;
-      }
-
-    }
-
-  </style>
 </head>
 
 
 <body>
 
 
-  <!-- HEADER -->
+  <!-- =========================
+       MENU OVERLAY
+  ========================== -->
 
-  <header>
+  <div
+    class="menu-overlay"
+    id="menuOverlay"
+    onclick="closeMenu()"
+  ></div>
+
+
+  <!-- =========================
+       SIDE MENU
+  ========================== -->
+
+  <aside
+    class="side-menu"
+    id="sideMenu"
+  >
+
+    <button
+      class="menu-close"
+      onclick="closeMenu()"
+      aria-label="Close menu"
+    >
+      ×
+    </button>
+
+
+    <div class="side-logo">
+      LEVANTE
+    </div>
+
+
+    <nav>
+
+      <a
+        href="#home"
+        onclick="closeMenu()"
+      >
+        Ana Sayfa
+      </a>
+
+
+      <a
+        href="#collection"
+        onclick="closeMenu()"
+      >
+        Koleksiyon
+      </a>
+
+
+      <a
+        href="#story"
+        onclick="closeMenu()"
+      >
+        Hikâyemiz
+      </a>
+
+    </nav>
+
+  </aside>
+
+
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header id="header">
+
 
     <div class="header-left">
 
@@ -1081,31 +113,54 @@
     </div>
 
 
-    <a href="#home" class="logo">
+
+    <a
+      href="#home"
+      class="brand"
+    >
+
       LEVANTE
+
+      <small>
+        ISTANBUL
+      </small>
+
     </a>
 
 
+
     <div class="header-right">
+
 
       <select
         id="language"
         class="language-select"
         onchange="changeLanguage()"
       >
-        <option value="tr">TR</option>
-        <option value="en">EN</option>
-        <option value="ar">عربي</option>
+
+        <option value="tr">
+          Türkçe
+        </option>
+
+        <option value="en">
+          English
+        </option>
+
+        <option value="ar">
+          مصري
+        </option>
+
       </select>
 
 
+
       <button
-        class="cart-button"
+        class="cart-btn"
         onclick="openCart()"
         aria-label="Cart"
       >
 
-        🛍️
+        🛍
 
         <span
           id="cartCount"
@@ -1116,89 +171,17 @@
 
       </button>
 
+
     </div>
+
 
   </header>
 
 
 
-  <!-- SIDE MENU -->
-
-  <div
-    class="menu-overlay"
-    id="menuOverlay"
-    onclick="closeMenu()"
-  ></div>
-
-
-  <aside
-    class="side-menu"
-    id="sideMenu"
-  >
-
-    <button
-      class="close-menu"
-      onclick="closeMenu()"
-    >
-      ×
-    </button>
-
-
-    <h2>LEVANTE</h2>
-
-
-    <nav>
-
-      <a
-        href="#home"
-        onclick="closeMenu()"
-        data-tr="Ana Sayfa"
-        data-en="Home"
-        data-ar="الرئيسية"
-      >
-        Ana Sayfa
-      </a>
-
-
-      <a
-        href="#collection"
-        onclick="closeMenu()"
-        data-tr="Koleksiyon"
-        data-en="Collection"
-        data-ar="المجموعة"
-      >
-        Koleksiyon
-      </a>
-
-
-      <a
-        href="#story"
-        onclick="closeMenu()"
-        data-tr="Hikayemiz"
-        data-en="Our Story"
-        data-ar="قصتنا"
-      >
-        Hikayemiz
-      </a>
-
-
-      <a
-        href="#about"
-        onclick="closeMenu()"
-        data-tr="LEVANTE Dünyası"
-        data-en="The LEVANTE World"
-        data-ar="عالم ليفانتي"
-      >
-        LEVANTE Dünyası
-      </a>
-
-    </nav>
-
-  </aside>
-
-
-
-  <!-- HERO -->
+  <!-- =========================
+       HERO
+  ========================== -->
 
   <section
     class="hero"
@@ -1206,225 +189,314 @@
   >
 
 
-    <div class="slide active">
-      <img
-        src="images/Levante-01.png"
-        alt="LEVANTE Galata Stripe"
-      >
-    </div>
+    <div
+      class="slide active"
+      style="
+        background-image:
+        url('images/Levante-01.png');
+      "
+    ></div>
 
 
-    <div class="slide">
-      <img
-        src="images/Levante-05.png"
-        alt="LEVANTE Taksim Burgundy"
-      >
-    </div>
+    <div
+      class="slide"
+      style="
+        background-image:
+        url('images/Levante-05.png');
+      "
+    ></div>
 
 
-    <div class="slide">
-      <img
-        src="images/Levante-10.png"
-        alt="LEVANTE Midnight Istanbul"
-      >
-    </div>
+    <div
+      class="slide"
+      style="
+        background-image:
+        url('images/Levante-10.png');
+      "
+    ></div>
 
 
 
     <div class="hero-content">
 
-      <span
-        class="hero-tag"
-        id="heroTag"
-      >
-        BORN IN ISTANBUL
-      </span>
 
+      <div class="hero-text">
 
-      <h1 id="heroTitle">
-        More than<br>
-        a bag.
-      </h1>
-
-
-      <p id="heroText">
-        Every LEVANTE piece carries
-        a story inspired by Istanbul.
-      </p>
-
-
-      <a
-        href="#collection"
-        class="primary-btn"
-        id="heroButton"
-      >
-        Discover Collection →
-      </a>
-
-    </div>
-
-
-
-    <div class="slider-dots">
-
-      <span
-        class="dot active"
-        onclick="goToSlide(0)"
-      ></span>
-
-      <span
-        class="dot"
-        onclick="goToSlide(1)"
-      ></span>
-
-      <span
-        class="dot"
-        onclick="goToSlide(2)"
-      ></span>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- INTRO -->
-
-  <section class="intro">
-
-    <div
-      class="small-title"
-      id="introTag"
-    >
-      LEVANTE EXPERIENCE
-    </div>
-
-
-    <h2 id="introTitle">
-      Don't just carry a bag.
-      Carry a story.
-    </h2>
-
-
-    <p id="introText">
-      The energy of Istanbul, the lightness
-      of the Mediterranean and the freedom
-      of everyday life.
-    </p>
-
-  </section>
-
-
-
-  <!-- COLLECTION -->
-
-  <section
-    class="products-section"
-    id="collection"
-  >
-
-    <div class="section-header">
-
-      <div>
 
         <div
-          class="small-title"
-          id="collectionTag"
+          class="hero-tag"
+          id="heroTag"
         >
-          DISCOVER THE COLLECTION
+          İSTANBUL'DA DOĞDU
         </div>
 
 
-        <h2 id="collectionTitle">
-          Carry Your Story.
-        </h2>
+
+        <h1
+          id="heroTitle"
+        >
+          Bir çantadan<br>
+          daha fazlası.
+        </h1>
+
+
+
+        <p
+          id="heroText"
+        >
+          Her LEVANTE modeli bir şehirden,
+          bir sokaktan ve bir anıdan
+          ilham alır.
+        </p>
+
+
+
+        <a
+          href="#collection"
+          class="primary-btn"
+          id="heroButton"
+        >
+          Koleksiyonu Keşfet →
+        </a>
+
 
       </div>
 
 
-      <p id="collectionText">
-        Every model has a personality.
-        Which one feels like you?
-      </p>
+    </div>
+
+
+
+    <!-- SLIDER DOTS -->
+
+    <div class="slider-dots">
+
+
+      <button
+        class="dot active"
+        onclick="goToSlide(0)"
+      ></button>
+
+
+      <button
+        class="dot"
+        onclick="goToSlide(1)"
+      ></button>
+
+
+      <button
+        class="dot"
+        onclick="goToSlide(2)"
+      ></button>
+
 
     </div>
 
+
+  </section>
+
+
+
+  <!-- =========================
+       INTRO
+  ========================== -->
+
+  <section class="intro-section">
+
+
+    <div
+      class="section-tag"
+      id="introTag"
+    >
+      LEVANTE DENEYİMİ
+    </div>
+
+
+
+    <h2
+      id="introTitle"
+    >
+      Taşıdığın şey sadece
+      bir çanta olmasın.
+    </h2>
+
+
+
+    <p
+      id="introText"
+    >
+      İstanbul'un enerjisi,
+      Akdeniz'in hafifliği ve
+      günlük hayatın özgürlüğü.
+      LEVANTE, gittiğin her yerde
+      seninle birlikte hareket etmek
+      için tasarlandı.
+    </p>
+
+
+  </section>
+
+
+
+  <!-- =========================
+       COLLECTION
+  ========================== -->
+
+  <section
+    class="collection-section"
+    id="collection"
+  >
+
+
+    <div class="collection-header">
+
+
+      <div>
+
+        <div
+          class="section-tag"
+          id="collectionTag"
+        >
+          KOLEKSİYONU KEŞFET
+        </div>
+
+
+        <h2
+          id="collectionTitle"
+        >
+          Hikâyeni Taşı.
+        </h2>
+
+
+      </div>
+
+
+
+      <p
+        id="collectionText"
+      >
+        Her modelin kendine ait
+        bir karakteri var.
+        Hangisi sana daha yakın?
+      </p>
+
+
+    </div>
+
+
+
+    <!-- PRODUCTS -->
 
     <div
       class="products-grid"
       id="productsGrid"
     ></div>
 
+
   </section>
 
 
 
-  <!-- STORY -->
+  <!-- =========================
+       BRAND STORY
+  ========================== -->
 
   <section
-    class="story-banner"
+    class="story-section"
     id="story"
   >
-
-    <img
-      src="images/Levante-10.png"
-      alt="LEVANTE Story"
-    >
-
-
-    <div class="story-overlay"></div>
 
 
     <div class="story-content">
 
+
       <div
-        class="small-title"
-        style="color:#f2b49a"
+        class="section-tag light"
         id="storyTag"
       >
-        THE LEVANT BREEZE
+        LEVANT RÜZGARI
       </div>
 
 
-      <h2 id="storyTitle">
-        Born in Istanbul.<br>
-        Inspired by the Levant breeze.
+
+      <h2
+        id="storyTitle"
+      >
+        İstanbul'da doğdu.<br>
+        Levant rüzgârından
+        ilham aldı.
       </h2>
 
 
-      <p id="storyText">
-        LEVANTE was born in Istanbul
-        and inspired by the free spirit
-        of the Mediterranean.
+
+      <p
+        id="storyText"
+      >
+        LEVANTE,
+        İstanbul'un enerjisinden doğdu
+        ve Akdeniz'in özgür ruhundan
+        ilham aldı.
       </p>
 
+
     </div>
+
+
+
+    <div class="story-side">
+
+
+      <div class="story-number">
+
+        10
+
+        <span>
+          İstanbul hikâyesi
+        </span>
+
+      </div>
+
+
+
+      <div class="story-number">
+
+        01
+
+        <span>
+          Şehir. Sonsuz ilham.
+        </span>
+
+      </div>
+
+
+    </div>
+
 
   </section>
 
 
 
-  <!-- FEATURES -->
+  <!-- =========================
+       FEATURES
+  ========================== -->
 
-  <section
-    class="features"
-    id="about"
-  >
+  <section class="features-section">
+
 
     <div
-      class="small-title"
+      class="section-tag"
       id="featuresTag"
-      style="color:#d96c3d"
     >
-      WHY LEVANTE?
+      NEDEN LEVANTE?
     </div>
 
 
+
     <h2
-      class="features-title"
       id="featuresTitle"
     >
-      Designed for lives in motion.
+      Hareket halindeki
+      hayatlar için tasarlandı.
     </h2>
 
 
@@ -1432,115 +504,92 @@
     <div class="features-grid">
 
 
-      <div class="feature">
+      <article class="feature-card">
 
         <div class="feature-number">
           01
         </div>
 
-        <h3 id="feature1Title">
-          Every Bag Has a Story
+
+        <h3
+          id="feature1Title"
+        >
+          Her Çantanın Bir Hikâyesi Var
         </h3>
 
-        <p id="feature1Text">
-          Each model is inspired by
-          a city, a feeling and a memory.
+
+        <p
+          id="feature1Text"
+        >
+          Her model bir şehirden,
+          bir duygudan ve bir anıdan
+          ilham alır.
         </p>
 
-      </div>
+      </article>
 
 
 
-      <div class="feature">
+      <article class="feature-card">
 
         <div class="feature-number">
           02
         </div>
 
-        <h3 id="feature2Title">
-          Moves With You
+
+        <h3
+          id="feature2Title"
+        >
+          Seninle Hareket Eder
         </h3>
 
-        <p id="feature2Text">
-          Designed to adapt to
-          the rhythm of your everyday life.
+
+        <p
+          id="feature2Text"
+        >
+          Günlük hayatının ritmine
+          uyum sağlamak için
+          tasarlandı.
         </p>
 
-      </div>
+      </article>
 
 
 
-      <div class="feature">
+      <article class="feature-card">
 
         <div class="feature-number">
           03
         </div>
 
-        <h3 id="feature3Title">
-          Your Own Story
+
+        <h3
+          id="feature3Title"
+        >
+          Senin Kendi Hikâyen
         </h3>
 
-        <p id="feature3Text">
-          You don't just choose a bag.
-          You find the one that tells your story.
+
+        <p
+          id="feature3Text"
+        >
+          Sadece bir çanta seçmezsin.
+          Sana ait hikâyeyi seçersin.
         </p>
 
-      </div>
+      </article>
 
 
     </div>
+
 
   </section>
 
 
 
-  <!-- FOOTER -->
-
-  <footer>
-
-    <div class="footer-top">
-
-
-      <div>
-
-        <div class="footer-logo">
-          LEVANTE
-        </div>
-
-
-        <p class="footer-text">
-          Born in Istanbul.<br>
-          Inspired by the Levant breeze.
-        </p>
-
-      </div>
-
-
-
-      <div>
-
-        <p class="footer-text">
-          © 2026 LEVANTE<br>
-          All rights reserved.
-        </p>
-
-      </div>
-
-
-    </div>
-
-
-
-    <div class="footer-bottom">
-      Designed for movement.
-      Made for stories.
-    </div>
-
-  </footer>
-
-
-
-  <!-- CART -->
+  <!-- =========================
+       CART DRAWER
+  ========================== -->
 
   <aside
     class="cart-drawer"
@@ -1550,21 +599,28 @@
 
     <div class="cart-header">
 
-      <h2 id="cartTitle">
-        My Bag
+
+      <h2
+        id="cartTitle"
+      >
+        Çantam
       </h2>
 
 
+
       <button
-        class="close-cart"
+        class="cart-close"
         onclick="closeCart()"
       >
         ×
       </button>
 
+
     </div>
 
 
+
+    <!-- CART ITEMS -->
 
     <div
       class="cart-items"
@@ -1573,1296 +629,190 @@
 
 
 
-    <div class="checkout">
+    <!-- CHECKOUT -->
+
+    <div class="checkout-section">
 
 
-      <h3 id="checkoutTitle">
-        Your Details
+      <h3
+        id="checkoutTitle"
+      >
+        Bilgileriniz
       </h3>
+
 
 
       <input
         type="text"
         id="customerName"
-        placeholder="Full Name"
+        placeholder="Ad Soyad"
       >
+
 
 
       <input
         type="tel"
         id="customerPhone"
-        placeholder="Phone Number"
+        placeholder="Telefon Numarası"
       >
+
 
 
       <button
-        class="whatsapp-order"
-        onclick="sendWhatsAppOrder()"
+        class="order-btn"
         id="whatsappButton"
+        onclick="sendWhatsAppOrder()"
       >
-        Send Order via WhatsApp
+
+        Sipariş Talebi Gönder
+
       </button>
 
 
     </div>
 
+
   </aside>
 
 
 
-<script>
-
-
-/* =====================================================
-   WHATSAPP NUMBER
-===================================================== */
-
-const WHATSAPP_NUMBER = "201039812810";
-
-
-
-/* =====================================================
-   PRODUCTS
-===================================================== */
-
-const products = [
-
-  {
-    id: 1,
-    number: "01",
-    code: "LV-GLT-01",
-    name: "GALATA STRIPE",
-    price: 0,
-    image: "images/Levante-01.png",
-
-    story: {
-      tr: "Galata'nın zamansız sokaklarından ilham aldı. Geçmişin hikâyesi ile modern stilin buluştuğu, her güne karakter katan bir tasarım.",
-      en: "Inspired by the timeless streets of Galata. Where history meets effortless modern style.",
-      ar: "مستوحاة من شوارع غلطة الخالدة، حيث تلتقي حكايات الماضي بالأناقة العصرية."
-    }
-  },
-
-
-  {
-    id: 2,
-    number: "02",
-    code: "LV-BSP-02",
-    name: "BOSPHORUS BLUE",
-    price: 0,
-    image: "images/Levante-02.png",
-
-    story: {
-      tr: "Boğaz'ın sakin mavisinden ilham aldı. Akışkan, zarif ve her kombine doğal bir şıklık katan bir model.",
-      en: "Inspired by the calm blue of the Bosphorus. Fluid, elegant and effortlessly refined.",
-      ar: "مستوحاة من زرقة البوسفور الهادئة. ناعمة وأنيقة وسهلة التنسيق."
-    }
-  },
-
-
-  {
-    id: 3,
-    number: "03",
-    code: "LV-SLT-03",
-    name: "SULTAN SAND",
-    price: 0,
-    image: "images/Levante-03.png",
-
-    story: {
-      tr: "İstanbul'un yumuşak ve zamansız tonlarından ilham aldı. Minimal, zarif ve her gün kullanılabilecek bir parça.",
-      en: "Inspired by Istanbul's soft and timeless tones. Minimal, elegant and endlessly versatile.",
-      ar: "مستوحاة من درجات إسطنبول الناعمة والخالدة. بسيطة وأنيقة ومناسبة لكل يوم."
-    }
-  },
-
-
-  {
-    id: 4,
-    number: "04",
-    code: "LV-KRK-04",
-    name: "KARAKÖY PINK",
-    price: 0,
-    image: "images/Levante-04.png",
-
-    story: {
-      tr: "Karaköy'ün enerjik ve modern sokaklarından ilham aldı. Feminen, şehirli ve dikkat çekici.",
-      en: "Inspired by Karaköy's vibrant streets. Feminine, urban and confidently modern.",
-      ar: "مستوحاة من شوارع كاراكوي النابضة بالحياة. أنثوية وعصرية وجريئة."
-    }
-  },
-
-
-  {
-    id: 5,
-    number: "05",
-    code: "LV-TSM-05",
-    name: "TAKSİM BURGUNDY",
-    price: 0,
-    image: "images/Levante-05.png",
-
-    story: {
-      tr: "Taksim'in hiç durmayan enerjisinden ilham aldı. Derin tonları ve güçlü çizgileriyle şehir hayatının ritmini taşır.",
-      en: "Inspired by Taksim's unstoppable energy. Deep tones and bold lines for life in motion.",
-      ar: "مستوحاة من طاقة تقسيم التي لا تتوقف. ألوان عميقة وخطوط قوية للحياة المتحركة."
-    }
-  },
-
-
-  {
-    id: 6,
-    number: "06",
-    code: "LV-ORT-06",
-    name: "ORTAKÖY DOT",
-    price: 0,
-    image: "images/Levante-06.png",
+  <!-- =========================
+       CART OVERLAY
+  ========================== -->
 
-    story: {
-      tr: "Ortaköy'ün sabahlarından ilham aldı. Hafif, neşeli ve küçük detaylarıyla karakter kazanan bir tasarım.",
-      en: "Inspired by Ortaköy's mornings. Light, playful and full of character.",
-      ar: "مستوحاة من صباحات أورتاكوي. خفيفة ومرحة ومليئة بالتفاصيل الجميلة."
-    }
-  },
+  <div
+    class="cart-overlay"
+    id="cartOverlay"
+    onclick="closeCart()"
+  ></div>
 
 
-  {
-    id: 7,
-    number: "07",
-    code: "LV-EMN-07",
-    name: "EMİNÖNÜ GRID",
-    price: 0,
-    image: "images/Levante-07.png",
 
-    story: {
-      tr: "Eminönü'nün düzenli ama canlı ritminden ilham aldı. Yapısal çizgiler ve zamansız bir şehir karakteri.",
-      en: "Inspired by Eminönü's structured rhythm. Clean lines and timeless city character.",
-      ar: "مستوحاة من إيقاع أمينونو المنظم والحيوي. خطوط واضحة وشخصية مدينة خالدة."
-    }
-  },
+  <!-- =========================
+       FOOTER
+  ========================== -->
 
+  <footer>
 
-  {
-    id: 8,
-    number: "08",
-    code: "LV-BLT-08",
-    name: "BALAT ROSE",
-    price: 0,
-    image: "images/Levante-08.png",
 
-    story: {
-      tr: "Balat'ın renkli sokaklarından ilham aldı. Yumuşak tonlar, nostaljik ruh ve modern bir özgürlük.",
-      en: "Inspired by the colorful streets of Balat. Soft tones, nostalgia and modern freedom.",
-      ar: "مستوحاة من شوارع بالاط الملونة. ألوان ناعمة وروح حنين وحرية عصرية."
-    }
-  },
+    <div class="footer-brand">
+      LEVANTE
+    </div>
 
 
-  {
-    id: 9,
-    number: "09",
-    code: "LV-LPD-09",
-    name: "LEVANTE LEOPARD",
-    price: 0,
-    image: "images/Levante-09.png",
 
-    story: {
-      tr: "Cesur, özgüvenli ve unutulmaz. Şehrin güçlü ruhundan ilham alan, dikkat çekmekten korkmayanlar için.",
-      en: "Bold, confident and unforgettable. Made for those who are never afraid to stand out.",
-      ar: "جريئة وواثقة ولا تُنسى. لمن لا يخافون من لفت الأنظار."
-    }
-  },
+    <p>
+      Born in Istanbul.<br>
+      Inspired by the Levant breeze.
+    </p>
 
 
-  {
-    id: 10,
-    number: "10",
-    code: "LV-MID-10",
-    name: "MIDNIGHT ISTANBUL",
-    price: 0,
-    image: "images/Levante-10.png",
 
-    story: {
-      tr: "İstanbul gecelerinden ilham aldı. Derin, zarif ve gizemli. Günün her saatinde güçlü bir ifade.",
-      en: "Inspired by Istanbul nights. Deep, elegant and mysterious. A powerful statement at any hour.",
-      ar: "مستوحاة من ليالي إسطنبول. عميقة وأنيقة وغامضة، حضور قوي في كل وقت."
-    }
-  }
+    <span>
+      © 2026 LEVANTE
+    </span>
 
-];
 
+  </footer>
 
 
-/* =====================================================
-   CART
-===================================================== */
 
-let cart = [];
+  <!-- =========================
+       SUPABASE LIBRARY
+       IMPORTANT
+  ========================== -->
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-function getLanguage() {
-  return document
-    .getElementById("language")
-    .value;
-}
 
+  <!-- WEBSITE SCRIPT -->
 
+  <script src="script.js"></script>
 
-function renderProducts() {
 
-  const language = getLanguage();
 
-  const grid =
-    document.getElementById("productsGrid");
+  <!-- =========================
+       HEADER + CART SMALL SCRIPT
+  ========================== -->
 
-  grid.innerHTML = "";
+  <script>
 
+    const header =
+      document.getElementById("header");
 
-  products.forEach(product => {
 
+    const cartOverlay =
+      document.getElementById("cartOverlay");
 
-    let buttonText = "Sepete Ekle";
 
-    if (language === "en") {
-      buttonText = "Add to Bag";
-    }
+    window.addEventListener(
+      "scroll",
+      function () {
 
-    if (language === "ar") {
-      buttonText = "أضف إلى السلة";
-    }
+        if (window.scrollY > 50) {
 
+          header.classList.add(
+            "scrolled"
+          );
 
-    let priceText = "Yakında";
+        }
 
-    if (language === "en") {
-      priceText = "Coming Soon";
-    }
+        else {
 
-    if (language === "ar") {
-      priceText = "قريباً";
-    }
+          header.classList.remove(
+            "scrolled"
+          );
 
+        }
 
-    grid.innerHTML += `
-
-      <article class="product-card">
-
-
-        <div class="product-image">
-
-          <img
-            src="${product.image}"
-            alt="${product.name}"
-            loading="lazy"
-          >
-
-        </div>
-
-
-
-        <div class="product-info">
-
-
-          <div class="product-code">
-            ${product.number} · ${product.code}
-          </div>
-
-
-          <h3>
-            ${product.name}
-          </h3>
-
-
-          <p class="story">
-            ${product.story[language]}
-          </p>
-
-
-          <div class="product-bottom">
-
-
-            <span class="price">
-              ${priceText}
-            </span>
-
-
-            <button
-              class="add-btn"
-              onclick="addToCart(${product.id})"
-            >
-              ${buttonText}
-            </button>
-
-
-          </div>
-
-
-        </div>
-
-
-      </article>
-
-    `;
-
-  });
-
-}
-
-
-
-function addToCart(productId) {
-
-  const product =
-    products.find(
-      p => p.id === productId
+      }
     );
 
 
-  const existingItem =
-    cart.find(
-      item => item.id === productId
-    );
+    function openCart() {
+
+      document
+        .getElementById("cartDrawer")
+        .classList
+        .add("active");
 
 
-  if (existingItem) {
-
-    existingItem.quantity++;
-
-  } else {
-
-    cart.push({
-      ...product,
-      quantity: 1
-    });
-
-  }
+      document
+        .getElementById("cartOverlay")
+        .classList
+        .add("active");
 
 
-  updateCart();
-  openCart();
-
-}
-
-
-
-function changeQuantity(
-  productId,
-  change
-) {
-
-  const item =
-    cart.find(
-      item => item.id === productId
-    );
-
-
-  if (!item) return;
-
-
-  item.quantity += change;
-
-
-  if (item.quantity <= 0) {
-
-    removeFromCart(productId);
-
-    return;
-
-  }
-
-
-  updateCart();
-
-}
-
-
-
-function removeFromCart(productId) {
-
-  cart =
-    cart.filter(
-      item => item.id !== productId
-    );
-
-
-  updateCart();
-
-}
-
-
-
-function updateCart() {
-
-  const cartItems =
-    document.getElementById("cartItems");
-
-  const cartCount =
-    document.getElementById("cartCount");
-
-  const language =
-    getLanguage();
-
-
-  const totalQuantity =
-    cart.reduce(
-      (total, item) =>
-        total + item.quantity,
-      0
-    );
-
-
-  cartCount.textContent =
-    totalQuantity;
-
-
-  if (cart.length === 0) {
-
-
-    let emptyText =
-      "Sepetin henüz boş. Hikâyeni seçmeye başla.";
-
-
-    if (language === "en") {
-
-      emptyText =
-        "Your bag is empty. Start choosing your story.";
+      document.body.classList.add(
+        "cart-open"
+      );
 
     }
 
 
-    if (language === "ar") {
+    function closeCart() {
 
-      emptyText =
-        "سلتك فارغة. ابدأ باختيار قصتك.";
+      document
+        .getElementById("cartDrawer")
+        .classList
+        .remove("active");
+
+
+      document
+        .getElementById("cartOverlay")
+        .classList
+        .remove("active");
+
+
+      document.body.classList.remove(
+        "cart-open"
+      );
 
     }
 
+  </script>
 
-    cartItems.innerHTML = `
-
-      <div class="empty-cart">
-        ${emptyText}
-      </div>
-
-    `;
-
-
-    return;
-
-  }
-
-
-
-  cartItems.innerHTML = "";
-
-
-  cart.forEach(item => {
-
-
-    let removeText = "Kaldır";
-
-
-    if (language === "en") {
-      removeText = "Remove";
-    }
-
-
-    if (language === "ar") {
-      removeText = "حذف";
-    }
-
-
-    cartItems.innerHTML += `
-
-      <div class="cart-item">
-
-
-        <img
-          src="${item.image}"
-          alt="${item.name}"
-        >
-
-
-        <div class="cart-item-info">
-
-
-          <h4>
-            ${item.number} · ${item.name}
-          </h4>
-
-
-          <small>
-            ${item.code}
-          </small>
-
-
-          <div class="quantity-controls">
-
-
-            <button
-              onclick="changeQuantity(${item.id}, -1)"
-            >
-              −
-            </button>
-
-
-            <strong>
-              ${item.quantity}
-            </strong>
-
-
-            <button
-              onclick="changeQuantity(${item.id}, 1)"
-            >
-              +
-            </button>
-
-
-          </div>
-
-
-          <button
-            class="remove-btn"
-            onclick="removeFromCart(${item.id})"
-          >
-            ${removeText}
-          </button>
-
-
-        </div>
-
-
-      </div>
-
-    `;
-
-  });
-
-}
-
-
-
-/* =====================================================
-   CART OPEN CLOSE
-===================================================== */
-
-function openCart() {
-
-  document
-    .getElementById("cartDrawer")
-    .classList
-    .add("active");
-
-
-  document.body
-    .classList
-    .add("cart-open");
-
-}
-
-
-
-function closeCart() {
-
-  document
-    .getElementById("cartDrawer")
-    .classList
-    .remove("active");
-
-
-  document.body
-    .classList
-    .remove("cart-open");
-
-}
-
-
-
-/* =====================================================
-   MENU
-===================================================== */
-
-function openMenu() {
-
-  document
-    .getElementById("sideMenu")
-    .classList
-    .add("active");
-
-
-  document
-    .getElementById("menuOverlay")
-    .classList
-    .add("active");
-
-
-  document.body
-    .classList
-    .add("menu-open");
-
-}
-
-
-
-function closeMenu() {
-
-  document
-    .getElementById("sideMenu")
-    .classList
-    .remove("active");
-
-
-  document
-    .getElementById("menuOverlay")
-    .classList
-    .remove("active");
-
-
-  document.body
-    .classList
-    .remove("menu-open");
-
-}
-
-
-
-/* =====================================================
-   WHATSAPP ORDER
-===================================================== */
-
-function sendWhatsAppOrder() {
-
-  const name =
-    document
-      .getElementById("customerName")
-      .value
-      .trim();
-
-
-  const phone =
-    document
-      .getElementById("customerPhone")
-      .value
-      .trim();
-
-
-  const language =
-    getLanguage();
-
-
-
-  if (cart.length === 0) {
-
-
-    let message =
-      "Sepetiniz boş.";
-
-
-    if (language === "en") {
-      message = "Your cart is empty.";
-    }
-
-
-    if (language === "ar") {
-      message = "سلتك فارغة.";
-    }
-
-
-    alert(message);
-
-    return;
-
-  }
-
-
-
-  if (!name || !phone) {
-
-
-    let message =
-      "Lütfen Ad Soyad ve Telefon Numaranızı giriniz.";
-
-
-    if (language === "en") {
-
-      message =
-        "Please enter your full name and phone number.";
-
-    }
-
-
-    if (language === "ar") {
-
-      message =
-        "من فضلك أدخل الاسم ورقم الهاتف.";
-
-    }
-
-
-    alert(message);
-
-    return;
-
-  }
-
-
-
-  let whatsappMessage =
-`👜 *NEW LEVANTE ORDER REQUEST*
-
-👤 *Customer Name:* ${name}
-
-📱 *Customer Phone:* ${phone}
-
-🛍️ *ORDER DETAILS*
-
-`;
-
-
-
-  cart.forEach(
-    (item, index) => {
-
-
-      whatsappMessage +=
-`${index + 1}. *${item.number} · ${item.name}*
-
-Product Code: ${item.code}
-
-Quantity: ${item.quantity}
-
-`;
-
-    }
-  );
-
-
-
-  whatsappMessage +=
-`-----------------------
-
-✨ Sent from LEVANTE Website
-
-Born in Istanbul.
-Inspired by the Levant breeze.`;
-
-
-
-  const encodedMessage =
-    encodeURIComponent(
-      whatsappMessage
-    );
-
-
-
-  const whatsappURL =
-    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-
-
-
-  window.open(
-    whatsappURL,
-    "_blank"
-  );
-
-}
-
-
-
-/* =====================================================
-   HERO SLIDER
-===================================================== */
-
-let currentSlide = 0;
-
-
-const slides =
-  document.querySelectorAll(".slide");
-
-
-const dots =
-  document.querySelectorAll(".dot");
-
-
-
-function goToSlide(index) {
-
-  slides[currentSlide]
-    .classList
-    .remove("active");
-
-
-  dots[currentSlide]
-    .classList
-    .remove("active");
-
-
-  currentSlide = index;
-
-
-  slides[currentSlide]
-    .classList
-    .add("active");
-
-
-  dots[currentSlide]
-    .classList
-    .add("active");
-
-}
-
-
-
-setInterval(() => {
-
-  let nextSlide =
-    currentSlide + 1;
-
-
-  if (
-    nextSlide >= slides.length
-  ) {
-
-    nextSlide = 0;
-
-  }
-
-
-  goToSlide(nextSlide);
-
-}, 5000);
-
-
-
-/* =====================================================
-   TRANSLATIONS
-===================================================== */
-
-const translations = {
-
-
-  tr: {
-
-    heroTag:
-      "İSTANBUL'DA DOĞDU",
-
-    heroTitle:
-      "Bir çantadan<br>daha fazlası.",
-
-    heroText:
-      "Her LEVANTE modeli bir şehirden, bir sokaktan ve bir anıdan ilham alır.",
-
-    heroButton:
-      "Koleksiyonu Keşfet →",
-
-
-    introTag:
-      "LEVANTE DENEYİMİ",
-
-    introTitle:
-      "Taşıdığın şey sadece bir çanta olmasın.",
-
-    introText:
-      "İstanbul'un enerjisi, Akdeniz'in hafifliği ve günlük hayatın özgürlüğü. LEVANTE, gittiğin her yerde seninle birlikte hareket etmek için tasarlandı.",
-
-
-    collectionTag:
-      "KOLEKSİYONU KEŞFET",
-
-    collectionTitle:
-      "Hikâyeni Taşı.",
-
-    collectionText:
-      "Her modelin bir karakteri var. Hangisi senin hikâyene daha yakın?",
-
-
-    storyTag:
-      "LEVANT RÜZGARI",
-
-    storyTitle:
-      "İstanbul'da doğdu.<br>Levant rüzgarından ilham aldı.",
-
-    storyText:
-      "LEVANTE, İstanbul'dan doğan ve Akdeniz'in özgür ruhundan ilham alan bir marka. Her tasarım yeni bir yolculuğa davet ediyor.",
-
-
-    featuresTag:
-      "NEDEN LEVANTE?",
-
-    featuresTitle:
-      "Hareket eden hayatlar için tasarlandı.",
-
-
-    feature1Title:
-      "Hikâyesi Var",
-
-    feature1Text:
-      "Her model bir şehirden, bir duygudan ve bir anıdan ilham alır.",
-
-
-    feature2Title:
-      "Seninle Hareket Eder",
-
-    feature2Text:
-      "Günlük yaşamın temposuna uyum sağlayacak şekilde tasarlandı.",
-
-
-    feature3Title:
-      "Kendi Hikâyen",
-
-    feature3Text:
-      "Bir çanta seçmezsin. Seni anlatan modeli bulursun.",
-
-
-    cartTitle:
-      "Sepetim",
-
-    checkoutTitle:
-      "Bilgilerin",
-
-    namePlaceholder:
-      "Ad Soyad",
-
-    phonePlaceholder:
-      "Telefon Numarası",
-
-    whatsappButton:
-      "WhatsApp ile Siparişi Gönder"
-
-  },
-
-
-
-  en: {
-
-    heroTag:
-      "BORN IN ISTANBUL",
-
-    heroTitle:
-      "More than<br>a bag.",
-
-    heroText:
-      "Every LEVANTE piece carries a story inspired by Istanbul.",
-
-    heroButton:
-      "Discover Collection →",
-
-
-    introTag:
-      "LEVANTE EXPERIENCE",
-
-    introTitle:
-      "Don't just carry a bag. Carry a story.",
-
-    introText:
-      "The energy of Istanbul, the lightness of the Mediterranean and the freedom of everyday life. LEVANTE is designed to move with you wherever you go.",
-
-
-    collectionTag:
-      "DISCOVER THE COLLECTION",
-
-    collectionTitle:
-      "Carry Your Story.",
-
-    collectionText:
-      "Every model has a personality. Which one feels like you?",
-
-
-    storyTag:
-      "THE LEVANT BREEZE",
-
-    storyTitle:
-      "Born in Istanbul.<br>Inspired by the Levant breeze.",
-
-    storyText:
-      "LEVANTE was born in Istanbul and inspired by the free spirit of the Mediterranean. Every design is an invitation to a new journey.",
-
-
-    featuresTag:
-      "WHY LEVANTE?",
-
-    featuresTitle:
-      "Designed for lives in motion.",
-
-
-    feature1Title:
-      "Every Bag Has a Story",
-
-    feature1Text:
-      "Each model is inspired by a city, a feeling and a memory.",
-
-
-    feature2Title:
-      "Moves With You",
-
-    feature2Text:
-      "Designed to adapt to the rhythm of your everyday life.",
-
-
-    feature3Title:
-      "Your Own Story",
-
-    feature3Text:
-      "You don't just choose a bag. You find the one that tells your story.",
-
-
-    cartTitle:
-      "My Bag",
-
-    checkoutTitle:
-      "Your Details",
-
-    namePlaceholder:
-      "Full Name",
-
-    phonePlaceholder:
-      "Phone Number",
-
-    whatsappButton:
-      "Send Order via WhatsApp"
-
-  },
-
-
-
-  ar: {
-
-    heroTag:
-      "وُلدت في إسطنبول",
-
-    heroTitle:
-      "أكثر من<br>مجرد حقيبة.",
-
-    heroText:
-      "كل موديل من ليفانتي يحمل قصة مستوحاة من إسطنبول.",
-
-    heroButton:
-      "اكتشف المجموعة ←",
-
-
-    introTag:
-      "تجربة ليفانتي",
-
-    introTitle:
-      "لا تحمل حقيبة فقط. احمل قصة.",
-
-    introText:
-      "طاقة إسطنبول وخفة البحر المتوسط وحرية الحياة اليومية. صُممت ليفانتي لتتحرك معك أينما ذهبت.",
-
-
-    collectionTag:
-      "اكتشف المجموعة",
-
-    collectionTitle:
-      "احمل قصتك.",
-
-    collectionText:
-      "كل موديل له شخصية. أي واحد يشبهك أكثر؟",
-
-
-    storyTag:
-      "نسيم ليفانتي",
-
-    storyTitle:
-      "وُلدت في إسطنبول.<br>مستوحاة من نسيم المشرق.",
-
-    storyText:
-      "ليفانتي علامة وُلدت في إسطنبول ومستوحاة من الروح الحرة للبحر المتوسط. كل تصميم هو دعوة لرحلة جديدة.",
-
-
-    featuresTag:
-      "لماذا ليفانتي؟",
-
-    featuresTitle:
-      "مصممة للحياة التي لا تتوقف.",
-
-
-    feature1Title:
-      "كل حقيبة لها قصة",
-
-    feature1Text:
-      "كل موديل مستوحى من مدينة وشعور وذكرى.",
-
-
-    feature2Title:
-      "تتحرك معك",
-
-    feature2Text:
-      "مصممة لتناسب إيقاع حياتك اليومية.",
-
-
-    feature3Title:
-      "قصتك أنت",
-
-    feature3Text:
-      "أنت لا تختار حقيبة فقط. أنت تجد الحقيبة التي تعبر عن قصتك.",
-
-
-    cartTitle:
-      "سلة التسوق",
-
-    checkoutTitle:
-      "بياناتك",
-
-    namePlaceholder:
-      "الاسم بالكامل",
-
-    phonePlaceholder:
-      "رقم الهاتف",
-
-    whatsappButton:
-      "إرسال الطلب عبر واتساب"
-
-  }
-
-};
-
-
-
-/* =====================================================
-   CHANGE LANGUAGE
-===================================================== */
-
-function changeLanguage() {
-
-  const language =
-    getLanguage();
-
-
-  const t =
-    translations[language];
-
-
-  document.documentElement.lang =
-    language;
-
-
-  document.documentElement.dir =
-    language === "ar"
-      ? "rtl"
-      : "ltr";
-
-
-  document.getElementById("heroTag").innerHTML =
-    t.heroTag;
-
-  document.getElementById("heroTitle").innerHTML =
-    t.heroTitle;
-
-  document.getElementById("heroText").innerHTML =
-    t.heroText;
-
-  document.getElementById("heroButton").innerHTML =
-    t.heroButton;
-
-
-  document.getElementById("introTag").innerHTML =
-    t.introTag;
-
-  document.getElementById("introTitle").innerHTML =
-    t.introTitle;
-
-  document.getElementById("introText").innerHTML =
-    t.introText;
-
-
-  document.getElementById("collectionTag").innerHTML =
-    t.collectionTag;
-
-  document.getElementById("collectionTitle").innerHTML =
-    t.collectionTitle;
-
-  document.getElementById("collectionText").innerHTML =
-    t.collectionText;
-
-
-  document.getElementById("storyTag").innerHTML =
-    t.storyTag;
-
-  document.getElementById("storyTitle").innerHTML =
-    t.storyTitle;
-
-  document.getElementById("storyText").innerHTML =
-    t.storyText;
-
-
-  document.getElementById("featuresTag").innerHTML =
-    t.featuresTag;
-
-  document.getElementById("featuresTitle").innerHTML =
-    t.featuresTitle;
-
-
-  document.getElementById("feature1Title").innerHTML =
-    t.feature1Title;
-
-  document.getElementById("feature1Text").innerHTML =
-    t.feature1Text;
-
-
-  document.getElementById("feature2Title").innerHTML =
-    t.feature2Title;
-
-  document.getElementById("feature2Text").innerHTML =
-    t.feature2Text;
-
-
-  document.getElementById("feature3Title").innerHTML =
-    t.feature3Title;
-
-  document.getElementById("feature3Text").innerHTML =
-    t.feature3Text;
-
-
-  document.getElementById("cartTitle").innerHTML =
-    t.cartTitle;
-
-  document.getElementById("checkoutTitle").innerHTML =
-    t.checkoutTitle;
-
-
-  document
-    .getElementById("customerName")
-    .placeholder =
-      t.namePlaceholder;
-
-
-  document
-    .getElementById("customerPhone")
-    .placeholder =
-      t.phonePlaceholder;
-
-
-  document
-    .getElementById("whatsappButton")
-    .innerHTML =
-      t.whatsappButton;
-
-
-  document
-    .querySelectorAll("[data-tr]")
-    .forEach(element => {
-
-      element.innerHTML =
-        element.dataset[language];
-
-    });
-
-
-  renderProducts();
-  updateCart();
-
-}
-
-
-
-/* =====================================================
-   INITIAL LOAD
-===================================================== */
-
-renderProducts();
-
-updateCart();
-
-
-</script>
 
 </body>
+
 </html>
