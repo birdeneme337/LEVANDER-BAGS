@@ -1655,7 +1655,6 @@ document.addEventListener(
 
     changeLanguage();
 
-
   }
 
 );
