@@ -1,11 +1,5 @@
 /* =====================================================
    LEVANTE WEBSITE
-   EXISTING DESIGN + PRODUCT DETAIL + CART ANIMATION
-===================================================== */
-
-
-/* =====================================================
-   SUPABASE
 ===================================================== */
 
 const SUPABASE_URL =
@@ -23,8 +17,6 @@ const WHATSAPP_NUMBER =
 
 /* =====================================================
    PRODUCTS
-   IMPORTANT:
-   EXISTING IMAGE PATHS ARE PRESERVED
 ===================================================== */
 
 const products = [
@@ -34,8 +26,7 @@ const products = [
     number: "01",
     code: "LV-GLT-01",
     name: "GALATA STRIPE",
-    price: 0,
-    image: "images/Levante-01.png",
+    image: "./images/Levante-01.png",
 
     colors: [
       {
@@ -50,11 +41,13 @@ const products = [
         "Günlük kullanım için hafif yapı",
         "İç astar ve fermuarlı bölme"
       ],
+
       en: [
         "Adjustable shoulder strap",
-        "Lightweight construction for everyday use",
+        "Lightweight construction",
         "Inner lining with zip compartment"
       ],
+
       ar: [
         "حزام كتف قابل للتعديل",
         "تصميم خفيف للاستخدام اليومي",
@@ -64,8 +57,8 @@ const products = [
 
     story: {
       tr: "Galata'nın zamansız sokaklarından ilham aldı. Geçmişin hikâyesi ile modern stilin buluştuğu, her güne karakter katan bir tasarım.",
-      en: "Inspired by the timeless streets of Galata. Where history meets effortless modern style.",
-      ar: "مستوحاة من شوارع غلطة الخالدة، حيث تلتقي حكايات الماضي بالأناقة العصرية."
+      en: "Inspired by the timeless streets of Galata, where history meets effortless modern style.",
+      ar: "مستوحاة من شوارع غلطة الخالدة حيث تلتقي حكايات الماضي بالأناقة العصرية."
     }
   },
 
@@ -75,8 +68,7 @@ const products = [
     number: "02",
     code: "LV-BSP-02",
     name: "BOSPHORUS BLUE",
-    price: 0,
-    image: "images/Levante-02.png",
+    image: "./images/Levante-02.png",
 
     colors: [
       {
@@ -91,11 +83,13 @@ const products = [
         "Hafif ve rahat kullanım",
         "İç astarlı yapı"
       ],
+
       en: [
         "Adjustable shoulder strap",
         "Lightweight and comfortable",
         "Fully lined interior"
       ],
+
       ar: [
         "حزام قابل للتعديل",
         "خفيفة ومريحة",
@@ -116,31 +110,32 @@ const products = [
     number: "03",
     code: "LV-SLT-03",
     name: "SULTAN SAND",
-    price: 0,
-    image: "images/Levante-03.png",
+    image: "./images/Levante-03.png",
 
     colors: [
       {
         name: "Sultan Sand",
-        hex: "#c8b69a"
+        hex: "#b99a72"
       }
     ],
 
     specs: {
       tr: [
-        "Ayarlanabilir omuz askısı",
-        "Günlük kullanım için uygun",
-        "Hafif ve kullanışlı tasarım"
+        "Yumuşak ve hafif yapı",
+        "Ayarlanabilir askı",
+        "İç astarlı kullanım"
       ],
+
       en: [
-        "Adjustable shoulder strap",
-        "Designed for everyday use",
-        "Lightweight and practical design"
+        "Soft lightweight construction",
+        "Adjustable strap",
+        "Lined interior"
       ],
+
       ar: [
-        "حزام كتف قابل للتعديل",
-        "مناسبة للاستخدام اليومي",
-        "تصميم خفيف وعملي"
+        "تصميم ناعم وخفيف",
+        "حزام قابل للتعديل",
+        "بطانة داخلية"
       ]
     },
 
@@ -156,39 +151,40 @@ const products = [
     id: 4,
     number: "04",
     code: "LV-KRK-04",
-    name: "KARAKÖY",
-    price: 0,
-    image: "images/Levante-04.png",
+    name: "KARAKÖY NIGHT",
+    image: "./images/Levante-04.png",
 
     colors: [
       {
-        name: "Karaköy",
-        hex: "#9d866d"
+        name: "Karaköy Night",
+        hex: "#333333"
       }
     ],
 
     specs: {
       tr: [
-        "Ayarlanabilir askı",
-        "Geniş iç hacim",
-        "İç astarlı tasarım"
+        "Günlük şehir kullanımı",
+        "Ayarlanabilir omuz askısı",
+        "İç astarlı yapı"
       ],
+
       en: [
-        "Adjustable strap",
-        "Spacious interior",
+        "Made for city life",
+        "Adjustable shoulder strap",
         "Lined interior"
       ],
+
       ar: [
-        "حزام قابل للتعديل",
-        "مساحة داخلية واسعة",
+        "مناسبة للحياة اليومية في المدينة",
+        "حزام كتف قابل للتعديل",
         "بطانة داخلية"
       ]
     },
 
     story: {
-      tr: "Karaköy'ün yaratıcı, özgür ve şehirli enerjisinden ilham alan modern bir tasarım.",
-      en: "Inspired by the creative, free and urban energy of Karaköy.",
-      ar: "مستوحاة من الطاقة الإبداعية والحضرية الحرة في كاراكوي."
+      tr: "Karaköy'ün enerjik sokaklarından ilham alan güçlü ve modern bir tasarım.",
+      en: "A bold and modern design inspired by the energetic streets of Karaköy.",
+      ar: "تصميم عصري وجريء مستوحى من شوارع كاراكوي الحيوية."
     }
   },
 
@@ -197,39 +193,40 @@ const products = [
     id: 5,
     number: "05",
     code: "LV-TKS-05",
-    name: "TAKSIM BURGUNDY",
-    price: 0,
-    image: "images/Levante-05.png",
+    name: "TAKSIM",
+    image: "./images/Levante-05.png",
 
     colors: [
       {
-        name: "Taksim Burgundy",
-        hex: "#6f2633"
+        name: "Taksim",
+        hex: "#8b6b55"
       }
     ],
 
     specs: {
       tr: [
-        "Ayarlanabilir omuz askısı",
-        "Yumuşak ve hafif yapı",
-        "İç astar"
+        "Hafif günlük kullanım",
+        "Ayarlanabilir askı",
+        "Fonksiyonel iç bölüm"
       ],
+
       en: [
-        "Adjustable shoulder strap",
-        "Soft and lightweight construction",
-        "Inner lining"
+        "Lightweight everyday use",
+        "Adjustable strap",
+        "Functional interior"
       ],
+
       ar: [
-        "حزام كتف قابل للتعديل",
-        "تصميم ناعم وخفيف",
-        "بطانة داخلية"
+        "خفيفة للاستخدام اليومي",
+        "حزام قابل للتعديل",
+        "تصميم داخلي عملي"
       ]
     },
 
     story: {
-      tr: "Taksim'in hiç durmayan enerjisinden ilham aldı. Güçlü, karakterli ve dikkat çekici.",
-      en: "Inspired by the endless energy of Taksim. Bold, expressive and full of character.",
-      ar: "مستوحاة من طاقة تقسيم التي لا تتوقف. قوية وجريئة ومليئة بالشخصية."
+      tr: "Taksim'in hareketli ve özgür ruhundan ilham alan şehirli bir tasarım.",
+      en: "An urban design inspired by the vibrant and free spirit of Taksim.",
+      ar: "تصميم حضري مستوحى من روح تقسيم الحيوية والحرة."
     }
   },
 
@@ -237,40 +234,41 @@ const products = [
   {
     id: 6,
     number: "06",
-    code: "LV-BLT-06",
-    name: "BALAT",
-    price: 0,
-    image: "images/Levante-06.png",
+    code: "LV-USK-06",
+    name: "ÜSKÜDAR",
+    image: "./images/Levante-06.png",
 
     colors: [
       {
-        name: "Balat",
-        hex: "#b88968"
+        name: "Üsküdar",
+        hex: "#9d8469"
       }
     ],
 
     specs: {
       tr: [
-        "Ayarlanabilir askı",
-        "Günlük kullanım için hafif",
-        "İç astarlı"
+        "Rahat günlük kullanım",
+        "Ayarlanabilir omuz askısı",
+        "İç astarlı tasarım"
       ],
+
       en: [
-        "Adjustable strap",
-        "Lightweight for everyday use",
-        "Lined interior"
+        "Comfortable everyday use",
+        "Adjustable shoulder strap",
+        "Lined construction"
       ],
+
       ar: [
-        "حزام قابل للتعديل",
-        "خفيفة للاستخدام اليومي",
-        "بطانة داخلية"
+        "مريحة للاستخدام اليومي",
+        "حزام كتف قابل للتعديل",
+        "تصميم مبطن"
       ]
     },
 
     story: {
-      tr: "Balat'ın renkli sokaklarından ve kendine özgü karakterinden ilham aldı.",
-      en: "Inspired by the colorful streets and unique personality of Balat.",
-      ar: "مستوحاة من شوارع بالاط الملونة وشخصيتها الفريدة."
+      tr: "Üsküdar'ın sakin, zarif ve zamansız atmosferinden ilham aldı.",
+      en: "Inspired by the calm, elegant and timeless atmosphere of Üsküdar.",
+      ar: "مستوحاة من أجواء أوسكودار الهادئة والأنيقة والخالدة."
     }
   },
 
@@ -278,40 +276,41 @@ const products = [
   {
     id: 7,
     number: "07",
-    code: "LV-USD-07",
-    name: "ÜSKÜDAR",
-    price: 0,
-    image: "images/Levante-07.png",
+    code: "LV-IST-07",
+    name: "ISTANBUL",
+    image: "./images/Levante-07.png",
 
     colors: [
       {
-        name: "Üsküdar",
-        hex: "#6e766b"
+        name: "Istanbul",
+        hex: "#6c5b4c"
       }
     ],
 
     specs: {
       tr: [
-        "Ayarlanabilir omuz askısı",
-        "Rahat günlük kullanım",
-        "İç astarlı tasarım"
+        "Şehir yaşamı için tasarlandı",
+        "Ayarlanabilir askı",
+        "Hafif yapı"
       ],
+
       en: [
-        "Adjustable shoulder strap",
-        "Comfortable everyday use",
-        "Lined construction"
+        "Designed for city life",
+        "Adjustable strap",
+        "Lightweight construction"
       ],
+
       ar: [
-        "حزام كتف قابل للتعديل",
-        "مريحة للاستخدام اليومي",
-        "بطانة داخلية"
+        "مصممة للحياة في المدينة",
+        "حزام قابل للتعديل",
+        "تصميم خفيف"
       ]
     },
 
     story: {
-      tr: "Üsküdar'ın sakin ve zarif atmosferinden ilham alan zamansız bir model.",
-      en: "A timeless model inspired by the calm and elegant atmosphere of Üsküdar.",
-      ar: "تصميم خالد مستوحى من أجواء أوسكودار الهادئة والأنيقة."
+      tr: "İstanbul'un karşıtlıklarla dolu enerjisini modern bir tasarımda buluşturuyor.",
+      en: "Bringing together the contrasting energy of Istanbul in a modern design.",
+      ar: "تجمع طاقة إسطنبول المتناقضة في تصميم عصري."
     }
   },
 
@@ -319,40 +318,41 @@ const products = [
   {
     id: 8,
     number: "08",
-    code: "LV-CNK-08",
-    name: "ÇUKURCUMA",
-    price: 0,
-    image: "images/Levante-08.png",
+    code: "LV-BLT-08",
+    name: "BALAT ROSE",
+    image: "./images/Levante-08.png",
 
     colors: [
       {
-        name: "Çukurcuma",
-        hex: "#92775d"
+        name: "Balat Rose",
+        hex: "#b77d78"
       }
     ],
 
     specs: {
       tr: [
+        "Yumuşak ve hafif tasarım",
         "Ayarlanabilir askı",
-        "Hafif yapı",
-        "İç astarlı kullanım"
+        "Günlük kullanım"
       ],
+
       en: [
+        "Soft lightweight design",
         "Adjustable strap",
-        "Lightweight structure",
-        "Lined interior"
+        "Perfect for everyday use"
       ],
+
       ar: [
+        "تصميم ناعم وخفيف",
         "حزام قابل للتعديل",
-        "تصميم خفيف",
-        "بطانة داخلية"
+        "مناسبة للاستخدام اليومي"
       ]
     },
 
     story: {
-      tr: "Çukurcuma'nın vintage ruhundan ve keşfedilmeyi bekleyen hikâyelerinden ilham aldı.",
-      en: "Inspired by the vintage soul and hidden stories of Çukurcuma.",
-      ar: "مستوحاة من روح تشوكورجوما الكلاسيكية وحكاياتها الخفية."
+      tr: "Balat'ın renkli sokaklarından ilham aldı. Yumuşak tonlar, nostaljik ruh ve modern bir özgürlük.",
+      en: "Inspired by the colorful streets of Balat. Soft tones, nostalgia and modern freedom.",
+      ar: "مستوحاة من شوارع بالاط الملونة. ألوان ناعمة وروح حنين وحرية عصرية."
     }
   },
 
@@ -360,40 +360,41 @@ const products = [
   {
     id: 9,
     number: "09",
-    code: "LV-KDL-09",
-    name: "KADIKÖY",
-    price: 0,
-    image: "images/Levante-09.png",
+    code: "LV-LPD-09",
+    name: "LEVANTE LEOPARD",
+    image: "./images/Levante-09.png",
 
     colors: [
       {
-        name: "Kadıköy",
-        hex: "#6f7788"
+        name: "Leopard",
+        hex: "#9a7651"
       }
     ],
 
     specs: {
       tr: [
+        "Dikkat çekici desen",
         "Ayarlanabilir omuz askısı",
-        "Günlük kullanım için hafif",
-        "İç astarlı yapı"
+        "Hafif günlük kullanım"
       ],
+
       en: [
+        "Statement pattern",
         "Adjustable shoulder strap",
-        "Lightweight for everyday use",
-        "Lined interior"
+        "Lightweight everyday use"
       ],
+
       ar: [
+        "نقشة مميزة",
         "حزام كتف قابل للتعديل",
-        "خفيفة للاستخدام اليومي",
-        "بطانة داخلية"
+        "خفيفة للاستخدام اليومي"
       ]
     },
 
     story: {
-      tr: "Kadıköy'ün genç, özgür ve enerjik ruhundan ilham alan bir tasarım.",
-      en: "Inspired by the young, free and energetic spirit of Kadıköy.",
-      ar: "مستوحاة من روح كاديكوي الشابة والحرة والمليئة بالطاقة."
+      tr: "Cesur, özgüvenli ve unutulmaz. Şehrin güçlü ruhundan ilham alan, dikkat çekmekten korkmayanlar için.",
+      en: "Bold, confident and unforgettable. Made for those who are never afraid to stand out.",
+      ar: "جريئة وواثقة ولا تُنسى. لمن لا يخافون من لفت الأنظار."
     }
   },
 
@@ -403,46 +404,52 @@ const products = [
     number: "10",
     code: "LV-MID-10",
     name: "MIDNIGHT ISTANBUL",
-    price: 0,
-    image: "images/Levante-10.png",
+    image: "./images/Levante-10.png",
 
     colors: [
       {
-        name: "Midnight Istanbul",
-        hex: "#1c1c1e"
+        name: "Midnight",
+        hex: "#202020"
       }
     ],
 
     specs: {
       tr: [
-        "Ayarlanabilir omuz askısı",
-        "Şık ve dayanıklı yapı",
-        "İç astar ve fermuarlı bölme"
+        "Gece ve gündüz kullanım",
+        "Ayarlanabilir askı",
+        "İç astarlı yapı"
       ],
+
       en: [
-        "Adjustable shoulder strap",
-        "Elegant and durable construction",
-        "Inner lining with zip compartment"
+        "Day and night use",
+        "Adjustable strap",
+        "Lined interior"
       ],
+
       ar: [
-        "حزام كتف قابل للتعديل",
-        "تصميم أنيق ومتين",
-        "بطانة داخلية مع جيب بسحاب"
+        "مناسبة للنهار والليل",
+        "حزام قابل للتعديل",
+        "بطانة داخلية"
       ]
     },
 
     story: {
-      tr: "İstanbul gecelerinin gizemli ve güçlü atmosferinden ilham aldı.",
-      en: "Inspired by the mysterious and powerful atmosphere of Istanbul at night.",
-      ar: "مستوحاة من أجواء إسطنبول الليلية الغامضة والقوية."
+      tr: "İstanbul gecelerinden ilham aldı. Derin, zarif ve gizemli. Günün her saatinde güçlü bir ifade.",
+      en: "Inspired by Istanbul nights. Deep, elegant and mysterious. A powerful statement at any hour.",
+      ar: "مستوحاة من ليالي إسطنبول. عميقة وأنيقة وغامضة وحضور قوي في كل وقت."
     }
   }
 
 ];
 
 
+let cart = [];
+let currentProductId = null;
+let currentSlide = 0;
+
+
 /* =====================================================
-   LANGUAGE
+   TRANSLATIONS
 ===================================================== */
 
 const translations = {
@@ -488,17 +495,22 @@ const translations = {
     contactTitle: "LEVANTE ile iletişime geç.",
     contactText: "Koleksiyon, iş birlikleri ve siparişler için bize ulaşabilirsin.",
 
-    quickView: "Detayları Gör",
+    quickView: "İncele",
     add: "Sepete Ekle",
+    buyNow: "Satın Al",
     coming: "Yakında",
+
     cartTitle: "Çantam",
     cartKicker: "LEVANTE",
     checkoutTitle: "Bilgileriniz",
+
     namePlaceholder: "Ad Soyad",
     phonePlaceholder: "Telefon Numarası",
+
     orderButton: "Sipariş Talebi Gönder",
 
-    emptyCart: "Sepetiniz boş.",
+    emptyCart: "Sepetin henüz boş. Hikâyeni seçmeye başla.",
+
     remove: "Kaldır",
 
     productCode: "Ürün Kodu",
@@ -506,7 +518,6 @@ const translations = {
     storyLabel: "Hikâyesi",
     detailsLabel: "Çanta Detayları",
     colorsLabel: "Renkler",
-    buyNow: "Satın Al",
 
     recommendationTag: "BUNLARI DA SEVEBİLİRSİN",
     recommendationTitle: "Senin için seçtik.",
@@ -525,19 +536,19 @@ const translations = {
     menuContact: "Contact",
 
     heroTag: "BORN IN ISTANBUL",
-    heroTitle: "More than<br>a bag.",
+    heroTitle: "More than<br>just a bag.",
     heroText: "Every LEVANTE piece carries a story inspired by Istanbul.",
-    heroButton: "Discover Collection →",
+    heroButton: "Explore Collection →",
 
-    introTag: "LEVANTE EXPERIENCE",
-    introTitle: "Don't just carry a bag. Carry a story.",
+    introTag: "THE LEVANTE EXPERIENCE",
+    introTitle: "Carry more than just a bag.",
     introText: "The energy of Istanbul, the lightness of the Mediterranean and the freedom of everyday life.",
 
     collectionTag: "DISCOVER THE COLLECTION",
-    collectionTitle: "Carry Your Story.",
-    collectionText: "Every model has a personality. Which one feels like you?",
+    collectionTitle: "Carry your story.",
+    collectionText: "Every model has its own character. Which one feels like you?",
 
-    storyTag: "LEVANT BREEZE",
+    storyTag: "THE LEVANT BREEZE",
     storyTitle: "Born in Istanbul.<br>Inspired by the Levant breeze.",
     storyText: "LEVANTE brings together the energy of Istanbul and the free spirit of the Mediterranean.",
 
@@ -550,8 +561,8 @@ const translations = {
     feature2Title: "Moves With You",
     feature2Text: "Designed to adapt to the rhythm of your everyday life.",
 
-    feature3Title: "Your Story",
-    feature3Text: "You don't simply choose a bag. You find the story that feels like you.",
+    feature3Title: "Your Own Story",
+    feature3Text: "You do not just choose a bag. You find the story that feels like you.",
 
     contactTag: "CONTACT",
     contactTitle: "Get in touch with LEVANTE.",
@@ -559,15 +570,20 @@ const translations = {
 
     quickView: "View Details",
     add: "Add to Bag",
+    buyNow: "Buy Now",
     coming: "Coming Soon",
+
     cartTitle: "My Bag",
     cartKicker: "LEVANTE",
     checkoutTitle: "Your Details",
+
     namePlaceholder: "Full Name",
     phonePlaceholder: "Phone Number",
+
     orderButton: "Send Order Request",
 
-    emptyCart: "Your bag is empty.",
+    emptyCart: "Your bag is empty. Start choosing your story.",
+
     remove: "Remove",
 
     productCode: "Product Code",
@@ -575,13 +591,12 @@ const translations = {
     storyLabel: "Story",
     detailsLabel: "Bag Details",
     colorsLabel: "Colors",
-    buyNow: "Buy Now",
 
     recommendationTag: "YOU MAY ALSO LIKE",
     recommendationTitle: "Selected for you.",
 
     storyOne: "Istanbul stories",
-    storyTwo: "One city. Endless inspiration."
+    storyTwo: "City. Endless inspiration."
   },
 
 
@@ -594,33 +609,33 @@ const translations = {
     menuContact: "تواصل معنا",
 
     heroTag: "وُلدت في إسطنبول",
-    heroTitle: "أكثر من<br>حقيبة.",
+    heroTitle: "أكثر من<br>مجرد حقيبة.",
     heroText: "كل قطعة من LEVANTE تحمل قصة مستوحاة من إسطنبول.",
     heroButton: "اكتشف المجموعة ←",
 
     introTag: "تجربة LEVANTE",
-    introTitle: "لا تحمل مجرد حقيبة. احمل قصة.",
+    introTitle: "لا تحمل مجرد حقيبة.",
     introText: "طاقة إسطنبول وخفة البحر المتوسط وحرية الحياة اليومية.",
 
     collectionTag: "اكتشف المجموعة",
     collectionTitle: "احمل قصتك.",
-    collectionText: "لكل موديل شخصيته الخاصة. أيها يشبهك؟",
+    collectionText: "لكل موديل شخصيته الخاصة. أي حقيبة تشبهك؟",
 
     storyTag: "نسيم المشرق",
-    storyTitle: "وُلدت في إسطنبول.<br>استوحت من نسيم المشرق.",
+    storyTitle: "وُلدت في إسطنبول.<br>مستوحاة من نسيم المشرق.",
     storyText: "تجمع LEVANTE بين طاقة إسطنبول وروح البحر المتوسط الحرة.",
 
     featuresTag: "لماذا LEVANTE؟",
-    featuresTitle: "مصممة لحياة مليئة بالحركة.",
+    featuresTitle: "مصممة للحياة المتحركة.",
 
-    feature1Title: "لكل حقيبة قصة",
+    feature1Title: "كل حقيبة لها قصة",
     feature1Text: "كل موديل مستوحى من مدينة وشعور وذكرى.",
 
     feature2Title: "تتحرك معك",
-    feature2Text: "مصممة لتواكب إيقاع حياتك اليومية.",
+    feature2Text: "مصممة لتناسب إيقاع حياتك اليومية.",
 
     feature3Title: "قصتك أنت",
-    feature3Text: "أنت لا تختار مجرد حقيبة. بل تجد القصة التي تشبهك.",
+    feature3Text: "أنت لا تختار حقيبة فقط، بل تجد القصة التي تشبهك.",
 
     contactTag: "تواصل معنا",
     contactTitle: "تواصل مع LEVANTE.",
@@ -628,15 +643,20 @@ const translations = {
 
     quickView: "عرض التفاصيل",
     add: "أضف إلى الحقيبة",
+    buyNow: "اشتري الآن",
     coming: "قريباً",
+
     cartTitle: "حقيبتي",
     cartKicker: "LEVANTE",
     checkoutTitle: "بياناتك",
+
     namePlaceholder: "الاسم بالكامل",
     phonePlaceholder: "رقم الهاتف",
+
     orderButton: "إرسال طلب الشراء",
 
-    emptyCart: "حقيبتك فارغة.",
+    emptyCart: "حقيبتك فارغة. ابدأ باختيار قصتك.",
+
     remove: "حذف",
 
     productCode: "كود المنتج",
@@ -644,7 +664,6 @@ const translations = {
     storyLabel: "القصة",
     detailsLabel: "تفاصيل الحقيبة",
     colorsLabel: "الألوان",
-    buyNow: "اشتري الآن",
 
     recommendationTag: "قد يعجبك أيضاً",
     recommendationTitle: "اخترناها لك.",
@@ -657,16 +676,7 @@ const translations = {
 
 
 /* =====================================================
-   STATE
-===================================================== */
-
-let cart = [];
-let currentProductId = null;
-let currentSlide = 0;
-
-
-/* =====================================================
-   LANGUAGE HELPERS
+   LANGUAGE
 ===================================================== */
 
 function getLanguage() {
@@ -702,13 +712,62 @@ function setText(
 
   if (html) {
 
-    element.innerHTML = value;
-
-  } else {
-
-    element.textContent = value;
+    element.innerHTML =
+      value;
 
   }
+
+  else {
+
+    element.textContent =
+      value;
+
+  }
+
+}
+
+
+/* =====================================================
+   LOGO FALLBACK
+===================================================== */
+
+function setupLogoFallbacks() {
+
+  const possiblePaths = [
+
+    "./images/levante-logo.png",
+    "./images/levante-logo",
+    "./images/images/levante-logo.png",
+    "./images/images/levante-logo",
+    "./images/levante-logo.png.png"
+
+  ];
+
+
+  document
+    .querySelectorAll(".levante-logo")
+    .forEach(image => {
+
+      let index = 0;
+
+
+      image.onerror =
+        function () {
+
+          index++;
+
+          if (
+            index < possiblePaths.length
+          ) {
+
+            image.src =
+              possiblePaths[index];
+
+          }
+
+        };
+
+    });
 
 }
 
@@ -720,11 +779,14 @@ function setText(
 function renderProducts() {
 
   const grid =
-    document.getElementById("productsGrid");
+    document.getElementById(
+      "productsGrid"
+    );
 
   if (!grid) return;
 
-  const text = t();
+  const text =
+    t();
 
 
   grid.innerHTML =
@@ -743,10 +805,8 @@ function renderProducts() {
             loading="lazy"
           >
 
-
           <button
             class="quick-view"
-            type="button"
             onclick="
               event.stopPropagation();
               openProduct(${product.id});
@@ -770,16 +830,16 @@ function renderProducts() {
 
 
           <h3>
-
             ${product.name}
-
           </h3>
 
 
           <p class="story">
 
             ${
-              product.story[getLanguage()]
+              product.story[
+                getLanguage()
+              ]
               ||
               product.story.en
             }
@@ -790,21 +850,17 @@ function renderProducts() {
           <div class="product-bottom">
 
             <span class="price">
-
               ${text.coming}
-
             </span>
 
 
             <button
               class="add-btn"
-              type="button"
               onclick="
-                event.stopPropagation();
                 addToCart(
                   ${product.id},
                   this
-                );
+                )
               "
             >
 
@@ -814,7 +870,9 @@ function renderProducts() {
 
           </div>
 
+
         </div>
+
 
       </article>
 
@@ -829,10 +887,13 @@ function renderProducts() {
 
 function changeLanguage() {
 
-  const text = t();
+  const text =
+    t();
+
 
   document.documentElement.lang =
     getLanguage();
+
 
   document.documentElement.dir =
     getLanguage() === "ar"
@@ -840,57 +901,117 @@ function changeLanguage() {
       : "ltr";
 
 
-  [
+  const items = [
+
     ["heroTag", text.heroTag],
-    ["heroTitle", text.heroTitle, true],
-    ["heroText", text.heroText],
-    ["heroButton", text.heroButton],
 
-    ["introTag", text.introTag],
-    ["introTitle", text.introTitle],
-    ["introText", text.introText],
+    ["heroTitle",
+      text.heroTitle,
+      true],
 
-    ["collectionTag", text.collectionTag],
-    ["collectionTitle", text.collectionTitle],
-    ["collectionText", text.collectionText],
+    ["heroText",
+      text.heroText],
 
-    ["storyTag", text.storyTag],
-    ["storyTitle", text.storyTitle, true],
-    ["storyText", text.storyText],
+    ["heroButton",
+      text.heroButton],
 
-    ["featuresTag", text.featuresTag],
-    ["featuresTitle", text.featuresTitle],
+    ["introTag",
+      text.introTag],
 
-    ["feature1Title", text.feature1Title],
-    ["feature1Text", text.feature1Text],
+    ["introTitle",
+      text.introTitle],
 
-    ["feature2Title", text.feature2Title],
-    ["feature2Text", text.feature2Text],
+    ["introText",
+      text.introText],
 
-    ["feature3Title", text.feature3Title],
-    ["feature3Text", text.feature3Text],
+    ["collectionTag",
+      text.collectionTag],
 
-    ["contactTag", text.contactTag],
-    ["contactTitle", text.contactTitle],
-    ["contactText", text.contactText],
+    ["collectionTitle",
+      text.collectionTitle],
 
-    ["cartTitle", text.cartTitle],
-    ["cartKicker", text.cartKicker],
-    ["checkoutTitle", text.checkoutTitle],
+    ["collectionText",
+      text.collectionText],
 
-    ["whatsappButton", text.orderButton],
+    ["storyTag",
+      text.storyTag],
 
-    ["storyNumberOne", text.storyOne],
-    ["storyNumberTwo", text.storyTwo]
+    ["storyTitle",
+      text.storyTitle,
+      true],
 
-  ].forEach(
-    ([id, value, html]) =>
-      setText(id, value, html)
-  );
+    ["storyText",
+      text.storyText],
+
+    ["featuresTag",
+      text.featuresTag],
+
+    ["featuresTitle",
+      text.featuresTitle],
+
+    ["feature1Title",
+      text.feature1Title],
+
+    ["feature1Text",
+      text.feature1Text],
+
+    ["feature2Title",
+      text.feature2Title],
+
+    ["feature2Text",
+      text.feature2Text],
+
+    ["feature3Title",
+      text.feature3Title],
+
+    ["feature3Text",
+      text.feature3Text],
+
+    ["contactTag",
+      text.contactTag],
+
+    ["contactTitle",
+      text.contactTitle],
+
+    ["contactText",
+      text.contactText],
+
+    ["cartTitle",
+      text.cartTitle],
+
+    ["cartKicker",
+      text.cartKicker],
+
+    ["checkoutTitle",
+      text.checkoutTitle],
+
+    ["whatsappButton",
+      text.orderButton],
+
+    ["storyNumberOne",
+      text.storyOne],
+
+    ["storyNumberTwo",
+      text.storyTwo]
+
+  ];
+
+
+  items.forEach(item => {
+
+    setText(
+      item[0],
+      item[1],
+      item[2]
+    );
+
+  });
 
 
   document
-    .querySelectorAll("[data-i18n]")
+    .querySelectorAll(
+      "[data-i18n]"
+    )
     .forEach(element => {
 
       const key =
@@ -961,8 +1082,10 @@ function openProduct(
 
   const product =
     products.find(
-      item => item.id === productId
+      item =>
+        item.id === productId
     );
+
 
   if (!product) return;
 
@@ -971,7 +1094,8 @@ function openProduct(
     productId;
 
 
-  const text = t();
+  const text =
+    t();
 
 
   const modal =
@@ -980,19 +1104,17 @@ function openProduct(
     );
 
 
-  const main =
+  const mainImage =
     document.getElementById(
       "detailMainImage"
     );
 
 
-  if (!modal || !main) return;
-
-
-  main.src =
+  mainImage.src =
     product.image;
 
-  main.alt =
+
+  mainImage.alt =
     product.name;
 
 
@@ -1001,51 +1123,65 @@ function openProduct(
     `${product.number} · LEVANTE`
   );
 
+
   setText(
     "detailName",
     product.name
   );
+
 
   setText(
     "detailCodeLabel",
     text.productCode
   );
 
+
   setText(
     "detailCode",
     product.code
   );
+
 
   setText(
     "detailStock",
     text.inStock
   );
 
+
   setText(
     "detailStoryLabel",
     text.storyLabel
   );
 
+
   setText(
     "detailStory",
-    product.story[getLanguage()]
-      || product.story.en
+
+    product.story[
+      getLanguage()
+    ]
+    ||
+    product.story.en
   );
+
 
   setText(
     "detailDetailsLabel",
     text.detailsLabel
   );
 
+
   setText(
     "detailColorsLabel",
     text.colorsLabel
   );
 
+
   setText(
     "recommendationTag",
     text.recommendationTag
   );
+
 
   setText(
     "recommendationTitle",
@@ -1053,78 +1189,61 @@ function openProduct(
   );
 
 
-  const specs =
-    document.getElementById(
+  document
+    .getElementById(
       "detailSpecs"
-    );
+    )
+    .innerHTML =
 
-
-  if (specs) {
-
-    specs.innerHTML =
-      (
-        product.specs[getLanguage()]
-        ||
-        product.specs.en
+    (
+      product.specs[
+        getLanguage()
+      ]
+      ||
+      product.specs.en
+    )
+      .map(
+        item =>
+          `<li>${item}</li>`
       )
-        .map(
-          item =>
-            `<li>${item}</li>`
-        )
-        .join("");
-
-  }
+      .join("");
 
 
-  const colors =
-    document.getElementById(
+  document
+    .getElementById(
       "detailColors"
-    );
+    )
+    .innerHTML =
+
+    product.colors
+      .map(color => `
+
+        <button
+          class="color-option"
+          title="${color.name}"
+        >
+
+          <span
+            class="color-swatch"
+            style="
+              background:${color.hex}
+            "
+          ></span>
+
+        </button>
+
+      `)
+      .join("");
 
 
-  if (colors) {
-
-    colors.innerHTML =
-      product.colors
-        .map(
-          color => `
-
-            <button
-              class="color-option"
-              type="button"
-              title="${color.name}"
-              aria-label="${color.name}"
-            >
-
-              <span
-                class="color-swatch"
-                style="
-                  background:${color.hex};
-                "
-              ></span>
-
-            </button>
-
-          `
-        )
-        .join("");
-
-  }
-
-
-  const thumbnails =
-    document.getElementById(
+  document
+    .getElementById(
       "productThumbnails"
-    );
-
-
-  if (thumbnails) {
-
-    thumbnails.innerHTML = `
+    )
+    .innerHTML = `
 
       <button
         class="thumb-btn active"
-        type="button"
         onclick="
           setDetailImage(
             '${product.image}',
@@ -1142,61 +1261,47 @@ function openProduct(
 
     `;
 
-  }
 
-
-  const add =
+  const addButton =
     document.getElementById(
       "detailAddButton"
     );
 
 
-  if (add) {
-
-    add.textContent =
-      text.add;
+  addButton.textContent =
+    text.add;
 
 
-    add.onclick = () => {
+  addButton.onclick =
+    () => {
 
       addToCart(
         product.id,
-        add,
-        document.getElementById(
-          "detailMainImage"
-        )
+        addButton,
+        mainImage
       );
 
     };
 
-  }
 
-
-  const buy =
+  const buyButton =
     document.getElementById(
       "detailBuyButton"
     );
 
 
-  if (buy) {
-
-    buy.textContent =
-      text.buyNow;
+  buyButton.textContent =
+    text.buyNow;
 
 
-    buy.onclick = () => {
+  buyButton.onclick =
+    () => {
 
       addToCart(
         product.id,
-        buy,
-        document.getElementById(
-          "detailMainImage"
-        )
+        buyButton,
+        mainImage
       );
-
-
-      closeProduct();
-
 
       setTimeout(
         openCart,
@@ -1205,80 +1310,73 @@ function openProduct(
 
     };
 
-  }
-
 
   renderRecommendations(
     product.id
   );
 
 
+  modal.classList.add(
+    "active"
+  );
+
+
+  document.body.classList.add(
+    "product-open"
+  );
+
+
+  modal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+
   if (!preserveScroll) {
 
-    modal.classList.add(
-      "active"
-    );
-
-    modal.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-    document.body.classList.add(
-      "product-open"
-    );
+    window.scrollTo({
+      top:
+        window.scrollY,
+      behavior:
+        "instant"
+    });
 
   }
 
 }
 
 
-/* =====================================================
-   PRODUCT IMAGE
-===================================================== */
-
 function setDetailImage(
-  src,
+  image,
   button
 ) {
 
-  const main =
-    document.getElementById(
+  document
+    .getElementById(
       "detailMainImage"
-    );
-
-
-  if (!main) return;
-
-
-  main.src = src;
+    )
+    .src =
+    image;
 
 
   document
-    .querySelectorAll(".thumb-btn")
-    .forEach(btn => {
-
-      btn.classList.remove(
-        "active"
-      );
-
-    });
-
-
-  if (button) {
-
-    button.classList.add(
-      "active"
+    .querySelectorAll(
+      ".thumb-btn"
+    )
+    .forEach(
+      item =>
+        item.classList.remove(
+          "active"
+        )
     );
 
-  }
+
+  button.classList.add(
+    "active"
+  );
 
 }
 
-
-/* =====================================================
-   CLOSE PRODUCT
-===================================================== */
 
 function closeProduct() {
 
@@ -1288,11 +1386,13 @@ function closeProduct() {
     );
 
 
-  if (!modal) return;
-
-
   modal.classList.remove(
     "active"
+  );
+
+
+  document.body.classList.remove(
+    "product-open"
   );
 
 
@@ -1302,20 +1402,11 @@ function closeProduct() {
   );
 
 
-  document.body.classList.remove(
-    "product-open"
-  );
-
-
   currentProductId =
     null;
 
 }
 
-
-/* =====================================================
-   RECOMMENDATIONS
-===================================================== */
 
 function renderRecommendations(
   currentId
@@ -1330,61 +1421,61 @@ function renderRecommendations(
   if (!grid) return;
 
 
-  const selected =
+  const recommended =
     products
       .filter(
-        product =>
-          product.id !== currentId
+        item =>
+          item.id !== currentId
       )
-      .slice(0, 3);
+      .slice(0, 4);
 
 
   grid.innerHTML =
-    selected.map(product => `
+    recommended
+      .map(product => `
 
-      <article
-        class="recommendation-card"
-        onclick="openProduct(${product.id})"
-      >
-
-        <img
-          src="${product.image}"
-          alt="${product.name}"
+        <article
+          class="recommendation-card"
+          onclick="
+            openProduct(
+              ${product.id}
+            )
+          "
         >
 
+          <img
+            src="${product.image}"
+            alt="${product.name}"
+          >
 
-        <div>
+          <div>
 
-          <small>
+            <span>
+              ${product.code}
+            </span>
 
-            ${product.code}
+            <h3>
+              ${product.name}
+            </h3>
 
-          </small>
+          </div>
 
+        </article>
 
-          <h4>
-
-            ${product.name}
-
-          </h4>
-
-        </div>
-
-      </article>
-
-    `).join("");
+      `)
+      .join("");
 
 }
 
 
 /* =====================================================
-   ADD TO CART
+   CART
 ===================================================== */
 
 function addToCart(
   productId,
-  sourceButton = null,
-  sourceImage = null
+  button = null,
+  imageElement = null
 ) {
 
   const product =
@@ -1397,16 +1488,16 @@ function addToCart(
   if (!product) return;
 
 
-  const existing =
+  const existingItem =
     cart.find(
       item =>
         item.id === productId
     );
 
 
-  if (existing) {
+  if (existingItem) {
 
-    existing.quantity += 1;
+    existingItem.quantity += 1;
 
   }
 
@@ -1424,223 +1515,35 @@ function addToCart(
 
 
   if (
-    !sourceImage
-    &&
-    sourceButton
+    button &&
+    !imageElement
   ) {
 
     const card =
-      sourceButton.closest(
+      button.closest(
         ".product-card"
       );
 
 
-    sourceImage =
-      card
-        ? card.querySelector("img")
-        : null;
+    if (card) {
+
+      imageElement =
+        card.querySelector(
+          "img"
+        );
+
+    }
 
   }
 
 
-  if (sourceImage) {
+  if (imageElement) {
 
-    animateToCart(
-      sourceImage
+    flyToCart(
+      imageElement
     );
 
   }
-
-  else {
-
-    updateCart(true);
-
-  }
-
-}
-
-
-/* =====================================================
-   PRODUCT FLY TO CART ANIMATION
-===================================================== */
-
-function animateToCart(
-  sourceImage
-) {
-
-  const cartButton =
-    document.getElementById(
-      "cartButton"
-    );
-
-
-  if (
-    !sourceImage
-    ||
-    !cartButton
-  ) {
-
-    updateCart(true);
-
-    return;
-
-  }
-
-
-  const rect =
-    sourceImage.getBoundingClientRect();
-
-
-  const target =
-    cartButton.getBoundingClientRect();
-
-
-  const flying =
-    sourceImage.cloneNode(true);
-
-
-  flying.className =
-    "flying-product";
-
-
-  flying.style.position =
-    "fixed";
-
-
-  flying.style.left =
-    `${rect.left}px`;
-
-
-  flying.style.top =
-    `${rect.top}px`;
-
-
-  flying.style.width =
-    `${rect.width}px`;
-
-
-  flying.style.height =
-    `${rect.height}px`;
-
-
-  flying.style.zIndex =
-    "9999";
-
-
-  flying.style.pointerEvents =
-    "none";
-
-
-  document.body.appendChild(
-    flying
-  );
-
-
-  requestAnimationFrame(() => {
-
-    flying.style.transition =
-      "all 0.75s cubic-bezier(.2,.8,.2,1)";
-
-
-    flying.style.left =
-      `${
-        target.left
-        +
-        target.width / 2
-        -
-        18
-      }px`;
-
-
-    flying.style.top =
-      `${
-        target.top
-        +
-        target.height / 2
-        -
-        18
-      }px`;
-
-
-    flying.style.width =
-      "36px";
-
-
-    flying.style.height =
-      "36px";
-
-
-    flying.style.opacity =
-      ".25";
-
-
-    flying.style.transform =
-      "rotate(18deg) scale(.45)";
-
-  });
-
-
-  setTimeout(() => {
-
-    flying.remove();
-
-    updateCart(true);
-
-  }, 760);
-
-}
-
-
-/* =====================================================
-   CART QUANTITY
-===================================================== */
-
-function changeQuantity(
-  productId,
-  amount
-) {
-
-  const item =
-    cart.find(
-      item =>
-        item.id === productId
-    );
-
-
-  if (!item) return;
-
-
-  item.quantity += amount;
-
-
-  if (
-    item.quantity <= 0
-  ) {
-
-    removeFromCart(
-      productId
-    );
-
-  }
-
-  else {
-
-    updateCart();
-
-  }
-
-}
-
-
-function removeFromCart(
-  productId
-) {
-
-  cart =
-    cart.filter(
-      item =>
-        item.id !== productId
-    );
 
 
   updateCart();
@@ -1648,13 +1551,7 @@ function removeFromCart(
 }
 
 
-/* =====================================================
-   UPDATE CART
-===================================================== */
-
-function updateCart(
-  animateCount = false
-) {
+function updateCart() {
 
   const cartItems =
     document.getElementById(
@@ -1668,52 +1565,52 @@ function updateCart(
     );
 
 
-  if (
-    !cartItems
-    ||
-    !cartCount
-  ) return;
-
-
-  const text = t();
+  const text =
+    t();
 
 
   const total =
     cart.reduce(
+
       (
-        sum,
+        total,
         item
       ) =>
-        sum
-        +
+        total +
         item.quantity,
+
       0
+
     );
 
 
-  cartCount.textContent =
-    total;
+  if (cartCount) {
 
+    cartCount.textContent =
+      total;
 
-  if (animateCount) {
 
     cartCount.classList.remove(
       "bump"
     );
 
 
-    void cartCount.offsetWidth;
+    setTimeout(() => {
 
+      cartCount.classList.add(
+        "bump"
+      );
 
-    cartCount.classList.add(
-      "bump"
-    );
+    }, 10);
 
   }
 
 
+  if (!cartItems) return;
+
+
   if (
-    !cart.length
+    cart.length === 0
   ) {
 
     cartItems.innerHTML = `
@@ -1745,27 +1642,19 @@ function updateCart(
         <div class="cart-item-info">
 
           <h4>
-
-            ${item.number}
-            ·
             ${item.name}
-
           </h4>
 
 
           <small>
-
             ${item.code}
-
           </small>
 
 
-          <div
-            class="quantity-controls"
-          >
+
+          <div class="quantity-controls">
 
             <button
-              type="button"
               onclick="
                 changeQuantity(
                   ${item.id},
@@ -1778,14 +1667,11 @@ function updateCart(
 
 
             <strong>
-
               ${item.quantity}
-
             </strong>
 
 
             <button
-              type="button"
               onclick="
                 changeQuantity(
                   ${item.id},
@@ -1799,9 +1685,9 @@ function updateCart(
           </div>
 
 
+
           <button
             class="remove-btn"
-            type="button"
             onclick="
               removeFromCart(
                 ${item.id}
@@ -1817,14 +1703,64 @@ function updateCart(
 
       </div>
 
-    `).join("");
+    `)
+    .join("");
 
 }
 
 
-/* =====================================================
-   CART
-===================================================== */
+function changeQuantity(
+  productId,
+  amount
+) {
+
+  const item =
+    cart.find(
+      product =>
+        product.id === productId
+    );
+
+
+  if (!item) return;
+
+
+  item.quantity +=
+    amount;
+
+
+  if (
+    item.quantity <= 0
+  ) {
+
+    removeFromCart(
+      productId
+    );
+
+    return;
+
+  }
+
+
+  updateCart();
+
+}
+
+
+function removeFromCart(
+  productId
+) {
+
+  cart =
+    cart.filter(
+      item =>
+        item.id !== productId
+    );
+
+
+  updateCart();
+
+}
+
 
 function openCart() {
 
@@ -1832,16 +1768,18 @@ function openCart() {
     .getElementById(
       "cartDrawer"
     )
-    ?.classList
-    .add("active");
+    .classList.add(
+      "active"
+    );
 
 
   document
     .getElementById(
       "cartOverlay"
     )
-    ?.classList
-    .add("active");
+    .classList.add(
+      "active"
+    );
 
 
   document.body.classList.add(
@@ -1857,21 +1795,110 @@ function closeCart() {
     .getElementById(
       "cartDrawer"
     )
-    ?.classList
-    .remove("active");
+    .classList.remove(
+      "active"
+    );
 
 
   document
     .getElementById(
       "cartOverlay"
     )
-    ?.classList
-    .remove("active");
+    .classList.remove(
+      "active"
+    );
 
 
   document.body.classList.remove(
     "cart-open"
   );
+
+}
+
+
+/* =====================================================
+   FLY TO CART ANIMATION
+===================================================== */
+
+function flyToCart(
+  imageElement
+) {
+
+  const cartButton =
+    document.getElementById(
+      "cartButton"
+    );
+
+
+  if (
+    !imageElement ||
+    !cartButton
+  ) return;
+
+
+  const imageRect =
+    imageElement.getBoundingClientRect();
+
+
+  const cartRect =
+    cartButton.getBoundingClientRect();
+
+
+  const flyingImage =
+    imageElement.cloneNode(
+      true
+    );
+
+
+  flyingImage.classList.add(
+    "flying-product"
+  );
+
+
+  flyingImage.style.left =
+    `${imageRect.left}px`;
+
+
+  flyingImage.style.top =
+    `${imageRect.top}px`;
+
+
+  flyingImage.style.width =
+    `${imageRect.width}px`;
+
+
+  flyingImage.style.height =
+    `${imageRect.height}px`;
+
+
+  document.body.appendChild(
+    flyingImage
+  );
+
+
+  requestAnimationFrame(() => {
+
+    flyingImage.style.transform =
+      `
+      translate(
+        ${cartRect.left - imageRect.left}px,
+        ${cartRect.top - imageRect.top}px
+      )
+      scale(.12)
+      `;
+
+
+    flyingImage.style.opacity =
+      "0.15";
+
+  });
+
+
+  setTimeout(() => {
+
+    flyingImage.remove();
+
+  }, 800);
 
 }
 
@@ -1886,16 +1913,18 @@ function openMenu() {
     .getElementById(
       "sideMenu"
     )
-    ?.classList
-    .add("active");
+    .classList.add(
+      "active"
+    );
 
 
   document
     .getElementById(
       "menuOverlay"
     )
-    ?.classList
-    .add("active");
+    .classList.add(
+      "active"
+    );
 
 
   document.body.classList.add(
@@ -1911,315 +1940,23 @@ function closeMenu() {
     .getElementById(
       "sideMenu"
     )
-    ?.classList
-    .remove("active");
+    .classList.remove(
+      "active"
+    );
 
 
   document
     .getElementById(
       "menuOverlay"
     )
-    ?.classList
-    .remove("active");
+    .classList.remove(
+      "active"
+    );
 
 
   document.body.classList.remove(
     "menu-open"
   );
-
-}
-
-
-/* =====================================================
-   ORDER
-===================================================== */
-
-async function sendWhatsAppOrder() {
-
-  const nameElement =
-    document.getElementById(
-      "customerName"
-    );
-
-
-  const phoneElement =
-    document.getElementById(
-      "customerPhone"
-    );
-
-
-  const button =
-    document.getElementById(
-      "whatsappButton"
-    );
-
-
-  const language =
-    getLanguage();
-
-
-  const name =
-    nameElement
-      ? nameElement.value.trim()
-      : "";
-
-
-  const phone =
-    phoneElement
-      ? phoneElement.value.trim()
-      : "";
-
-
-  const messages = {
-
-    tr: {
-      empty: "Sepetiniz boş.",
-      required:
-        "Lütfen ad soyad ve telefon numaranızı giriniz.",
-      sending:
-        "Gönderiliyor..."
-    },
-
-    en: {
-      empty:
-        "Your bag is empty.",
-      required:
-        "Please enter your full name and phone number.",
-      sending:
-        "Sending..."
-    },
-
-    ar: {
-      empty:
-        "حقيبتك فارغة.",
-      required:
-        "يرجى إدخال الاسم ورقم الهاتف.",
-      sending:
-        "جارٍ الإرسال..."
-    }
-
-  };
-
-
-  const message =
-    messages[language]
-    ||
-    messages.tr;
-
-
-  if (
-    !cart.length
-  ) {
-
-    alert(
-      message.empty
-    );
-
-    return;
-
-  }
-
-
-  if (
-    !name
-    ||
-    !phone
-  ) {
-
-    alert(
-      message.required
-    );
-
-    return;
-
-  }
-
-
-  const orderData = {
-
-    customer_name:
-      name,
-
-    customer_phone:
-      phone,
-
-    language:
-      language,
-
-    items:
-      cart.map(item => ({
-
-        id:
-          item.id,
-
-        name:
-          item.name,
-
-        number:
-          item.number,
-
-        code:
-          item.code,
-
-        quantity:
-          item.quantity
-
-      })),
-
-    created_at:
-      new Date().toISOString()
-
-  };
-
-
-  const originalText =
-    button
-      ? button.textContent
-      : "";
-
-
-  if (button) {
-
-    button.disabled =
-      true;
-
-
-    button.textContent =
-      message.sending;
-
-  }
-
-
-  try {
-
-    const response =
-      await fetch(
-        SUPABASE_WHATSAPP_FUNCTION_URL,
-        {
-
-          method:
-            "POST",
-
-          headers: {
-
-            "Content-Type":
-              "application/json",
-
-            "apikey":
-              SUPABASE_PUBLISHABLE_KEY,
-
-            "Authorization":
-              `Bearer ${SUPABASE_PUBLISHABLE_KEY}`
-
-          },
-
-          body:
-            JSON.stringify(
-              orderData
-            )
-
-        }
-      );
-
-
-    if (
-      !response.ok
-    ) {
-
-      throw new Error(
-        "Edge function unavailable"
-      );
-
-    }
-
-
-    if (nameElement) {
-
-      nameElement.value =
-        "";
-
-    }
-
-
-    if (phoneElement) {
-
-      phoneElement.value =
-        "";
-
-    }
-
-
-    setTimeout(
-      closeCart,
-      350
-    );
-
-  }
-
-
-  catch (error) {
-
-    const items =
-      cart.map(
-        (
-          item,
-          index
-        ) =>
-
-          `${
-            index + 1
-          }. ${
-            item.number
-          } · ${
-            item.name
-          }\nKod: ${
-            item.code
-          }\nAdet: ${
-            item.quantity
-          }`
-      )
-      .join("\n\n");
-
-
-    const whatsappMessage =
-      `👜 *NEW LEVANTE ORDER REQUEST*
-
-👤 *Customer Name:* ${name}
-📱 *Customer Phone:* ${phone}
-
-🛍️ *ORDER DETAILS*
-
-${items}
-
-✨ Sent from LEVANTE Website`;
-
-
-    const url =
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
-
-
-    window.open(
-      url,
-      "_blank"
-    );
-
-  }
-
-
-  finally {
-
-    if (button) {
-
-      button.disabled =
-        false;
-
-
-      button.textContent =
-        originalText;
-
-    }
-
-  }
 
 }
 
@@ -2244,72 +1981,79 @@ function goToSlide(
     );
 
 
-  if (
-    !slides.length
-  ) return;
+  slides.forEach(
+    slide =>
+      slide.classList.remove(
+        "active"
+      )
+  );
 
 
-  slides[currentSlide]
-    ?.classList
-    .remove("active");
+  dots.forEach(
+    dot =>
+      dot.classList.remove(
+        "active"
+      )
+  );
 
 
-  dots[currentSlide]
-    ?.classList
-    .remove("active");
+  if (slides[index]) {
+
+    slides[index].classList.add(
+      "active"
+    );
+
+  }
+
+
+  if (dots[index]) {
+
+    dots[index].classList.add(
+      "active"
+    );
+
+  }
 
 
   currentSlide =
     index;
 
-
-  if (
-    currentSlide
-    >=
-    slides.length
-  ) {
-
-    currentSlide = 0;
-
-  }
-
-
-  if (
-    currentSlide < 0
-  ) {
-
-    currentSlide =
-      slides.length - 1;
-
-  }
-
-
-  slides[currentSlide]
-    ?.classList
-    .add("active");
-
-
-  dots[currentSlide]
-    ?.classList
-    .add("active");
-
 }
 
 
+setInterval(() => {
+
+  const slides =
+    document.querySelectorAll(
+      ".slide"
+    );
+
+
+  if (!slides.length) return;
+
+
+  currentSlide =
+    (
+      currentSlide + 1
+    )
+    %
+    slides.length;
+
+
+  goToSlide(
+    currentSlide
+  );
+
+}, 6000);
+
+
 /* =====================================================
-   START WEBSITE
+   HEADER
 ===================================================== */
 
-document.addEventListener(
-  "DOMContentLoaded",
+window.addEventListener(
+  "scroll",
   () => {
-
-    renderProducts();
-
-    updateCart();
-
-    changeLanguage();
-
 
     const header =
       document.getElementById(
@@ -2317,51 +2061,119 @@ document.addEventListener(
       );
 
 
-    window.addEventListener(
-      "scroll",
-      () => {
+    if (!header) return;
 
-        if (!header) return;
 
-        header.classList.toggle(
-          "scrolled",
-          window.scrollY > 50
-        );
+    if (
+      window.scrollY > 40
+    ) {
 
-      }
+      header.classList.add(
+        "scrolled"
+      );
+
+    }
+
+    else {
+
+      header.classList.remove(
+        "scrolled"
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   WHATSAPP ORDER
+===================================================== */
+
+function sendWhatsAppOrder() {
+
+  if (
+    cart.length === 0
+  ) {
+
+    alert(
+      getLanguage() === "tr"
+        ? "Sepetiniz boş."
+        : "Your bag is empty."
     );
 
+    return;
 
-    setInterval(
-      () => {
-
-        goToSlide(
-          currentSlide + 1
-        );
-
-      },
-      5000
-    );
+  }
 
 
-    document.addEventListener(
-      "keydown",
-      event => {
+  const name =
+    document
+      .getElementById(
+        "customerName"
+      )
+      .value;
 
-        if (
-          event.key === "Escape"
-        ) {
 
-          closeMenu();
+  const phone =
+    document
+      .getElementById(
+        "customerPhone"
+      )
+      .value;
 
-          closeCart();
 
-          closeProduct();
+  let message =
+    `LEVANTE ORDER\n\n`;
 
-        }
 
-      }
-    );
+  message +=
+    `Name: ${name}\n`;
+
+
+  message +=
+    `Phone: ${phone}\n\n`;
+
+
+  message +=
+    `Products:\n`;
+
+
+  cart.forEach(item => {
+
+    message +=
+      `• ${item.name} x ${item.quantity}\n`;
+
+  });
+
+
+  const url =
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    setupLogoFallbacks();
+
+    renderProducts();
+
+    updateCart();
+
+    changeLanguage();
 
   }
 );
