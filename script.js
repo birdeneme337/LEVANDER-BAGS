@@ -35,6 +35,7 @@ const products = [
     number: "01",
     code: "LV-GLT-01",
     name: "GALATA STRIPE",
+    price: 0,
     image: "images/Levante-01.png",
 
     story: {
@@ -44,11 +45,13 @@ const products = [
     }
   },
 
+
   {
     id: 2,
     number: "02",
     code: "LV-BSP-02",
     name: "BOSPHORUS BLUE",
+    price: 0,
     image: "images/Levante-02.png",
 
     story: {
@@ -58,11 +61,13 @@ const products = [
     }
   },
 
+
   {
     id: 3,
     number: "03",
     code: "LV-SLT-03",
     name: "SULTAN SAND",
+    price: 0,
     image: "images/Levante-03.png",
 
     story: {
@@ -72,11 +77,13 @@ const products = [
     }
   },
 
+
   {
     id: 4,
     number: "04",
     code: "LV-KRK-04",
     name: "KARAKÖY PINK",
+    price: 0,
     image: "images/Levante-04.png",
 
     story: {
@@ -86,11 +93,13 @@ const products = [
     }
   },
 
+
   {
     id: 5,
     number: "05",
     code: "LV-TSM-05",
-    name: "TAKSIM BURGUNDY",
+    name: "TAKSİM BURGUNDY",
+    price: 0,
     image: "images/Levante-05.png",
 
     story: {
@@ -100,11 +109,13 @@ const products = [
     }
   },
 
+
   {
     id: 6,
     number: "06",
     code: "LV-ORT-06",
     name: "ORTAKÖY DOT",
+    price: 0,
     image: "images/Levante-06.png",
 
     story: {
@@ -114,11 +125,13 @@ const products = [
     }
   },
 
+
   {
     id: 7,
     number: "07",
     code: "LV-EMN-07",
-    name: "EMINONU GRID",
+    name: "EMİNÖNÜ GRID",
+    price: 0,
     image: "images/Levante-07.png",
 
     story: {
@@ -128,11 +141,13 @@ const products = [
     }
   },
 
+
   {
     id: 8,
     number: "08",
     code: "LV-BLT-08",
     name: "BALAT ROSE",
+    price: 0,
     image: "images/Levante-08.png",
 
     story: {
@@ -142,11 +157,13 @@ const products = [
     }
   },
 
+
   {
     id: 9,
     number: "09",
     code: "LV-LPD-09",
     name: "LEVANTE LEOPARD",
+    price: 0,
     image: "images/Levante-09.png",
 
     story: {
@@ -156,11 +173,13 @@ const products = [
     }
   },
 
+
   {
     id: 10,
     number: "10",
     code: "LV-MID-10",
     name: "MIDNIGHT ISTANBUL",
+    price: 0,
     image: "images/Levante-10.png",
 
     story: {
@@ -183,7 +202,7 @@ let cart = [];
 
 
 /* =====================================================
-   LANGUAGE
+   GET LANGUAGE
 ===================================================== */
 
 function getLanguage() {
@@ -191,40 +210,9 @@ function getLanguage() {
   const languageElement =
     document.getElementById("language");
 
-
   return languageElement
     ? languageElement.value
     : "tr";
-
-}
-
-
-
-/* =====================================================
-   TRANSLATION HELPER
-===================================================== */
-
-function getText(
-  tr,
-  en,
-  ar
-) {
-
-  const language =
-    getLanguage();
-
-
-  if (language === "en") {
-    return en;
-  }
-
-
-  if (language === "ar") {
-    return ar;
-  }
-
-
-  return tr;
 
 }
 
@@ -241,9 +229,7 @@ function renderProducts() {
 
 
   const grid =
-    document.getElementById(
-      "productsGrid"
-    );
+    document.getElementById("productsGrid");
 
 
   if (!grid) return;
@@ -255,16 +241,44 @@ function renderProducts() {
   products.forEach(product => {
 
 
-    const buttonText =
-      getText(
-        "SEPETE EKLE",
-        "ADD TO BAG",
-        "أضف إلى السلة"
-      );
+    let buttonText =
+      "Sepete Ekle";
 
 
-    const story =
-      product.story[language];
+    if (language === "en") {
+
+      buttonText =
+        "Add to Bag";
+
+    }
+
+
+    if (language === "ar") {
+
+      buttonText =
+        "أضف إلى السلة";
+
+    }
+
+
+    let priceText =
+      "Yakında";
+
+
+    if (language === "en") {
+
+      priceText =
+        "Coming Soon";
+
+    }
+
+
+    if (language === "ar") {
+
+      priceText =
+        "قريباً";
+
+    }
 
 
     grid.innerHTML += `
@@ -284,12 +298,9 @@ function renderProducts() {
 
         <div class="product-info">
 
-
           <div class="product-code">
 
-            ${product.number}
-            ·
-            ${product.code}
+            ${product.number} · ${product.code}
 
           </div>
 
@@ -303,21 +314,16 @@ function renderProducts() {
 
           <p class="story">
 
-            ${story}
+            ${product.story[language] || product.story.en}
 
           </p>
 
 
           <div class="product-bottom">
 
-
             <span class="price">
 
-              ${getText(
-                "LEVANTE COLLECTION",
-                "LEVANTE COLLECTION",
-                "مجموعة ليفانتي"
-              )}
+              ${priceText}
 
             </span>
 
@@ -331,12 +337,9 @@ function renderProducts() {
 
             </button>
 
-
           </div>
 
-
         </div>
-
 
       </article>
 
@@ -365,8 +368,7 @@ function addToCart(productId) {
 
   const existingItem =
     cart.find(
-      item =>
-        item.id === productId
+      item => item.id === productId
     );
 
 
@@ -374,9 +376,7 @@ function addToCart(productId) {
 
     existingItem.quantity++;
 
-  }
-
-  else {
+  } else {
 
     cart.push({
 
@@ -408,8 +408,7 @@ function changeQuantity(
 
   const item =
     cart.find(
-      item =>
-        item.id === productId
+      item => item.id === productId
     );
 
 
@@ -438,14 +437,11 @@ function changeQuantity(
    REMOVE FROM CART
 ===================================================== */
 
-function removeFromCart(
-  productId
-) {
+function removeFromCart(productId) {
 
   cart =
     cart.filter(
-      item =>
-        item.id !== productId
+      item => item.id !== productId
     );
 
 
@@ -462,32 +458,25 @@ function removeFromCart(
 function updateCart() {
 
   const cartItems =
-    document.getElementById(
-      "cartItems"
-    );
+    document.getElementById("cartItems");
 
 
   const cartCount =
-    document.getElementById(
-      "cartCount"
-    );
+    document.getElementById("cartCount");
 
 
-  if (!cartItems || !cartCount) {
-    return;
-  }
+  if (!cartItems || !cartCount) return;
+
+
+  const language =
+    getLanguage();
 
 
   const totalQuantity =
     cart.reduce(
-
       (total, item) =>
-
-        total +
-        item.quantity,
-
+        total + item.quantity,
       0
-
     );
 
 
@@ -498,15 +487,31 @@ function updateCart() {
   if (cart.length === 0) {
 
 
+    let emptyText =
+      "Sepetin henüz boş. Hikâyeni seçmeye başla.";
+
+
+    if (language === "en") {
+
+      emptyText =
+        "Your bag is empty. Start choosing your story.";
+
+    }
+
+
+    if (language === "ar") {
+
+      emptyText =
+        "سلتك فارغة. ابدأ باختيار قصتك.";
+
+    }
+
+
     cartItems.innerHTML = `
 
       <div class="empty-cart">
 
-        ${getText(
-          "Sepetin henüz boş. Hikâyeni seçmeye başla.",
-          "Your bag is empty. Start choosing your story.",
-          "سلتك فارغة. ابدأ باختيار قصتك."
-        )}
+        ${emptyText}
 
       </div>
 
@@ -524,10 +529,29 @@ function updateCart() {
   cart.forEach(item => {
 
 
+    let removeText =
+      "Kaldır";
+
+
+    if (language === "en") {
+
+      removeText =
+        "Remove";
+
+    }
+
+
+    if (language === "ar") {
+
+      removeText =
+        "حذف";
+
+    }
+
+
     cartItems.innerHTML += `
 
       <div class="cart-item">
-
 
         <img
           src="${item.image}"
@@ -537,12 +561,9 @@ function updateCart() {
 
         <div class="cart-item-info">
 
-
           <h4>
 
-            ${item.number}
-            ·
-            ${item.name}
+            ${item.number} · ${item.name}
 
           </h4>
 
@@ -556,14 +577,8 @@ function updateCart() {
 
           <div class="quantity-controls">
 
-
             <button
-              onclick="
-                changeQuantity(
-                  ${item.id},
-                  -1
-                )
-              "
+              onclick="changeQuantity(${item.id}, -1)"
             >
               −
             </button>
@@ -577,41 +592,24 @@ function updateCart() {
 
 
             <button
-              onclick="
-                changeQuantity(
-                  ${item.id},
-                  1
-                )
-              "
+              onclick="changeQuantity(${item.id}, 1)"
             >
               +
             </button>
 
-
           </div>
-
 
 
           <button
             class="remove-btn"
-            onclick="
-              removeFromCart(
-                ${item.id}
-              )
-            "
+            onclick="removeFromCart(${item.id})"
           >
 
-            ${getText(
-              "Kaldır",
-              "Remove",
-              "حذف"
-            )}
+            ${removeText}
 
           </button>
 
-
         </div>
-
 
       </div>
 
@@ -624,98 +622,199 @@ function updateCart() {
 
 
 /* =====================================================
-   MENU
+   CART OPEN
 ===================================================== */
 
-function openMenu() {
+function openCart() {
 
-  document
-    .getElementById("sideMenu")
-    ?.classList
+  const cartDrawer =
+    document.getElementById("cartDrawer");
+
+
+  if (!cartDrawer) return;
+
+
+  cartDrawer
+    .classList
     .add("active");
 
 
-  document
-    .getElementById("menuOverlay")
-    ?.classList
-    .add("active");
-
-
-  document.body.classList.add(
-    "menu-open"
-  );
-
-}
-
-
-
-function closeMenu() {
-
-  document
-    .getElementById("sideMenu")
-    ?.classList
-    .remove("active");
-
-
-  document
-    .getElementById("menuOverlay")
-    ?.classList
-    .remove("active");
-
-
-  document.body.classList.remove(
-    "menu-open"
-  );
+  document.body
+    .classList
+    .add("cart-open");
 
 }
 
 
 
 /* =====================================================
-   SUPABASE ORDER
+   CART CLOSE
+===================================================== */
+
+function closeCart() {
+
+  const cartDrawer =
+    document.getElementById("cartDrawer");
+
+
+  if (!cartDrawer) return;
+
+
+  cartDrawer
+    .classList
+    .remove("active");
+
+
+  document.body
+    .classList
+    .remove("cart-open");
+
+}
+
+
+
+/* =====================================================
+   MENU OPEN
+===================================================== */
+
+function openMenu() {
+
+  const sideMenu =
+    document.getElementById("sideMenu");
+
+
+  const menuOverlay =
+    document.getElementById("menuOverlay");
+
+
+  if (sideMenu) {
+
+    sideMenu
+      .classList
+      .add("active");
+
+  }
+
+
+  if (menuOverlay) {
+
+    menuOverlay
+      .classList
+      .add("active");
+
+  }
+
+
+  document.body
+    .classList
+    .add("menu-open");
+
+}
+
+
+
+/* =====================================================
+   MENU CLOSE
+===================================================== */
+
+function closeMenu() {
+
+  const sideMenu =
+    document.getElementById("sideMenu");
+
+
+  const menuOverlay =
+    document.getElementById("menuOverlay");
+
+
+  if (sideMenu) {
+
+    sideMenu
+      .classList
+      .remove("active");
+
+  }
+
+
+  if (menuOverlay) {
+
+    menuOverlay
+      .classList
+      .remove("active");
+
+  }
+
+
+  document.body
+    .classList
+    .remove("menu-open");
+
+}
+
+
+
+/* =====================================================
+   SUBMIT ORDER TO SUPABASE
 ===================================================== */
 
 async function sendWhatsAppOrder() {
 
+  const customerNameElement =
+    document.getElementById("customerName");
+
+
+  const customerPhoneElement =
+    document.getElementById("customerPhone");
+
+
+  const orderButton =
+    document.getElementById("whatsappButton");
+
 
   const name =
-    document
-      .getElementById("customerName")
-      .value
-      .trim();
+    customerNameElement
+      ? customerNameElement.value.trim()
+      : "";
 
 
   const phone =
-    document
-      .getElementById("customerPhone")
-      .value
-      .trim();
+    customerPhoneElement
+      ? customerPhoneElement.value.trim()
+      : "";
 
 
   const language =
     getLanguage();
 
 
-  const orderButton =
-    document.getElementById(
-      "whatsappButton"
-    );
 
-
-
-  /* EMPTY CART */
+  /* -----------------------------
+     CART VALIDATION
+  ----------------------------- */
 
   if (cart.length === 0) {
 
-    alert(
+    let message =
+      "Sepetiniz boş.";
 
-      getText(
-        "Sepetiniz boş.",
-        "Your cart is empty.",
-        "سلتك فارغة."
-      )
 
-    );
+    if (language === "en") {
+
+      message =
+        "Your cart is empty.";
+
+    }
+
+
+    if (language === "ar") {
+
+      message =
+        "سلتك فارغة.";
+
+    }
+
+
+    alert(message);
 
     return;
 
@@ -723,18 +822,48 @@ async function sendWhatsAppOrder() {
 
 
 
-  /* EMPTY CUSTOMER INFO */
+  /* -----------------------------
+     CUSTOMER VALIDATION
+  ----------------------------- */
 
   if (!name || !phone) {
 
+    let message =
+      "Lütfen Ad Soyad ve Telefon Numaranızı giriniz.";
+
+
+    if (language === "en") {
+
+      message =
+        "Please enter your full name and phone number.";
+
+    }
+
+
+    if (language === "ar") {
+
+      message =
+        "من فضلك أدخل الاسم ورقم الهاتف.";
+
+    }
+
+
+    alert(message);
+
+    return;
+
+  }
+
+
+
+  /* -----------------------------
+     SUPABASE CHECK
+  ----------------------------- */
+
+  if (!supabaseClient) {
+
     alert(
-
-      getText(
-        "Lütfen Ad Soyad ve Telefon Numaranızı giriniz.",
-        "Please enter your full name and phone number.",
-        "من فضلك أدخل الاسم ورقم الهاتف."
-      )
-
+      "Database connection could not be initialized."
     );
 
     return;
@@ -743,51 +872,72 @@ async function sendWhatsAppOrder() {
 
 
 
-  if (!orderButton) {
-
-    console.error(
-      "Order button not found."
-    );
-
-    return;
-
-  }
-
-
+  /* -----------------------------
+     BUTTON LOADING STATE
+  ----------------------------- */
 
   const originalButtonText =
-    orderButton.innerHTML;
+    orderButton
+      ? orderButton.innerHTML
+      : "";
+
+
+  if (orderButton) {
+
+    orderButton.disabled =
+      true;
+
+
+    if (language === "tr") {
+
+      orderButton.innerHTML =
+        "Siparişiniz kaydediliyor...";
+
+    }
+
+
+    if (language === "en") {
+
+      orderButton.innerHTML =
+        "Saving your order...";
+
+    }
+
+
+    if (language === "ar") {
+
+      orderButton.innerHTML =
+        "جاري تسجيل طلبك...";
+
+    }
+
+  }
 
 
 
-  orderButton.disabled = true;
-
-
-  orderButton.innerHTML =
-    getText(
-      "SİPARİŞİNİZ KAYDEDİLİYOR...",
-      "SAVING YOUR ORDER...",
-      "جارٍ تسجيل طلبك..."
-    );
-
-
-
-  /* ORDER NUMBER */
+  /* -----------------------------
+     CREATE ORDER NUMBER
+  ----------------------------- */
 
   const orderNumber =
-
     "LV-" +
-
     Date.now()
       .toString()
-      .slice(-8);
+      .slice(-8) +
+    "-" +
+    Math.floor(
+      Math.random() * 1000
+    )
+      .toString()
+      .padStart(3, "0");
 
 
 
-  /* ORDER ITEMS */
+  /* -----------------------------
+     PREPARE ORDER ITEMS
+  ----------------------------- */
 
   const orderItems =
-
     cart.map(item => ({
 
       product_id:
@@ -809,23 +959,19 @@ async function sendWhatsAppOrder() {
 
 
 
+  /* =====================================================
+     SEND TO SUPABASE
+  ===================================================== */
+
   try {
 
 
     const {
-
       data,
-
       error
-
-    }
-
-    =
-
+    } =
     await supabaseClient
-
       .from("orders")
-
       .insert([
 
         {
@@ -836,14 +982,20 @@ async function sendWhatsAppOrder() {
           customer_name:
             name,
 
-          customer_phone:
+          /*
+             IMPORTANT:
+
+             SUPABASE COLUMN NAME
+             IS "phone"
+
+             NOT customer_phone
+          */
+
+          phone:
             phone,
 
           items:
             orderItems,
-
-          language:
-            language,
 
           status:
             "new"
@@ -851,89 +1003,133 @@ async function sendWhatsAppOrder() {
         }
 
       ])
-
       .select();
 
 
 
-    /* ERROR */
+    /* -----------------------------
+       SUPABASE ERROR
+    ----------------------------- */
 
     if (error) {
 
+
       console.error(
-        "Supabase Error:",
+        "SUPABASE ORDER ERROR:",
         error
       );
 
 
-      throw error;
+      let errorMessage =
+        "Sipariş kaydedilirken bir hata oluştu.";
+
+      let detailMessage =
+        error.message || "";
+
+
+      if (language === "en") {
+
+        errorMessage =
+          "There was a problem saving your order.";
+
+      }
+
+
+      if (language === "ar") {
+
+        errorMessage =
+          "حدثت مشكلة أثناء تسجيل طلبك.";
+
+      }
+
+
+      alert(
+
+        errorMessage +
+
+        "\n\nError: " +
+
+        detailMessage
+
+      );
+
+
+      if (orderButton) {
+
+        orderButton.disabled =
+          false;
+
+
+        orderButton.innerHTML =
+          originalButtonText;
+
+      }
+
+
+      return;
 
     }
 
 
 
+    /* =====================================================
+       SUCCESS
+    ===================================================== */
+
     console.log(
-      "LEVANTE ORDER SAVED:",
+      "LEVANTE ORDER SAVED SUCCESSFULLY:",
       data
     );
 
 
-
-    /* SUCCESS MESSAGE */
-
-    alert(
-
-      getText(
-
-        `Teşekkür ederiz ${name}! 👜
+    let successMessage =
+`Teşekkür ederiz ${name}! 👜
 
 Sipariş talebiniz başarıyla alınmıştır.
 
 Sipariş Numaranız:
 ${orderNumber}
 
-LEVANTE ekibi en kısa sürede sizinle iletişime geçecektir.`,
+LEVANTE ekibi en kısa sürede sizinle iletişime geçecektir.`;
 
-        `Thank you ${name}! 👜
+
+    if (language === "en") {
+
+      successMessage =
+`Thank you ${name}! 👜
 
 Your order request has been successfully received.
 
 Your Order Number:
 ${orderNumber}
 
-The LEVANTE team will contact you as soon as possible.`,
+The LEVANTE team will contact you as soon as possible.`;
 
-        `شكراً لك ${name}! 👜
+    }
+
+
+    if (language === "ar") {
+
+      successMessage =
+`شكراً لك ${name}! 👜
 
 تم استلام طلبك بنجاح.
 
 رقم الطلب:
 ${orderNumber}
 
-سيتواصل معك فريق LEVANTE في أقرب وقت ممكن.`
+سيتواصل معك فريق LEVANTE في أقرب وقت.`;
 
-      )
-
-    );
+    }
 
 
-
-    /* RESET CUSTOMER INFO */
-
-    document
-      .getElementById("customerName")
-      .value =
-        "";
-
-
-    document
-      .getElementById("customerPhone")
-      .value =
-        "";
+    alert(successMessage);
 
 
 
-    /* EMPTY CART */
+    /* -----------------------------
+       CLEAR CART
+    ----------------------------- */
 
     cart = [];
 
@@ -941,48 +1137,117 @@ ${orderNumber}
     updateCart();
 
 
-    closeCart();
 
+    /* -----------------------------
+       CLEAR CUSTOMER FORM
+    ----------------------------- */
+
+    if (customerNameElement) {
+
+      customerNameElement.value =
+        "";
+
+    }
+
+
+    if (customerPhoneElement) {
+
+      customerPhoneElement.value =
+        "";
+
+    }
+
+
+
+    /* -----------------------------
+       CLOSE CART
+    ----------------------------- */
+
+    setTimeout(
+      () => {
+
+        closeCart();
+
+      },
+      300
+    );
+
+
+
+    /* -----------------------------
+       RESET BUTTON
+    ----------------------------- */
+
+    if (orderButton) {
+
+      orderButton.disabled =
+        false;
+
+
+      orderButton.innerHTML =
+        originalButtonText;
+
+    }
 
 
   }
 
+
+
+  /* =====================================================
+     UNEXPECTED ERROR
+  ===================================================== */
 
   catch (error) {
 
 
     console.error(
-      "ORDER ERROR:",
+      "UNEXPECTED ORDER ERROR:",
       error
     );
 
 
+    let errorMessage =
+      "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.";
+
+
+    if (language === "en") {
+
+      errorMessage =
+        "An unexpected error occurred. Please try again.";
+
+    }
+
+
+    if (language === "ar") {
+
+      errorMessage =
+        "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.";
+
+    }
+
+
     alert(
 
-      getText(
+      errorMessage +
 
-        "Sipariş kaydedilirken bir hata oluştu. Lütfen tekrar deneyin.",
+      "\n\nError: " +
 
-        "There was a problem saving your order. Please try again.",
-
-        "حدثت مشكلة أثناء تسجيل طلبك. يرجى المحاولة مرة أخرى."
-
-      )
+      (error.message || error)
 
     );
 
-  }
+
+    if (orderButton) {
+
+      orderButton.disabled =
+        false;
 
 
-  finally {
+      orderButton.innerHTML =
+        originalButtonText;
 
-
-    orderButton.disabled =
-      false;
-
-
-    orderButton.innerHTML =
-      originalButtonText;
+    }
 
   }
 
@@ -998,90 +1263,90 @@ let currentSlide = 0;
 
 
 const slides =
-  document.querySelectorAll(
-    ".slide"
-  );
+  document.querySelectorAll(".slide");
 
 
 const dots =
-  document.querySelectorAll(
-    ".dot"
-  );
+  document.querySelectorAll(".dot");
 
 
 
 function goToSlide(index) {
 
+  if (!slides.length) return;
+
 
   if (
-    slides.length === 0 ||
-    dots.length === 0
+    slides[currentSlide]
   ) {
-    return;
+
+    slides[currentSlide]
+      .classList
+      .remove("active");
+
   }
 
 
-  slides.forEach(
-    slide =>
-      slide.classList.remove(
-        "active"
-      )
-  );
+  if (
+    dots[currentSlide]
+  ) {
+
+    dots[currentSlide]
+      .classList
+      .remove("active");
+
+  }
 
 
-  dots.forEach(
-    dot =>
-      dot.classList.remove(
-        "active"
-      )
-  );
+  currentSlide =
+    index;
 
 
-  currentSlide = index;
+  if (
+    slides[currentSlide]
+  ) {
+
+    slides[currentSlide]
+      .classList
+      .add("active");
+
+  }
 
 
-  slides[currentSlide]
-    .classList
-    .add("active");
+  if (
+    dots[currentSlide]
+  ) {
 
+    dots[currentSlide]
+      .classList
+      .add("active");
 
-  dots[currentSlide]
-    .classList
-    .add("active");
+  }
 
 }
 
 
 
-if (slides.length > 0) {
+if (slides.length > 1) {
+
+  setInterval(() => {
+
+    let nextSlide =
+      currentSlide + 1;
 
 
-  setInterval(
+    if (
+      nextSlide >= slides.length
+    ) {
 
-    () => {
+      nextSlide = 0;
 
-
-      const nextSlide =
-
-        (
-          currentSlide + 1
-        )
-
-        %
-
-        slides.length;
+    }
 
 
-      goToSlide(
-        nextSlide
-      );
+    goToSlide(nextSlide);
 
-
-    },
-
-    5000
-
-  );
+  }, 5000);
 
 }
 
@@ -1108,7 +1373,6 @@ const translations = {
     heroButton:
       "Koleksiyonu Keşfet →",
 
-
     introTag:
       "LEVANTE DENEYİMİ",
 
@@ -1118,16 +1382,14 @@ const translations = {
     introText:
       "İstanbul'un enerjisi, Akdeniz'in hafifliği ve günlük hayatın özgürlüğü. LEVANTE, gittiğin her yerde seninle birlikte hareket etmek için tasarlandı.",
 
-
     collectionTag:
       "KOLEKSİYONU KEŞFET",
 
     collectionTitle:
-      "Hikâyeni Taşı.",
+      "Hikâyeni taşı.",
 
     collectionText:
-      "Her modelin kendine ait bir karakteri var. Hangisi sana daha yakın?",
-
+      "Her modelin kendine ait bir karakteri var. Hangisi seni anlatıyor?",
 
     storyTag:
       "LEVANT RÜZGARI",
@@ -1136,8 +1398,7 @@ const translations = {
       "İstanbul'da doğdu.<br>Levant rüzgârından ilham aldı.",
 
     storyText:
-      "LEVANTE, İstanbul'un enerjisinden doğdu ve Akdeniz'in özgür ruhundan ilham aldı.",
-
+      "LEVANTE, İstanbul'da doğdu ve Akdeniz'in özgür ruhundan ilham aldı.",
 
     featuresTag:
       "NEDEN LEVANTE?",
@@ -1145,13 +1406,11 @@ const translations = {
     featuresTitle:
       "Hareket halindeki hayatlar için tasarlandı.",
 
-
     feature1Title:
       "Her Çantanın Bir Hikâyesi Var",
 
     feature1Text:
       "Her model bir şehirden, bir duygudan ve bir anıdan ilham alır.",
-
 
     feature2Title:
       "Seninle Hareket Eder",
@@ -1159,13 +1418,11 @@ const translations = {
     feature2Text:
       "Günlük hayatının ritmine uyum sağlamak için tasarlandı.",
 
-
     feature3Title:
-      "Senin Kendi Hikâyen",
+      "Senin Hikâyen",
 
     feature3Text:
-      "Sadece bir çanta seçmezsin. Sana ait hikâyeyi seçersin.",
-
+      "Sadece bir çanta seçmezsin. Sana ait olan hikâyeyi bulursun.",
 
     cartTitle:
       "Çantam",
@@ -1185,7 +1442,6 @@ const translations = {
   },
 
 
-
   en: {
 
     heroTag:
@@ -1198,28 +1454,25 @@ const translations = {
       "Every LEVANTE piece carries a story inspired by Istanbul.",
 
     heroButton:
-      "Discover Collection →",
-
+      "Explore Collection →",
 
     introTag:
-      "LEVANTE EXPERIENCE",
+      "THE LEVANTE EXPERIENCE",
 
     introTitle:
-      "Don't just carry a bag.<br>Carry a story.",
+      "Carry more than just a bag.",
 
     introText:
       "The energy of Istanbul, the lightness of the Mediterranean and the freedom of everyday life.",
-
 
     collectionTag:
       "DISCOVER THE COLLECTION",
 
     collectionTitle:
-      "Carry Your Story.",
+      "Carry your story.",
 
     collectionText:
-      "Every model has a personality. Which one feels like you?",
-
+      "Every model has its own character. Which one feels like you?",
 
     storyTag:
       "THE LEVANT BREEZE",
@@ -1230,13 +1483,11 @@ const translations = {
     storyText:
       "LEVANTE was born in Istanbul and inspired by the free spirit of the Mediterranean.",
 
-
     featuresTag:
       "WHY LEVANTE?",
 
     featuresTitle:
       "Designed for lives in motion.",
-
 
     feature1Title:
       "Every Bag Has a Story",
@@ -1244,20 +1495,17 @@ const translations = {
     feature1Text:
       "Each model is inspired by a city, a feeling and a memory.",
 
-
     feature2Title:
       "Moves With You",
 
     feature2Text:
       "Designed to adapt to the rhythm of your everyday life.",
 
-
     feature3Title:
       "Your Own Story",
 
     feature3Text:
       "You don't just choose a bag. You find the one that tells your story.",
-
 
     cartTitle:
       "My Bag",
@@ -1277,7 +1525,6 @@ const translations = {
   },
 
 
-
   ar: {
 
     heroTag:
@@ -1292,7 +1539,6 @@ const translations = {
     heroButton:
       "اكتشف المجموعة ←",
 
-
     introTag:
       "تجربة LEVANTE",
 
@@ -1301,7 +1547,6 @@ const translations = {
 
     introText:
       "طاقة إسطنبول وخفة البحر المتوسط وحرية الحياة اليومية.",
-
 
     collectionTag:
       "اكتشف المجموعة",
@@ -1312,7 +1557,6 @@ const translations = {
     collectionText:
       "لكل موديل شخصية خاصة. أي واحد يشبهك؟",
 
-
     storyTag:
       "نسيم المشرق",
 
@@ -1322,13 +1566,11 @@ const translations = {
     storyText:
       "وُلدت LEVANTE في إسطنبول واستُلهمت من الروح الحرة للبحر المتوسط.",
 
-
     featuresTag:
       "لماذا LEVANTE؟",
 
     featuresTitle:
       "مصممة لحياة لا تتوقف عن الحركة.",
-
 
     feature1Title:
       "لكل حقيبة قصة",
@@ -1336,20 +1578,17 @@ const translations = {
     feature1Text:
       "كل موديل مستوحى من مدينة وشعور وذكرى.",
 
-
     feature2Title:
       "تتحرك معك",
 
     feature2Text:
       "مصممة لتتكيف مع إيقاع حياتك اليومية.",
 
-
     feature3Title:
       "قصتك الخاصة",
 
     feature3Text:
       "أنت لا تختار حقيبة فقط، بل تختار القصة التي تشبهك.",
-
 
     cartTitle:
       "حقيبتي",
@@ -1390,38 +1629,34 @@ function changeLanguage() {
   if (!text) return;
 
 
-
-  function setText(
-    id,
-    value,
-    html = false
-  ) {
-
-
-    const element =
-      document.getElementById(id);
+  const setText =
+    (
+      id,
+      value,
+      html = false
+    ) => {
 
 
-    if (!element) {
-      return;
-    }
+      const element =
+        document.getElementById(id);
 
 
-    if (html) {
+      if (!element) return;
 
-      element.innerHTML =
-        value;
 
-    }
+      if (html) {
 
-    else {
+        element.innerHTML =
+          value;
 
-      element.textContent =
-        value;
+      } else {
 
-    }
+        element.textContent =
+          value;
 
-  }
+      }
+
+    };
 
 
 
@@ -1620,9 +1855,7 @@ function changeLanguage() {
     document.documentElement.dir =
       "rtl";
 
-  }
-
-  else {
+  } else {
 
     document.documentElement.dir =
       "ltr";
@@ -1644,17 +1877,12 @@ function changeLanguage() {
 ===================================================== */
 
 document.addEventListener(
-
   "DOMContentLoaded",
-
-  function () {
+  () => {
 
     renderProducts();
 
     updateCart();
 
-    changeLanguage();
-
   }
-
 );
