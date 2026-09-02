@@ -811,10 +811,6 @@ async function sendWhatsAppOrder() {
     getLanguage();
 
 
-  /* =====================================================
-     CART VALIDATION
-  ===================================================== */
-
   if (cart.length === 0) {
 
     let message =
@@ -843,10 +839,6 @@ async function sendWhatsAppOrder() {
 
   }
 
-
-  /* =====================================================
-     CUSTOMER VALIDATION
-  ===================================================== */
 
   if (!name || !phone) {
 
@@ -877,10 +869,6 @@ async function sendWhatsAppOrder() {
   }
 
 
-  /* =====================================================
-     BUTTON CHECK
-  ===================================================== */
-
   if (!orderButton) {
 
     alert(
@@ -891,10 +879,6 @@ async function sendWhatsAppOrder() {
 
   }
 
-
-  /* =====================================================
-     BUTTON LOADING
-  ===================================================== */
 
   const originalButtonText =
     orderButton.innerHTML;
@@ -928,10 +912,6 @@ async function sendWhatsAppOrder() {
   }
 
 
-  /* =====================================================
-     CREATE ORDER NUMBER
-  ===================================================== */
-
   const orderNumber =
     "LV-" +
     Date.now()
@@ -947,10 +927,6 @@ async function sendWhatsAppOrder() {
         "0"
       );
 
-
-  /* =====================================================
-     PREPARE ORDER ITEMS
-  ===================================================== */
 
   const orderItems =
     cart.map(
@@ -975,10 +951,6 @@ async function sendWhatsAppOrder() {
     );
 
 
-  /* =====================================================
-     DATABASE DATA
-  ===================================================== */
-
   const orderData = {
 
     order_number:
@@ -998,10 +970,6 @@ async function sendWhatsAppOrder() {
 
   };
 
-
-  /* =====================================================
-     CREATE WHATSAPP MESSAGE
-  ===================================================== */
 
   let whatsappMessage =
 `👜 NEW LEVANTE ORDER REQUEST
@@ -1043,10 +1011,6 @@ Quantity: ${item.quantity}
 Born in Istanbul.
 Inspired by the Levant breeze.`;
 
-
-  /* =====================================================
-     SEND ORDER TO SUPABASE DATABASE
-  ===================================================== */
 
   try {
 
@@ -1154,10 +1118,6 @@ Inspired by the Levant breeze.`;
       "LEVANTE ORDER SAVED SUCCESSFULLY"
     );
 
-
-    /* =====================================================
-       SEND ORDER TO WHATSAPP VIA EDGE FUNCTION
-    ===================================================== */
 
     if (language === "tr") {
 
@@ -1283,10 +1243,6 @@ Inspired by the Levant breeze.`;
     );
 
 
-    /* =====================================================
-       SUCCESS MESSAGE
-    ===================================================== */
-
     let successMessage =
 `Teşekkür ederiz ${name}! 👜
 
@@ -1333,19 +1289,11 @@ ${orderNumber}
     );
 
 
-    /* =====================================================
-       CLEAR CART
-    ===================================================== */
-
     cart = [];
 
 
     updateCart();
 
-
-    /* =====================================================
-       CLEAR FORM
-    ===================================================== */
 
     if (customerNameElement) {
 
@@ -1363,10 +1311,6 @@ ${orderNumber}
     }
 
 
-    /* =====================================================
-       CLOSE CART
-    ===================================================== */
-
     setTimeout(
       () => {
 
@@ -1379,10 +1323,6 @@ ${orderNumber}
 
   }
 
-
-  /* =====================================================
-     ERROR
-  ===================================================== */
 
   catch (error) {
 
@@ -1428,10 +1368,6 @@ ${orderNumber}
 
   }
 
-
-  /* =====================================================
-     ALWAYS RESET BUTTON
-  ===================================================== */
 
   finally {
 
