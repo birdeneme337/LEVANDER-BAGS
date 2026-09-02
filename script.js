@@ -20,6 +20,10 @@ const SUPABASE_ORDERS_URL =
   `${SUPABASE_URL}/rest/v1/orders`;
 
 
+const SUPABASE_WHATSAPP_FUNCTION_URL =
+  `${SUPABASE_URL}/functions/v1/send-whatsapp-order`;
+
+
 /* =====================================================
    WHATSAPP NUMBER
    EGYPT
@@ -246,7 +250,6 @@ function renderProducts() {
 
 
   products.forEach(product => {
-
 
     let buttonText =
       "Sepete Ekle";
@@ -501,7 +504,6 @@ function updateCart() {
 
   if (cart.length === 0) {
 
-
     let emptyText =
       "Sepetin henüz boş. Hikâyeni seçmeye başla.";
 
@@ -542,7 +544,6 @@ function updateCart() {
 
 
   cart.forEach(item => {
-
 
     let removeText =
       "Kaldır";
@@ -776,7 +777,6 @@ function closeMenu() {
 
 async function sendWhatsAppOrder() {
 
-
   const customerNameElement =
     document.getElementById(
       "customerName"
@@ -811,13 +811,11 @@ async function sendWhatsAppOrder() {
     getLanguage();
 
 
-
   /* =====================================================
      CART VALIDATION
   ===================================================== */
 
   if (cart.length === 0) {
-
 
     let message =
       "Sepetiniz boş.";
@@ -846,13 +844,11 @@ async function sendWhatsAppOrder() {
   }
 
 
-
   /* =====================================================
      CUSTOMER VALIDATION
   ===================================================== */
 
   if (!name || !phone) {
-
 
     let message =
       "Lütfen Ad Soyad ve Telefon Numaranızı giriniz.";
@@ -881,7 +877,6 @@ async function sendWhatsAppOrder() {
   }
 
 
-
   /* =====================================================
      BUTTON CHECK
   ===================================================== */
@@ -895,23 +890,6 @@ async function sendWhatsAppOrder() {
     return;
 
   }
-
-
-
-  /* =====================================================
-     OPEN WHATSAPP WINDOW IMMEDIATELY
-
-     IMPORTANT:
-     We open the window BEFORE await/fetch.
-     This prevents browser popup blocking.
-  ===================================================== */
-
-  const whatsappWindow =
-    window.open(
-      "about:blank",
-      "_blank"
-    );
-
 
 
   /* =====================================================
@@ -950,7 +928,6 @@ async function sendWhatsAppOrder() {
   }
 
 
-
   /* =====================================================
      CREATE ORDER NUMBER
   ===================================================== */
@@ -969,7 +946,6 @@ async function sendWhatsAppOrder() {
         3,
         "0"
       );
-
 
 
   /* =====================================================
@@ -999,7 +975,6 @@ async function sendWhatsAppOrder() {
     );
 
 
-
   /* =====================================================
      DATABASE DATA
   ===================================================== */
@@ -1024,34 +999,32 @@ async function sendWhatsAppOrder() {
   };
 
 
-
   /* =====================================================
      CREATE WHATSAPP MESSAGE
   ===================================================== */
 
   let whatsappMessage =
-`👜 *NEW LEVANTE ORDER REQUEST*
+`👜 NEW LEVANTE ORDER REQUEST
 
-📦 *ORDER NUMBER:*
+📦 ORDER NUMBER:
 ${orderNumber}
 
-👤 *CUSTOMER NAME:*
+👤 CUSTOMER NAME:
 ${name}
 
-📱 *CUSTOMER PHONE:*
+📱 CUSTOMER PHONE:
 ${phone}
 
-🛍️ *ORDER DETAILS:*
+🛍️ ORDER DETAILS:
 
 `;
-
 
 
   cart.forEach(
     (item, index) => {
 
       whatsappMessage +=
-`${index + 1}. *${item.number} · ${item.name}*
+`${index + 1}. ${item.number} · ${item.name}
 
 Product Code: ${item.code}
 Quantity: ${item.quantity}
@@ -1060,7 +1033,6 @@ Quantity: ${item.quantity}
 
     }
   );
-
 
 
   whatsappMessage +=
@@ -1072,25 +1044,11 @@ Born in Istanbul.
 Inspired by the Levant breeze.`;
 
 
-
-  const encodedMessage =
-    encodeURIComponent(
-      whatsappMessage
-    );
-
-
-
-  const whatsappURL =
-    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-
-
-
   /* =====================================================
-     SEND ORDER TO SUPABASE
+     SEND ORDER TO SUPABASE DATABASE
   ===================================================== */
 
   try {
-
 
     const response =
       await fetch(
@@ -1137,10 +1095,8 @@ Inspired by the Levant breeze.`;
       );
 
 
-
     const responseText =
       await response.text();
-
 
 
     console.log(
@@ -1155,20 +1111,13 @@ Inspired by the Levant breeze.`;
     );
 
 
-
-    /* =====================================================
-       SUPABASE ERROR
-    ===================================================== */
-
     if (!response.ok) {
-
 
       let detailMessage =
         responseText;
 
 
       try {
-
 
         const errorData =
           JSON.parse(
@@ -1182,7 +1131,6 @@ Inspired by the Levant breeze.`;
           errorData.hint ||
           errorData.error ||
           responseText;
-
 
       }
 
@@ -1202,40 +1150,137 @@ Inspired by the Levant breeze.`;
     }
 
 
-
-    /* =====================================================
-       SUCCESS
-    ===================================================== */
-
     console.log(
       "LEVANTE ORDER SAVED SUCCESSFULLY"
     );
 
 
-
     /* =====================================================
-       SEND CUSTOMER ORDER TO WHATSAPP
+       SEND ORDER TO WHATSAPP VIA EDGE FUNCTION
     ===================================================== */
 
-    if (whatsappWindow) {
+    if (language === "tr") {
 
-
-      whatsappWindow.location.href =
-        whatsappURL;
-
+      orderButton.innerHTML =
+        "WhatsApp bildirimi gönderiliyor...";
 
     }
 
-    else {
 
+    if (language === "en") {
 
-      /* Fallback if popup was blocked */
-
-      window.location.href =
-        whatsappURL;
+      orderButton.innerHTML =
+        "Sending WhatsApp notification...";
 
     }
 
+
+    if (language === "ar") {
+
+      orderButton.innerHTML =
+        "جاري إرسال إشعار واتساب...";
+
+    }
+
+
+    const whatsappResponse =
+      await fetch(
+
+        SUPABASE_WHATSAPP_FUNCTION_URL,
+
+        {
+
+          method:
+            "POST",
+
+
+          headers: {
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+
+          body:
+            JSON.stringify({
+
+              phone:
+                WHATSAPP_NUMBER,
+
+              customer_name:
+                name,
+
+              order_number:
+                orderNumber,
+
+              message:
+                whatsappMessage
+
+            })
+
+        }
+
+      );
+
+
+    const whatsappResponseText =
+      await whatsappResponse.text();
+
+
+    console.log(
+      "WHATSAPP FUNCTION STATUS:",
+      whatsappResponse.status
+    );
+
+
+    console.log(
+      "WHATSAPP FUNCTION RESPONSE:",
+      whatsappResponseText
+    );
+
+
+    if (!whatsappResponse.ok) {
+
+      let detailMessage =
+        whatsappResponseText;
+
+
+      try {
+
+        const errorData =
+          JSON.parse(
+            whatsappResponseText
+          );
+
+
+        detailMessage =
+          errorData.error ||
+          errorData.message ||
+          errorData.details ||
+          whatsappResponseText;
+
+      }
+
+      catch (parseError) {
+
+        console.error(
+          parseError
+        );
+
+      }
+
+
+      throw new Error(
+        `WhatsApp notification failed: ${detailMessage}`
+      );
+
+    }
+
+
+    console.log(
+      "WHATSAPP NOTIFICATION SENT SUCCESSFULLY"
+    );
 
 
     /* =====================================================
@@ -1253,7 +1298,6 @@ ${orderNumber}
 LEVANTE ekibi en kısa sürede sizinle iletişime geçecektir.`;
 
 
-
     if (language === "en") {
 
       successMessage =
@@ -1267,7 +1311,6 @@ ${orderNumber}
 The LEVANTE team will contact you as soon as possible.`;
 
     }
-
 
 
     if (language === "ar") {
@@ -1285,11 +1328,9 @@ ${orderNumber}
     }
 
 
-
     alert(
       successMessage
     );
-
 
 
     /* =====================================================
@@ -1300,7 +1341,6 @@ ${orderNumber}
 
 
     updateCart();
-
 
 
     /* =====================================================
@@ -1323,20 +1363,6 @@ ${orderNumber}
     }
 
 
-
-    /* =====================================================
-       RESET BUTTON
-    ===================================================== */
-
-    orderButton.disabled =
-      false;
-
-
-    orderButton.innerHTML =
-      originalButtonText;
-
-
-
     /* =====================================================
        CLOSE CART
     ===================================================== */
@@ -1354,13 +1380,11 @@ ${orderNumber}
   }
 
 
-
   /* =====================================================
      ERROR
   ===================================================== */
 
   catch (error) {
-
 
     console.error(
       "LEVANTE ORDER ERROR:",
@@ -1368,26 +1392,14 @@ ${orderNumber}
     );
 
 
-
-    /* Close blank WhatsApp window
-       if Supabase order failed */
-
-    if (whatsappWindow) {
-
-      whatsappWindow.close();
-
-    }
-
-
-
     let errorMessage =
-      "Sipariş kaydedilirken bir hata oluştu.";
+      "Sipariş işlenirken bir hata oluştu.";
 
 
     if (language === "en") {
 
       errorMessage =
-        "There was a problem saving your order.";
+        "There was a problem processing your order.";
 
     }
 
@@ -1395,7 +1407,7 @@ ${orderNumber}
     if (language === "ar") {
 
       errorMessage =
-        "حدثت مشكلة أثناء تسجيل طلبك.";
+        "حدثت مشكلة أثناء معالجة طلبك.";
 
     }
 
@@ -1404,16 +1416,24 @@ ${orderNumber}
 
       errorMessage +
 
-      "\n\nSupabase Error:\n" +
+      "\n\nDetails:\n" +
 
       (
-        error.message ||
-        "Unknown error"
+        error instanceof Error
+          ? error.message
+          : "Unknown error"
       )
 
     );
 
+  }
 
+
+  /* =====================================================
+     ALWAYS RESET BUTTON
+  ===================================================== */
+
+  finally {
 
     orderButton.disabled =
       false;
@@ -1447,9 +1467,7 @@ const dots =
   );
 
 
-
 function goToSlide(index) {
-
 
   if (!slides.length) {
 
@@ -1514,7 +1532,6 @@ function goToSlide(index) {
   }
 
 }
-
 
 
 if (slides.length > 1) {
