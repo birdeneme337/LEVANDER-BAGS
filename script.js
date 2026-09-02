@@ -1,6 +1,6 @@
 /* =====================================================
    LEVANTE WEBSITE
-   CART + SUPABASE ORDER SYSTEM
+   CART + SUPABASE + WHATSAPP ORDER SYSTEM
 ===================================================== */
 
 
@@ -19,6 +19,14 @@ const SUPABASE_PUBLISHABLE_KEY =
 const SUPABASE_ORDERS_URL =
   `${SUPABASE_URL}/rest/v1/orders`;
 
+
+/* =====================================================
+   WHATSAPP NUMBER
+   EGYPT
+===================================================== */
+
+const WHATSAPP_NUMBER =
+  "201039812810";
 
 
 /* =====================================================
@@ -134,7 +142,7 @@ const products = [
     story: {
       tr: "Eminönü'nün düzenli ama canlı ritminden ilham aldı. Yapısal çizgiler ve zamansız bir şehir karakteri.",
       en: "Inspired by Eminönü's structured rhythm. Clean lines and timeless city character.",
-      ar: "مستوحاة من إيقاع أمينونو المنظم والحيوي. خطوط واضحة وشخصية مدينة خالدة."
+      ar: "مستوحاة من إيقاع إمينونو المنظم والحيوي. خطوط واضحة وشخصية مدينة خالدة."
     }
   },
 
@@ -189,13 +197,11 @@ const products = [
 ];
 
 
-
 /* =====================================================
    CART
 ===================================================== */
 
 let cart = [];
-
 
 
 /* =====================================================
@@ -215,7 +221,6 @@ function getLanguage() {
 }
 
 
-
 /* =====================================================
    RENDER PRODUCTS
 ===================================================== */
@@ -230,7 +235,11 @@ function renderProducts() {
     document.getElementById("productsGrid");
 
 
-  if (!grid) return;
+  if (!grid) {
+
+    return;
+
+  }
 
 
   grid.innerHTML = "";
@@ -348,7 +357,6 @@ function renderProducts() {
 }
 
 
-
 /* =====================================================
    ADD TO CART
 ===================================================== */
@@ -357,11 +365,15 @@ function addToCart(productId) {
 
   const product =
     products.find(
-      product => product.id === productId
+      item => item.id === productId
     );
 
 
-  if (!product) return;
+  if (!product) {
+
+    return;
+
+  }
 
 
   const existingItem =
@@ -372,9 +384,11 @@ function addToCart(productId) {
 
   if (existingItem) {
 
-    existingItem.quantity++;
+    existingItem.quantity += 1;
 
-  } else {
+  }
+
+  else {
 
     cart.push({
 
@@ -389,10 +403,7 @@ function addToCart(productId) {
 
   updateCart();
 
-  openCart();
-
 }
-
 
 
 /* =====================================================
@@ -401,7 +412,7 @@ function addToCart(productId) {
 
 function changeQuantity(
   productId,
-  change
+  amount
 ) {
 
   const item =
@@ -410,10 +421,14 @@ function changeQuantity(
     );
 
 
-  if (!item) return;
+  if (!item) {
+
+    return;
+
+  }
 
 
-  item.quantity += change;
+  item.quantity += amount;
 
 
   if (item.quantity <= 0) {
@@ -428,7 +443,6 @@ function changeQuantity(
   updateCart();
 
 }
-
 
 
 /* =====================================================
@@ -448,7 +462,6 @@ function removeFromCart(productId) {
 }
 
 
-
 /* =====================================================
    UPDATE CART
 ===================================================== */
@@ -463,27 +476,27 @@ function updateCart() {
     document.getElementById("cartCount");
 
 
-  const language =
-    getLanguage();
+  if (!cartItems || !cartCount) {
 
-
-  if (cartCount) {
-
-    const totalQuantity =
-      cart.reduce(
-        (total, item) =>
-          total + item.quantity,
-        0
-      );
-
-
-    cartCount.textContent =
-      totalQuantity;
+    return;
 
   }
 
 
-  if (!cartItems) return;
+  const language =
+    getLanguage();
+
+
+  const totalQuantity =
+    cart.reduce(
+      (total, item) =>
+        total + item.quantity,
+      0
+    );
+
+
+  cartCount.textContent =
+    totalQuantity;
 
 
   if (cart.length === 0) {
@@ -622,7 +635,6 @@ function updateCart() {
 }
 
 
-
 /* =====================================================
    CART OPEN
 ===================================================== */
@@ -633,20 +645,21 @@ function openCart() {
     document.getElementById("cartDrawer");
 
 
-  if (!cartDrawer) return;
+  if (!cartDrawer) {
+
+    return;
+
+  }
 
 
-  cartDrawer
-    .classList
-    .add("active");
+  cartDrawer.classList.add("active");
 
 
-  document.body
-    .classList
-    .add("cart-open");
+  document.body.classList.add(
+    "cart-open"
+  );
 
 }
-
 
 
 /* =====================================================
@@ -659,20 +672,23 @@ function closeCart() {
     document.getElementById("cartDrawer");
 
 
-  if (!cartDrawer) return;
+  if (!cartDrawer) {
+
+    return;
+
+  }
 
 
-  cartDrawer
-    .classList
-    .remove("active");
+  cartDrawer.classList.remove(
+    "active"
+  );
 
 
-  document.body
-    .classList
-    .remove("cart-open");
+  document.body.classList.remove(
+    "cart-open"
+  );
 
 }
-
 
 
 /* =====================================================
@@ -691,28 +707,27 @@ function openMenu() {
 
   if (sideMenu) {
 
-    sideMenu
-      .classList
-      .add("active");
+    sideMenu.classList.add(
+      "active"
+    );
 
   }
 
 
   if (menuOverlay) {
 
-    menuOverlay
-      .classList
-      .add("active");
+    menuOverlay.classList.add(
+      "active"
+    );
 
   }
 
 
-  document.body
-    .classList
-    .add("menu-open");
+  document.body.classList.add(
+    "menu-open"
+  );
 
 }
-
 
 
 /* =====================================================
@@ -731,46 +746,53 @@ function closeMenu() {
 
   if (sideMenu) {
 
-    sideMenu
-      .classList
-      .remove("active");
+    sideMenu.classList.remove(
+      "active"
+    );
 
   }
 
 
   if (menuOverlay) {
 
-    menuOverlay
-      .classList
-      .remove("active");
+    menuOverlay.classList.remove(
+      "active"
+    );
 
   }
 
 
-  document.body
-    .classList
-    .remove("menu-open");
+  document.body.classList.remove(
+    "menu-open"
+  );
 
 }
 
 
-
 /* =====================================================
-   SUBMIT ORDER TO SUPABASE
+   SEND ORDER
+   SUPABASE + WHATSAPP
 ===================================================== */
 
 async function sendWhatsAppOrder() {
 
+
   const customerNameElement =
-    document.getElementById("customerName");
+    document.getElementById(
+      "customerName"
+    );
 
 
   const customerPhoneElement =
-    document.getElementById("customerPhone");
+    document.getElementById(
+      "customerPhone"
+    );
 
 
   const orderButton =
-    document.getElementById("whatsappButton");
+    document.getElementById(
+      "whatsappButton"
+    );
 
 
   const name =
@@ -877,6 +899,22 @@ async function sendWhatsAppOrder() {
 
 
   /* =====================================================
+     OPEN WHATSAPP WINDOW IMMEDIATELY
+
+     IMPORTANT:
+     We open the window BEFORE await/fetch.
+     This prevents browser popup blocking.
+  ===================================================== */
+
+  const whatsappWindow =
+    window.open(
+      "about:blank",
+      "_blank"
+    );
+
+
+
+  /* =====================================================
      BUTTON LOADING
   ===================================================== */
 
@@ -963,7 +1001,7 @@ async function sendWhatsAppOrder() {
 
 
   /* =====================================================
-     CREATE DATABASE DATA
+     DATABASE DATA
   ===================================================== */
 
   const orderData = {
@@ -986,16 +1024,64 @@ async function sendWhatsAppOrder() {
   };
 
 
-  console.log(
-    "LEVANTE ORDER DATA:",
-    orderData
+
+  /* =====================================================
+     CREATE WHATSAPP MESSAGE
+  ===================================================== */
+
+  let whatsappMessage =
+`👜 *NEW LEVANTE ORDER REQUEST*
+
+📦 *ORDER NUMBER:*
+${orderNumber}
+
+👤 *CUSTOMER NAME:*
+${name}
+
+📱 *CUSTOMER PHONE:*
+${phone}
+
+🛍️ *ORDER DETAILS:*
+
+`;
+
+
+
+  cart.forEach(
+    (item, index) => {
+
+      whatsappMessage +=
+`${index + 1}. *${item.number} · ${item.name}*
+
+Product Code: ${item.code}
+Quantity: ${item.quantity}
+
+`;
+
+    }
   );
 
 
-  console.log(
-    "SUPABASE URL:",
-    SUPABASE_ORDERS_URL
-  );
+
+  whatsappMessage +=
+`----------------------------
+
+✨ Sent from LEVANTE Website
+
+Born in Istanbul.
+Inspired by the Levant breeze.`;
+
+
+
+  const encodedMessage =
+    encodeURIComponent(
+      whatsappMessage
+    );
+
+
+
+  const whatsappURL =
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
 
 
@@ -1052,12 +1138,9 @@ async function sendWhatsAppOrder() {
 
 
 
-    /* =====================================================
-       READ RESPONSE
-    ===================================================== */
-
     const responseText =
       await response.text();
+
 
 
     console.log(
@@ -1074,7 +1157,7 @@ async function sendWhatsAppOrder() {
 
 
     /* =====================================================
-       HANDLE ERROR
+       SUPABASE ERROR
     ===================================================== */
 
     if (!response.ok) {
@@ -1106,7 +1189,6 @@ async function sendWhatsAppOrder() {
       catch (parseError) {
 
         console.error(
-          "Could not parse Supabase error:",
           parseError
         );
 
@@ -1129,6 +1211,36 @@ async function sendWhatsAppOrder() {
       "LEVANTE ORDER SAVED SUCCESSFULLY"
     );
 
+
+
+    /* =====================================================
+       SEND CUSTOMER ORDER TO WHATSAPP
+    ===================================================== */
+
+    if (whatsappWindow) {
+
+
+      whatsappWindow.location.href =
+        whatsappURL;
+
+
+    }
+
+    else {
+
+
+      /* Fallback if popup was blocked */
+
+      window.location.href =
+        whatsappURL;
+
+    }
+
+
+
+    /* =====================================================
+       SUCCESS MESSAGE
+    ===================================================== */
 
     let successMessage =
 `Teşekkür ederiz ${name}! 👜
@@ -1184,8 +1296,7 @@ ${orderNumber}
        CLEAR CART
     ===================================================== */
 
-    cart =
-      [];
+    cart = [];
 
 
     updateCart();
@@ -1193,7 +1304,7 @@ ${orderNumber}
 
 
     /* =====================================================
-       CLEAR CUSTOMER FORM
+       CLEAR FORM
     ===================================================== */
 
     if (customerNameElement) {
@@ -1257,6 +1368,18 @@ ${orderNumber}
     );
 
 
+
+    /* Close blank WhatsApp window
+       if Supabase order failed */
+
+    if (whatsappWindow) {
+
+      whatsappWindow.close();
+
+    }
+
+
+
     let errorMessage =
       "Sipariş kaydedilirken bir hata oluştu.";
 
@@ -1291,6 +1414,7 @@ ${orderNumber}
     );
 
 
+
     orderButton.disabled =
       false;
 
@@ -1301,7 +1425,6 @@ ${orderNumber}
   }
 
 }
-
 
 
 /* =====================================================
@@ -1335,9 +1458,7 @@ function goToSlide(index) {
   }
 
 
-  if (
-    slides[currentSlide]
-  ) {
+  if (slides[currentSlide]) {
 
     slides[currentSlide]
       .classList
@@ -1346,9 +1467,7 @@ function goToSlide(index) {
   }
 
 
-  if (
-    dots[currentSlide]
-  ) {
+  if (dots[currentSlide]) {
 
     dots[currentSlide]
       .classList
@@ -1361,9 +1480,7 @@ function goToSlide(index) {
     index;
 
 
-  if (
-    currentSlide >= slides.length
-  ) {
+  if (currentSlide >= slides.length) {
 
     currentSlide =
       0;
@@ -1371,9 +1488,7 @@ function goToSlide(index) {
   }
 
 
-  if (
-    currentSlide < 0
-  ) {
+  if (currentSlide < 0) {
 
     currentSlide =
       slides.length - 1;
@@ -1381,9 +1496,7 @@ function goToSlide(index) {
   }
 
 
-  if (
-    slides[currentSlide]
-  ) {
+  if (slides[currentSlide]) {
 
     slides[currentSlide]
       .classList
@@ -1392,9 +1505,7 @@ function goToSlide(index) {
   }
 
 
-  if (
-    dots[currentSlide]
-  ) {
+  if (dots[currentSlide]) {
 
     dots[currentSlide]
       .classList
@@ -1406,11 +1517,10 @@ function goToSlide(index) {
 
 
 
-if (
-  slides.length > 1
-) {
+if (slides.length > 1) {
 
   setInterval(
+
     () => {
 
       goToSlide(
@@ -1418,11 +1528,12 @@ if (
       );
 
     },
+
     5000
+
   );
 
 }
-
 
 
 /* =====================================================
@@ -1434,106 +1545,80 @@ const translations = {
 
   tr: {
 
-
     heroTag:
       "İSTANBUL'DA DOĞDU",
-
 
     heroTitle:
       "Bir çantadan<br>daha fazlası.",
 
-
     heroText:
       "Her LEVANTE modeli bir şehirden, bir sokaktan ve bir anıdan ilham alır.",
-
 
     heroButton:
       "Koleksiyonu Keşfet →",
 
-
     introTag:
       "LEVANTE DENEYİMİ",
-
 
     introTitle:
       "Taşıdığın şey sadece bir çanta olmasın.",
 
-
     introText:
-      "İstanbul'un enerjisi, Akdeniz'in hafifliği ve günlük hayatın özgürlüğü. LEVANTE, gittiğin her yerde seninle birlikte hareket etmek için tasarlandı.",
-
+      "İstanbul'un enerjisi, Akdeniz'in hafifliği ve günlük hayatın özgürlüğü.",
 
     collectionTag:
       "KOLEKSİYONU KEŞFET",
 
-
     collectionTitle:
       "Hikâyeni Taşı.",
-
 
     collectionText:
       "Her modelin kendine ait bir karakteri var. Hangisi sana daha yakın?",
 
-
     storyTag:
       "LEVANT RÜZGARI",
-
 
     storyTitle:
       "İstanbul'da doğdu.<br>Levant rüzgârından ilham aldı.",
 
-
     storyText:
-      "LEVANTE, İstanbul'un enerjisinden doğdu ve Akdeniz'in özgür ruhundan ilham aldı.",
-
+      "LEVANTE, İstanbul'un enerjisini ve Akdeniz'in özgür ruhunu bir araya getirir.",
 
     featuresTag:
       "NEDEN LEVANTE?",
 
-
     featuresTitle:
       "Hareket halindeki hayatlar için tasarlandı.",
-
 
     feature1Title:
       "Her Çantanın Bir Hikâyesi Var",
 
-
     feature1Text:
       "Her model bir şehirden, bir duygudan ve bir anıdan ilham alır.",
-
 
     feature2Title:
       "Seninle Hareket Eder",
 
-
     feature2Text:
       "Günlük hayatının ritmine uyum sağlamak için tasarlandı.",
 
-
     feature3Title:
-      "Senin Kendi Hikâyen",
-
+      "Senin Hikâyen",
 
     feature3Text:
-      "Sadece bir çanta seçmezsin. Sana ait hikâyeyi seçersin.",
-
+      "Sadece bir çanta seçmezsin. Sana benzeyen hikâyeyi bulursun.",
 
     cartTitle:
       "Çantam",
 
-
     checkoutTitle:
       "Bilgileriniz",
-
 
     customerNamePlaceholder:
       "Ad Soyad",
 
-
     customerPhonePlaceholder:
       "Telefon Numarası",
-
 
     orderButton:
       "Sipariş Talebi Gönder"
@@ -1541,109 +1626,82 @@ const translations = {
   },
 
 
-
   en: {
-
 
     heroTag:
       "BORN IN ISTANBUL",
 
-
     heroTitle:
-      "More than<br>a bag.",
-
+      "More than<br>just a bag.",
 
     heroText:
       "Every LEVANTE piece carries a story inspired by Istanbul.",
 
-
     heroButton:
-      "Discover Collection →",
-
+      "Discover the Collection →",
 
     introTag:
-      "LEVANTE EXPERIENCE",
-
+      "THE LEVANTE EXPERIENCE",
 
     introTitle:
       "Don't just carry a bag.<br>Carry a story.",
 
-
     introText:
       "The energy of Istanbul, the lightness of the Mediterranean and the freedom of everyday life.",
-
 
     collectionTag:
       "DISCOVER THE COLLECTION",
 
-
     collectionTitle:
       "Carry Your Story.",
 
-
     collectionText:
-      "Every model has a personality. Which one feels like you?",
-
+      "Every model has its own personality. Which one feels like you?",
 
     storyTag:
-      "THE LEVANT BREEZE",
-
+      "LEVANT BREEZE",
 
     storyTitle:
       "Born in Istanbul.<br>Inspired by the Levant breeze.",
 
-
     storyText:
-      "LEVANTE was born in Istanbul and inspired by the free spirit of the Mediterranean.",
-
+      "LEVANTE brings together Istanbul's energy and the free spirit of the Mediterranean.",
 
     featuresTag:
       "WHY LEVANTE?",
 
-
     featuresTitle:
       "Designed for lives in motion.",
-
 
     feature1Title:
       "Every Bag Has a Story",
 
-
     feature1Text:
       "Each model is inspired by a city, a feeling and a memory.",
-
 
     feature2Title:
       "Moves With You",
 
-
     feature2Text:
       "Designed to adapt to the rhythm of your everyday life.",
-
 
     feature3Title:
       "Your Own Story",
 
-
     feature3Text:
       "You don't just choose a bag. You find the one that tells your story.",
-
 
     cartTitle:
       "My Bag",
 
-
     checkoutTitle:
       "Your Details",
-
 
     customerNamePlaceholder:
       "Full Name",
 
-
     customerPhonePlaceholder:
       "Phone Number",
-
 
     orderButton:
       "Submit Order Request"
@@ -1651,109 +1709,82 @@ const translations = {
   },
 
 
-
   ar: {
-
 
     heroTag:
       "وُلدت في إسطنبول",
 
-
     heroTitle:
       "أكثر من<br>مجرد حقيبة.",
-
 
     heroText:
       "كل قطعة من LEVANTE تحمل قصة مستوحاة من إسطنبول.",
 
-
     heroButton:
       "اكتشف المجموعة ←",
-
 
     introTag:
       "تجربة LEVANTE",
 
-
     introTitle:
       "لا تحمل حقيبة فقط.<br>احمل قصة.",
-
 
     introText:
       "طاقة إسطنبول وخفة البحر المتوسط وحرية الحياة اليومية.",
 
-
     collectionTag:
       "اكتشف المجموعة",
-
 
     collectionTitle:
       "احمل قصتك.",
 
-
     collectionText:
       "لكل موديل شخصية خاصة. أي واحد يشبهك؟",
-
 
     storyTag:
       "نسيم المشرق",
 
-
     storyTitle:
       "وُلدت في إسطنبول.<br>مستوحاة من نسيم المشرق.",
 
-
     storyText:
-      "وُلدت LEVANTE في إسطنبول واستُلهمت من الروح الحرة للبحر المتوسط.",
-
+      "تجمع LEVANTE بين طاقة إسطنبول وروح البحر المتوسط الحرة.",
 
     featuresTag:
       "لماذا LEVANTE؟",
 
-
     featuresTitle:
       "مصممة لحياة لا تتوقف عن الحركة.",
-
 
     feature1Title:
       "لكل حقيبة قصة",
 
-
     feature1Text:
       "كل موديل مستوحى من مدينة وشعور وذكرى.",
-
 
     feature2Title:
       "تتحرك معك",
 
-
     feature2Text:
       "مصممة لتتكيف مع إيقاع حياتك اليومية.",
-
 
     feature3Title:
       "قصتك الخاصة",
 
-
     feature3Text:
       "أنت لا تختار حقيبة فقط، بل تختار القصة التي تشبهك.",
-
 
     cartTitle:
       "حقيبتي",
 
-
     checkoutTitle:
       "بياناتك",
-
 
     customerNamePlaceholder:
       "الاسم بالكامل",
 
-
     customerPhonePlaceholder:
       "رقم الهاتف",
-
 
     orderButton:
       "إرسال طلب الشراء"
@@ -1763,13 +1794,11 @@ const translations = {
 };
 
 
-
 /* =====================================================
    CHANGE LANGUAGE
 ===================================================== */
 
 function changeLanguage() {
-
 
   const language =
     getLanguage();
@@ -1786,14 +1815,12 @@ function changeLanguage() {
   }
 
 
-
   const setText =
     (
       id,
       value,
       html = false
     ) => {
-
 
       const element =
         document.getElementById(id);
@@ -1811,7 +1838,9 @@ function changeLanguage() {
         element.innerHTML =
           value;
 
-      } else {
+      }
+
+      else {
 
         element.textContent =
           value;
@@ -1821,12 +1850,7 @@ function changeLanguage() {
     };
 
 
-
-  setText(
-    "heroTag",
-    text.heroTag
-  );
-
+  setText("heroTag", text.heroTag);
 
   setText(
     "heroTitle",
@@ -1834,24 +1858,20 @@ function changeLanguage() {
     true
   );
 
-
   setText(
     "heroText",
     text.heroText
   );
-
 
   setText(
     "heroButton",
     text.heroButton
   );
 
-
   setText(
     "introTag",
     text.introTag
   );
-
 
   setText(
     "introTitle",
@@ -1859,36 +1879,30 @@ function changeLanguage() {
     true
   );
 
-
   setText(
     "introText",
     text.introText
   );
-
 
   setText(
     "collectionTag",
     text.collectionTag
   );
 
-
   setText(
     "collectionTitle",
     text.collectionTitle
   );
-
 
   setText(
     "collectionText",
     text.collectionText
   );
 
-
   setText(
     "storyTag",
     text.storyTag
   );
-
 
   setText(
     "storyTitle",
@@ -1896,72 +1910,60 @@ function changeLanguage() {
     true
   );
 
-
   setText(
     "storyText",
     text.storyText
   );
-
 
   setText(
     "featuresTag",
     text.featuresTag
   );
 
-
   setText(
     "featuresTitle",
     text.featuresTitle
   );
-
 
   setText(
     "feature1Title",
     text.feature1Title
   );
 
-
   setText(
     "feature1Text",
     text.feature1Text
   );
-
 
   setText(
     "feature2Title",
     text.feature2Title
   );
 
-
   setText(
     "feature2Text",
     text.feature2Text
   );
-
 
   setText(
     "feature3Title",
     text.feature3Title
   );
 
-
   setText(
     "feature3Text",
     text.feature3Text
   );
-
 
   setText(
     "cartTitle",
     text.cartTitle
   );
 
-
   setText(
     "checkoutTitle",
     text.checkoutTitle
   );
-
 
 
   const customerName =
@@ -1973,6 +1975,12 @@ function changeLanguage() {
   const customerPhone =
     document.getElementById(
       "customerPhone"
+    );
+
+
+  const orderButton =
+    document.getElementById(
+      "whatsappButton"
     );
 
 
@@ -1992,39 +2000,12 @@ function changeLanguage() {
   }
 
 
-
-  const orderButton =
-    document.getElementById(
-      "whatsappButton"
-    );
-
-
   if (orderButton) {
 
     orderButton.innerHTML =
       text.orderButton;
 
   }
-
-
-
-  document.documentElement.lang =
-    language;
-
-
-
-  if (language === "ar") {
-
-    document.documentElement.dir =
-      "rtl";
-
-  } else {
-
-    document.documentElement.dir =
-      "ltr";
-
-  }
-
 
 
   renderProducts();
@@ -2034,21 +2015,20 @@ function changeLanguage() {
 }
 
 
-
 /* =====================================================
-   INITIAL LOAD
+   INITIALIZE WEBSITE
 ===================================================== */
 
 document.addEventListener(
-
   "DOMContentLoaded",
 
   () => {
 
-
     renderProducts();
 
     updateCart();
+
+    changeLanguage();
 
   }
 
