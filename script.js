@@ -1,6 +1,6 @@
 /* =====================================================
    LEVANTE WEBSITE
-   SUPABASE + CART + ORDER SYSTEM
+   CART + SUPABASE ORDER SYSTEM
 ===================================================== */
 
 
@@ -16,11 +16,8 @@ const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_117r8cUyiqhzn1X4t7sFAA_QaoTKKIw";
 
 
-const supabaseClient =
-  supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
+const SUPABASE_ORDERS_URL =
+  `${SUPABASE_URL}/rest/v1/orders`;
 
 
 
@@ -137,7 +134,7 @@ const products = [
     story: {
       tr: "Eminönü'nün düzenli ama canlı ritminden ilham aldı. Yapısal çizgiler ve zamansız bir şehir karakteri.",
       en: "Inspired by Eminönü's structured rhythm. Clean lines and timeless city character.",
-      ar: "مستوحاة من إيقاع إمينونو المنظم والحيوي. خطوط واضحة وشخصية مدينة خالدة."
+      ar: "مستوحاة من إيقاع أمينونو المنظم والحيوي. خطوط واضحة وشخصية مدينة خالدة."
     }
   },
 
@@ -209,6 +206,7 @@ function getLanguage() {
 
   const languageElement =
     document.getElementById("language");
+
 
   return languageElement
     ? languageElement.value
@@ -359,7 +357,7 @@ function addToCart(productId) {
 
   const product =
     products.find(
-      p => p.id === productId
+      product => product.id === productId
     );
 
 
@@ -465,23 +463,27 @@ function updateCart() {
     document.getElementById("cartCount");
 
 
-  if (!cartItems || !cartCount) return;
-
-
   const language =
     getLanguage();
 
 
-  const totalQuantity =
-    cart.reduce(
-      (total, item) =>
-        total + item.quantity,
-      0
-    );
+  if (cartCount) {
+
+    const totalQuantity =
+      cart.reduce(
+        (total, item) =>
+          total + item.quantity,
+        0
+      );
 
 
-  cartCount.textContent =
-    totalQuantity;
+    cartCount.textContent =
+      totalQuantity;
+
+  }
+
+
+  if (!cartItems) return;
 
 
   if (cart.length === 0) {
@@ -788,11 +790,12 @@ async function sendWhatsAppOrder() {
 
 
 
-  /* -----------------------------
+  /* =====================================================
      CART VALIDATION
-  ----------------------------- */
+  ===================================================== */
 
   if (cart.length === 0) {
+
 
     let message =
       "Sepetiniz boş.";
@@ -822,11 +825,12 @@ async function sendWhatsAppOrder() {
 
 
 
-  /* -----------------------------
+  /* =====================================================
      CUSTOMER VALIDATION
-  ----------------------------- */
+  ===================================================== */
 
   if (!name || !phone) {
+
 
     let message =
       "Lütfen Ad Soyad ve Telefon Numaranızı giriniz.";
@@ -856,14 +860,14 @@ async function sendWhatsAppOrder() {
 
 
 
-  /* -----------------------------
-     SUPABASE CHECK
-  ----------------------------- */
+  /* =====================================================
+     BUTTON CHECK
+  ===================================================== */
 
-  if (!supabaseClient) {
+  if (!orderButton) {
 
     alert(
-      "Database connection could not be initialized."
+      "Sipariş butonu bulunamadı."
     );
 
     return;
@@ -872,52 +876,46 @@ async function sendWhatsAppOrder() {
 
 
 
-  /* -----------------------------
-     BUTTON LOADING STATE
-  ----------------------------- */
+  /* =====================================================
+     BUTTON LOADING
+  ===================================================== */
 
   const originalButtonText =
-    orderButton
-      ? orderButton.innerHTML
-      : "";
+    orderButton.innerHTML;
 
 
-  if (orderButton) {
-
-    orderButton.disabled =
-      true;
+  orderButton.disabled =
+    true;
 
 
-    if (language === "tr") {
+  if (language === "tr") {
 
-      orderButton.innerHTML =
-        "Siparişiniz kaydediliyor...";
+    orderButton.innerHTML =
+      "Siparişiniz kaydediliyor...";
 
-    }
-
-
-    if (language === "en") {
-
-      orderButton.innerHTML =
-        "Saving your order...";
-
-    }
+  }
 
 
-    if (language === "ar") {
+  if (language === "en") {
 
-      orderButton.innerHTML =
-        "جاري تسجيل طلبك...";
+    orderButton.innerHTML =
+      "Saving your order...";
 
-    }
+  }
+
+
+  if (language === "ar") {
+
+    orderButton.innerHTML =
+      "جاري تسجيل طلبك...";
 
   }
 
 
 
-  /* -----------------------------
+  /* =====================================================
      CREATE ORDER NUMBER
-  ----------------------------- */
+  ===================================================== */
 
   const orderNumber =
     "LV-" +
@@ -929,144 +927,195 @@ async function sendWhatsAppOrder() {
       Math.random() * 1000
     )
       .toString()
-      .padStart(3, "0");
-
-
-
-  /* -----------------------------
-     PREPARE ORDER ITEMS
-  ----------------------------- */
-
-  const orderItems =
-    cart.map(item => ({
-
-      product_id:
-        item.id,
-
-      product_number:
-        item.number,
-
-      product_name:
-        item.name,
-
-      product_code:
-        item.code,
-
-      quantity:
-        item.quantity
-
-    }));
+      .padStart(
+        3,
+        "0"
+      );
 
 
 
   /* =====================================================
-     SEND TO SUPABASE
+     PREPARE ORDER ITEMS
+  ===================================================== */
+
+  const orderItems =
+    cart.map(
+      item => ({
+
+        product_id:
+          item.id,
+
+        product_number:
+          item.number,
+
+        product_name:
+          item.name,
+
+        product_code:
+          item.code,
+
+        quantity:
+          item.quantity
+
+      })
+    );
+
+
+
+  /* =====================================================
+     CREATE DATABASE DATA
+  ===================================================== */
+
+  const orderData = {
+
+    order_number:
+      orderNumber,
+
+    customer_name:
+      name,
+
+    phone:
+      phone,
+
+    items:
+      orderItems,
+
+    status:
+      "new"
+
+  };
+
+
+  console.log(
+    "LEVANTE ORDER DATA:",
+    orderData
+  );
+
+
+  console.log(
+    "SUPABASE URL:",
+    SUPABASE_ORDERS_URL
+  );
+
+
+
+  /* =====================================================
+     SEND ORDER TO SUPABASE
   ===================================================== */
 
   try {
 
 
-    const {
-      data,
-      error
-    } =
-    await supabaseClient
-      .from("orders")
-      .insert([
+    const response =
+      await fetch(
+
+        SUPABASE_ORDERS_URL,
 
         {
 
-          order_number:
-            orderNumber,
+          method:
+            "POST",
 
-          customer_name:
-            name,
 
-          /*
-             IMPORTANT:
+          headers: {
 
-             SUPABASE COLUMN NAME
-             IS "phone"
+            "apikey":
+              SUPABASE_PUBLISHABLE_KEY,
 
-             NOT customer_phone
-          */
 
-          phone:
-            phone,
+            "Authorization":
+              `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
 
-          items:
-            orderItems,
 
-          status:
-            "new"
+            "Content-Type":
+              "application/json",
+
+
+            "Accept":
+              "application/json",
+
+
+            "Prefer":
+              "return=representation"
+
+          },
+
+
+          body:
+            JSON.stringify(
+              orderData
+            )
 
         }
 
-      ])
-      .select();
-
-
-
-    /* -----------------------------
-       SUPABASE ERROR
-    ----------------------------- */
-
-    if (error) {
-
-
-      console.error(
-        "SUPABASE ORDER ERROR:",
-        error
       );
 
 
-      let errorMessage =
-        "Sipariş kaydedilirken bir hata oluştu.";
+
+    /* =====================================================
+       READ RESPONSE
+    ===================================================== */
+
+    const responseText =
+      await response.text();
+
+
+    console.log(
+      "SUPABASE STATUS:",
+      response.status
+    );
+
+
+    console.log(
+      "SUPABASE RESPONSE:",
+      responseText
+    );
+
+
+
+    /* =====================================================
+       HANDLE ERROR
+    ===================================================== */
+
+    if (!response.ok) {
+
 
       let detailMessage =
-        error.message || "";
+        responseText;
 
 
-      if (language === "en") {
+      try {
 
-        errorMessage =
-          "There was a problem saving your order.";
+
+        const errorData =
+          JSON.parse(
+            responseText
+          );
+
+
+        detailMessage =
+          errorData.message ||
+          errorData.details ||
+          errorData.hint ||
+          errorData.error ||
+          responseText;
+
+
+      }
+
+      catch (parseError) {
+
+        console.error(
+          "Could not parse Supabase error:",
+          parseError
+        );
 
       }
 
 
-      if (language === "ar") {
-
-        errorMessage =
-          "حدثت مشكلة أثناء تسجيل طلبك.";
-
-      }
-
-
-      alert(
-
-        errorMessage +
-
-        "\n\nError: " +
-
+      throw new Error(
         detailMessage
-
       );
-
-
-      if (orderButton) {
-
-        orderButton.disabled =
-          false;
-
-
-        orderButton.innerHTML =
-          originalButtonText;
-
-      }
-
-
-      return;
 
     }
 
@@ -1077,8 +1126,7 @@ async function sendWhatsAppOrder() {
     ===================================================== */
 
     console.log(
-      "LEVANTE ORDER SAVED SUCCESSFULLY:",
-      data
+      "LEVANTE ORDER SAVED SUCCESSFULLY"
     );
 
 
@@ -1091,6 +1139,7 @@ Sipariş Numaranız:
 ${orderNumber}
 
 LEVANTE ekibi en kısa sürede sizinle iletişime geçecektir.`;
+
 
 
     if (language === "en") {
@@ -1108,6 +1157,7 @@ The LEVANTE team will contact you as soon as possible.`;
     }
 
 
+
     if (language === "ar") {
 
       successMessage =
@@ -1123,24 +1173,28 @@ ${orderNumber}
     }
 
 
-    alert(successMessage);
+
+    alert(
+      successMessage
+    );
 
 
 
-    /* -----------------------------
+    /* =====================================================
        CLEAR CART
-    ----------------------------- */
+    ===================================================== */
 
-    cart = [];
+    cart =
+      [];
 
 
     updateCart();
 
 
 
-    /* -----------------------------
+    /* =====================================================
        CLEAR CUSTOMER FORM
-    ----------------------------- */
+    ===================================================== */
 
     if (customerNameElement) {
 
@@ -1159,9 +1213,22 @@ ${orderNumber}
 
 
 
-    /* -----------------------------
+    /* =====================================================
+       RESET BUTTON
+    ===================================================== */
+
+    orderButton.disabled =
+      false;
+
+
+    orderButton.innerHTML =
+      originalButtonText;
+
+
+
+    /* =====================================================
        CLOSE CART
-    ----------------------------- */
+    ===================================================== */
 
     setTimeout(
       () => {
@@ -1173,48 +1240,31 @@ ${orderNumber}
     );
 
 
-
-    /* -----------------------------
-       RESET BUTTON
-    ----------------------------- */
-
-    if (orderButton) {
-
-      orderButton.disabled =
-        false;
-
-
-      orderButton.innerHTML =
-        originalButtonText;
-
-    }
-
-
   }
 
 
 
   /* =====================================================
-     UNEXPECTED ERROR
+     ERROR
   ===================================================== */
 
   catch (error) {
 
 
     console.error(
-      "UNEXPECTED ORDER ERROR:",
+      "LEVANTE ORDER ERROR:",
       error
     );
 
 
     let errorMessage =
-      "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.";
+      "Sipariş kaydedilirken bir hata oluştu.";
 
 
     if (language === "en") {
 
       errorMessage =
-        "An unexpected error occurred. Please try again.";
+        "There was a problem saving your order.";
 
     }
 
@@ -1222,7 +1272,7 @@ ${orderNumber}
     if (language === "ar") {
 
       errorMessage =
-        "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.";
+        "حدثت مشكلة أثناء تسجيل طلبك.";
 
     }
 
@@ -1231,23 +1281,22 @@ ${orderNumber}
 
       errorMessage +
 
-      "\n\nError: " +
+      "\n\nSupabase Error:\n" +
 
-      (error.message || error)
+      (
+        error.message ||
+        "Unknown error"
+      )
 
     );
 
 
-    if (orderButton) {
-
-      orderButton.disabled =
-        false;
+    orderButton.disabled =
+      false;
 
 
-      orderButton.innerHTML =
-        originalButtonText;
-
-    }
+    orderButton.innerHTML =
+      originalButtonText;
 
   }
 
@@ -1259,21 +1308,31 @@ ${orderNumber}
    HERO SLIDER
 ===================================================== */
 
-let currentSlide = 0;
+let currentSlide =
+  0;
 
 
 const slides =
-  document.querySelectorAll(".slide");
+  document.querySelectorAll(
+    ".slide"
+  );
 
 
 const dots =
-  document.querySelectorAll(".dot");
+  document.querySelectorAll(
+    ".dot"
+  );
 
 
 
 function goToSlide(index) {
 
-  if (!slides.length) return;
+
+  if (!slides.length) {
+
+    return;
+
+  }
 
 
   if (
@@ -1303,6 +1362,26 @@ function goToSlide(index) {
 
 
   if (
+    currentSlide >= slides.length
+  ) {
+
+    currentSlide =
+      0;
+
+  }
+
+
+  if (
+    currentSlide < 0
+  ) {
+
+    currentSlide =
+      slides.length - 1;
+
+  }
+
+
+  if (
     slides[currentSlide]
   ) {
 
@@ -1327,26 +1406,20 @@ function goToSlide(index) {
 
 
 
-if (slides.length > 1) {
+if (
+  slides.length > 1
+) {
 
-  setInterval(() => {
+  setInterval(
+    () => {
 
-    let nextSlide =
-      currentSlide + 1;
+      goToSlide(
+        currentSlide + 1
+      );
 
-
-    if (
-      nextSlide >= slides.length
-    ) {
-
-      nextSlide = 0;
-
-    }
-
-
-    goToSlide(nextSlide);
-
-  }, 5000);
+    },
+    5000
+  );
 
 }
 
@@ -1361,80 +1434,106 @@ const translations = {
 
   tr: {
 
+
     heroTag:
       "İSTANBUL'DA DOĞDU",
+
 
     heroTitle:
       "Bir çantadan<br>daha fazlası.",
 
+
     heroText:
       "Her LEVANTE modeli bir şehirden, bir sokaktan ve bir anıdan ilham alır.",
+
 
     heroButton:
       "Koleksiyonu Keşfet →",
 
+
     introTag:
       "LEVANTE DENEYİMİ",
+
 
     introTitle:
       "Taşıdığın şey sadece bir çanta olmasın.",
 
+
     introText:
       "İstanbul'un enerjisi, Akdeniz'in hafifliği ve günlük hayatın özgürlüğü. LEVANTE, gittiğin her yerde seninle birlikte hareket etmek için tasarlandı.",
+
 
     collectionTag:
       "KOLEKSİYONU KEŞFET",
 
+
     collectionTitle:
-      "Hikâyeni taşı.",
+      "Hikâyeni Taşı.",
+
 
     collectionText:
-      "Her modelin kendine ait bir karakteri var. Hangisi seni anlatıyor?",
+      "Her modelin kendine ait bir karakteri var. Hangisi sana daha yakın?",
+
 
     storyTag:
       "LEVANT RÜZGARI",
 
+
     storyTitle:
       "İstanbul'da doğdu.<br>Levant rüzgârından ilham aldı.",
 
+
     storyText:
-      "LEVANTE, İstanbul'da doğdu ve Akdeniz'in özgür ruhundan ilham aldı.",
+      "LEVANTE, İstanbul'un enerjisinden doğdu ve Akdeniz'in özgür ruhundan ilham aldı.",
+
 
     featuresTag:
       "NEDEN LEVANTE?",
 
+
     featuresTitle:
       "Hareket halindeki hayatlar için tasarlandı.",
+
 
     feature1Title:
       "Her Çantanın Bir Hikâyesi Var",
 
+
     feature1Text:
       "Her model bir şehirden, bir duygudan ve bir anıdan ilham alır.",
+
 
     feature2Title:
       "Seninle Hareket Eder",
 
+
     feature2Text:
       "Günlük hayatının ritmine uyum sağlamak için tasarlandı.",
 
+
     feature3Title:
-      "Senin Hikâyen",
+      "Senin Kendi Hikâyen",
+
 
     feature3Text:
-      "Sadece bir çanta seçmezsin. Sana ait olan hikâyeyi bulursun.",
+      "Sadece bir çanta seçmezsin. Sana ait hikâyeyi seçersin.",
+
 
     cartTitle:
       "Çantam",
 
+
     checkoutTitle:
       "Bilgileriniz",
+
 
     customerNamePlaceholder:
       "Ad Soyad",
 
+
     customerPhonePlaceholder:
       "Telefon Numarası",
+
 
     orderButton:
       "Sipariş Talebi Gönder"
@@ -1442,82 +1541,109 @@ const translations = {
   },
 
 
+
   en: {
+
 
     heroTag:
       "BORN IN ISTANBUL",
 
+
     heroTitle:
       "More than<br>a bag.",
+
 
     heroText:
       "Every LEVANTE piece carries a story inspired by Istanbul.",
 
+
     heroButton:
-      "Explore Collection →",
+      "Discover Collection →",
+
 
     introTag:
-      "THE LEVANTE EXPERIENCE",
+      "LEVANTE EXPERIENCE",
+
 
     introTitle:
-      "Carry more than just a bag.",
+      "Don't just carry a bag.<br>Carry a story.",
+
 
     introText:
       "The energy of Istanbul, the lightness of the Mediterranean and the freedom of everyday life.",
 
+
     collectionTag:
       "DISCOVER THE COLLECTION",
 
+
     collectionTitle:
-      "Carry your story.",
+      "Carry Your Story.",
+
 
     collectionText:
-      "Every model has its own character. Which one feels like you?",
+      "Every model has a personality. Which one feels like you?",
+
 
     storyTag:
       "THE LEVANT BREEZE",
 
+
     storyTitle:
       "Born in Istanbul.<br>Inspired by the Levant breeze.",
+
 
     storyText:
       "LEVANTE was born in Istanbul and inspired by the free spirit of the Mediterranean.",
 
+
     featuresTag:
       "WHY LEVANTE?",
+
 
     featuresTitle:
       "Designed for lives in motion.",
 
+
     feature1Title:
       "Every Bag Has a Story",
+
 
     feature1Text:
       "Each model is inspired by a city, a feeling and a memory.",
 
+
     feature2Title:
       "Moves With You",
+
 
     feature2Text:
       "Designed to adapt to the rhythm of your everyday life.",
 
+
     feature3Title:
       "Your Own Story",
+
 
     feature3Text:
       "You don't just choose a bag. You find the one that tells your story.",
 
+
     cartTitle:
       "My Bag",
+
 
     checkoutTitle:
       "Your Details",
 
+
     customerNamePlaceholder:
       "Full Name",
 
+
     customerPhonePlaceholder:
       "Phone Number",
+
 
     orderButton:
       "Submit Order Request"
@@ -1525,82 +1651,109 @@ const translations = {
   },
 
 
+
   ar: {
+
 
     heroTag:
       "وُلدت في إسطنبول",
 
+
     heroTitle:
       "أكثر من<br>مجرد حقيبة.",
+
 
     heroText:
       "كل قطعة من LEVANTE تحمل قصة مستوحاة من إسطنبول.",
 
+
     heroButton:
       "اكتشف المجموعة ←",
+
 
     introTag:
       "تجربة LEVANTE",
 
+
     introTitle:
       "لا تحمل حقيبة فقط.<br>احمل قصة.",
+
 
     introText:
       "طاقة إسطنبول وخفة البحر المتوسط وحرية الحياة اليومية.",
 
+
     collectionTag:
       "اكتشف المجموعة",
+
 
     collectionTitle:
       "احمل قصتك.",
 
+
     collectionText:
       "لكل موديل شخصية خاصة. أي واحد يشبهك؟",
+
 
     storyTag:
       "نسيم المشرق",
 
+
     storyTitle:
       "وُلدت في إسطنبول.<br>مستوحاة من نسيم المشرق.",
+
 
     storyText:
       "وُلدت LEVANTE في إسطنبول واستُلهمت من الروح الحرة للبحر المتوسط.",
 
+
     featuresTag:
       "لماذا LEVANTE؟",
+
 
     featuresTitle:
       "مصممة لحياة لا تتوقف عن الحركة.",
 
+
     feature1Title:
       "لكل حقيبة قصة",
+
 
     feature1Text:
       "كل موديل مستوحى من مدينة وشعور وذكرى.",
 
+
     feature2Title:
       "تتحرك معك",
+
 
     feature2Text:
       "مصممة لتتكيف مع إيقاع حياتك اليومية.",
 
+
     feature3Title:
       "قصتك الخاصة",
+
 
     feature3Text:
       "أنت لا تختار حقيبة فقط، بل تختار القصة التي تشبهك.",
 
+
     cartTitle:
       "حقيبتي",
+
 
     checkoutTitle:
       "بياناتك",
 
+
     customerNamePlaceholder:
       "الاسم بالكامل",
 
+
     customerPhonePlaceholder:
       "رقم الهاتف",
+
 
     orderButton:
       "إرسال طلب الشراء"
@@ -1626,7 +1779,12 @@ function changeLanguage() {
     translations[language];
 
 
-  if (!text) return;
+  if (!text) {
+
+    return;
+
+  }
+
 
 
   const setText =
@@ -1641,7 +1799,11 @@ function changeLanguage() {
         document.getElementById(id);
 
 
-      if (!element) return;
+      if (!element) {
+
+        return;
+
+      }
 
 
       if (html) {
@@ -1850,6 +2012,7 @@ function changeLanguage() {
     language;
 
 
+
   if (language === "ar") {
 
     document.documentElement.dir =
@@ -1877,12 +2040,16 @@ function changeLanguage() {
 ===================================================== */
 
 document.addEventListener(
+
   "DOMContentLoaded",
+
   () => {
+
 
     renderProducts();
 
     updateCart();
 
   }
+
 );
